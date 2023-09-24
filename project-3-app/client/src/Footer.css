@@ -1,0 +1,12 @@
+#footer {
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+#text {
+    text-align: center;
+    justify-content: center;
+    color: red;
+}
