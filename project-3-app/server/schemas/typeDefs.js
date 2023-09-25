@@ -10,6 +10,11 @@ const typeDefs = gql`
         friends: [User]
     }
 
+    login(
+        email: String!
+        password: String!
+      ): Auth
+
     type Auth {
         token: ID
         user: User
@@ -22,6 +27,7 @@ const typeDefs = gql`
         postAuthor: User
         createdAt: String
         comments: [Comment]
+        game: Game
     }
 
     type Game {
@@ -29,7 +35,8 @@ const typeDefs = gql`
         title: String!
         releaseDate: String
         genre: String
-    }
+        posts: [Post]
+      }
 
     type Comment {
         _id: ID
@@ -40,10 +47,11 @@ const typeDefs = gql`
 
     type Query {
         users: [User]
-        user(username: String!): User
+        user(userId: ID!): User
         posts(username: String): [Post]!
         post(postId: ID!): Post 
-    }
+        me: User
+      }
 
     type Mutation {
         addUser(
@@ -56,6 +64,7 @@ const typeDefs = gql`
             postTitle: String!
             postText: String!
             postAuthor: String!
+            game: ID
         ): Post
 
         updatePost(

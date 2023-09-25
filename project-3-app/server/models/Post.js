@@ -34,6 +34,11 @@ const postSchema = new Schema(
                 ref: 'Comment',
             }
         ],
+        game: {
+            type: Schema.Types.ObjectId,
+            ref: 'Game',
+            required: false,
+          },
 
     }
 );
