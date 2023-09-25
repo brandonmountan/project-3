@@ -8,7 +8,9 @@ const resolvers = {
             return User.find().populate('posts');
         },
         user: async (parent, { userId }) => {
-            return User.findOne({ _id: userId }).populate('games');
+            return User.findOne({ _id: userId })
+            .populate('games')
+            .populate('posts');
         },
         posts: async (parent, { userId }) => {
             const params = userId ? { postAuthor: userId } : {};
@@ -19,7 +21,9 @@ const resolvers = {
         },
         me: async (parent, args, context) => {
             if (context.user) {
-                return User.findOne({ _id: context.user._id }).populate('posts');
+                return User.findOne({ _id: context.user._id })
+                .populate('posts')
+                .populate('comments');
             }
             throw new AuthenticationError('You need to be logged in!');
         },
