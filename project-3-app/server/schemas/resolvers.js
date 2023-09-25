@@ -7,11 +7,11 @@ const resolvers = {
         users: async () => {
             return User.find().populate('posts');
         },
-        user: async (parent, { username }) => {
-            return User.findOne({ username }).populate('games');
+        user: async (parent, { userId }) => {
+            return User.findOne({ _id: userId }).populate('games');
         },
-        posts: async (parent, { username }) => {
-            const params = username ? { username } : {};
+        posts: async (parent, { userId }) => {
+            const params = userId ? { postAuthor: userId } : {};
             return Post.find(params).sort({ createdAt: -1 });
         },
         post: async (parent, { postId }) => {
@@ -66,12 +66,12 @@ const resolvers = {
             }
         },
 
-        addPost: async (parent, { postTitle, postText, postAuthor }) => {
+        addPost: async (parent, { postTitle, postText, postAuthor, game }) => {
             try {
-                const post = await Post.create({ postTitle, postText, postAuthor });
+                const post = await Post.create({ postTitle, postText, postAuthor, game }); //postAuthor= User _id, game= Game _id
 
                 await User.findOneAndUpdate(
-                    { username: postAuthor },
+                    { _id: postAuthor },
                     { $addToSet: { posts: post._id } }
                 );
 
@@ -107,9 +107,18 @@ const resolvers = {
 
                 // remove the reference to this post from the user
                 await User.findOneAndUpdate(
-                    { username: deletedPost.postAuthor },
+                    { _id: deletedPost.postAuthor },
                     { $pull: { posts: postId } }
                 );
+
+                // remove the reference to this post from the game
+                await Game.findOneAndUpdate(
+                    { _id: deletedPost.game },
+                    { $pull: { posts: postId } }
+                );
+                
+                // do we want to delete all comments associated with a Post, or make a placeholder "user removed post" that leaves comments visible under the deleted post?
+                // await Comment.deleteMany({ post: postId });
 
                 return deletedPost;
             } catch (error) {

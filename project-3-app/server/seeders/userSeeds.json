@@ -1,0 +1,38 @@
+[
+    {
+        "_id": "seeduser1-unique-id",
+        "username": "Chris",
+        "email": "redfield@email.rpd",
+        "password": "password01"
+    },
+    {
+        "_id": "seeduser2-unique-id",
+        "username": "Jill",
+        "email": "valentine@email.rpd",
+        "password": "password02"
+    },
+    {
+        "_id": "seeduser3-unique-id",
+        "username": "Leon",
+        "email": "kennedy@email.rpd",
+        "password": "password03"
+    },
+    {
+        "_id": "seeduser4-unique-id",
+        "username": "Claire",
+        "email": "redfield2@email.rpd",
+        "password": "password04"
+    },
+    {
+        "_id": "seeduser5-unique-id",
+        "username": "Sheva",
+        "email": "alomar@email.rpd",
+        "password": "password05"
+    },
+    {
+        "_id": "seeduser6-unique-id",
+        "username": "Albert",
+        "email": "wesker@email.rpd",
+        "password": "password06"
+    }
+]

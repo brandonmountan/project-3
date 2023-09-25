@@ -2,9 +2,6 @@ const { Schema, model } = require('mongoose');
 
 const gameSchema = new Schema(
   {
-    // storing an _id because the API will likely have id's the model will need to reference to match user posts to games
-    // _id: ObjectId
-
     // fields will be fetched and defined from the API
     title: {
       type: String,
@@ -13,8 +10,28 @@ const gameSchema = new Schema(
     releaseDate: Date,
     genre: String,
     // add fields as needed
+
+    posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Post',
+      },
+    ],
+  },
+  {
+    toJSON: {
+      virtuals: true,
+    },
   }
+
 );
+
+// virtually populate list of users that like a game based on User 'likedGames' property
+gameSchema.virtual('usersLiked', {
+  ref: 'User',
+  localField: '_id', // local field in Game schema
+  foreignField: 'likedGames', // field in User schema
+});
 
 const Game = model('Game', gameSchema);
 
