@@ -41,7 +41,7 @@ const router = express.Router();
 router.get('/games', async (req, res) => {
   try {
     // external API
-    const response = await axios.get('https://api.rawg.com/games');
+    const response = await axios.get('https://api.rawg.com/games'); //placeholder URL
 
     const gameData = response.data.map((game) => ({
       title: game.title,
