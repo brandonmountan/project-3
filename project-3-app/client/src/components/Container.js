@@ -43,7 +43,12 @@ export default function PortfolioContainer() {
         <div className="col-md-3">
           <Sidebar />
         </div>
-        <div className="col-md-9">{renderPage()}</div>
+        <div
+          className="col-md-9 d-flex justify-content-center align-items-center"
+          style={{ minHeight: "70vh" }}
+        >
+          {renderPage()}
+        </div>
       </div>
       <Footer />
     </div>
