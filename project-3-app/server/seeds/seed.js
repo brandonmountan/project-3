@@ -1,10 +1,10 @@
-const db = require('../config/connection');
-const { User, Post, Comment } = require('../models');
-const userSeeds = require('./userSeeds.json');
-const postSeeds = require('./postSeeds.json');
-const commentSeeds = require('./commentSeeds.json');
+const db = require("../config/connection");
+const { User, Post, Comment } = require("../models");
+const userSeeds = require("./userSeeds.json");
+const postSeeds = require("./postSeeds.json");
+const commentSeeds = require("./commentSeeds.json");
 
-db.once('open', async () => {
+db.once("open", async () => {
   try {
     await Comment.deleteMany({});
     await Post.deleteMany({});
@@ -50,6 +50,6 @@ db.once('open', async () => {
     process.exit(1);
   }
 
-  console.log('All done!');
+  console.log("all done!");
   process.exit(0);
 });
