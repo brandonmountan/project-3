@@ -10,22 +10,38 @@ db.once("open", async () => {
     await Post.deleteMany({});
     await User.deleteMany({});
 
-    // Seed users
-    await User.create(userSeeds);
-
+    // seed users
     const users = await User.create(userSeeds);
-    for (const commentSeed of commentSeeds) {
-      const user = users[Math.floor(Math.random() * users.length)];
-      const comment = await Comment.create({
-        ...commentSeed,
-        commentAuthor: user._id,
-      });
-      user.comments.push(comment);
-      await user.save();
-    }
+
+    // seed posts and comments
     for (const postSeed of postSeeds) {
       const user = users[Math.floor(Math.random() * users.length)];
-      const post = await Post.create({ ...postSeed, postAuthor: user._id });
+
+      // create a post
+      const post = await Post.create({
+        ...postSeed,
+        postAuthor: user._id,
+      });
+
+      for (const commentSeed of commentSeeds) {
+        const commentUser = users[Math.floor(Math.random() * users.length)];
+
+        // create a comment
+        const comment = await Comment.create({
+          ...commentSeed,
+          commentAuthor: commentUser._id,
+          post: post._id,
+        });
+
+        // link the comment to the post
+        post.comments.push(comment);
+        await post.save();
+
+        commentUser.comments.push(comment);
+        await commentUser.save();
+      }
+
+      // link the post to the user
       user.posts.push(post);
       await user.save();
     }
