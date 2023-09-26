@@ -1,7 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Post } = require('../models');
-// Comment, Game
-// const { signToken } = require('../utils/auth');
+const { User, Post, Comment } = require('../models');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -10,8 +9,8 @@ const resolvers = {
         },
         user: async (parent, { userId }) => {
             return User.findOne({ _id: userId })
-            // .populate('games')
-            .populate('posts');
+                // .populate('games')
+                .populate('posts');
         },
         posts: async (parent, { userId }) => {
             const params = userId ? { postAuthor: userId } : {};
@@ -23,8 +22,8 @@ const resolvers = {
         me: async (parent, args, context) => {
             if (context.user) {
                 return User.findOne({ _id: context.user._id })
-                .populate('posts')
-                .populate('comments');
+                    .populate('posts')
+                    .populate('comments');
             }
             throw new AuthenticationError('You need to be logged in!');
         },
@@ -71,20 +70,33 @@ const resolvers = {
             }
         },
 
-        addPost: async (parent, { postTitle, postText, postAuthor, game }) => {
+
+        // THE USER YOU CHOOSE TO GENERATE YOUR TOKEN ON THE LOGIN ROUTE WILL BE THE USER AFFECTED BY ALL AUTH ROUTES, SO IT DOESN'T MATTER WHAT "AUTHOR" ID IS USED IN THE APOLLO VARIABLES
+
+        addPost: async (parent, { postTitle, postText }, context) => {
+            console.log("test addPost");
             try {
-                const post = await Post.create({ postTitle, postText, postAuthor, game }); //postAuthor= User _id, game= Game _id
-
+              if (context.user) {
+                const post = await Post.create({
+                  postTitle,
+                  postText,
+                  postAuthor: context.user._id,
+                });
+                console.log("author user id is: " + context.user._id)
+          
                 await User.findOneAndUpdate(
-                    { _id: postAuthor },
-                    { $addToSet: { posts: post._id } }
+                  { _id: context.user._id },
+                  { $addToSet: { posts: post._id } }
                 );
-
+                console.log("user id is: " + context.user._id )
                 return post;
+              }
             } catch (error) {
-                throw new Error(`Error creating post: ${error.message}`);
+              throw new Error(`Error creating post: ${error.message}`);
             }
         },
+
+
         updatePost: async (parent, { postId, postTitle, postText }) => {
             try {
                 const updatedPost = await Post.findOneAndUpdate(
@@ -121,7 +133,7 @@ const resolvers = {
                     { _id: deletedPost.game },
                     { $pull: { posts: postId } }
                 );
-                
+
                 // do we want to delete all comments associated with a Post, or make a placeholder "user removed post" that leaves comments visible under the deleted post?
                 // await Comment.deleteMany({ post: postId });
 
