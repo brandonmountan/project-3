@@ -1,52 +1,56 @@
-import React, { useState } from 'react';
-import NavBar from './NavBar';
-import Home from './pages/Home';
-import About from './pages/About';
-import ProfilePost from './pages/Profile-Post';
-import LoginSignup from './pages/Login-Signup';
-import Profile from './pages/Profile';
-import Footer from './Footer';
-import Header from './Header';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import React, { useState } from "react";
+import NavBar from "./NavBar";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import ProfilePost from "./pages/Profile-Post";
+import LoginSignup from "./pages/Login-Signup";
+import Profile from "./pages/Profile";
+import Footer from "./Footer";
+import Header from "./Header";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Sidebar from "./Sidebar";
 export default function PortfolioContainer() {
-  const [currentPage, setCurrentPage] = useState('Home');
+  const [currentPage, setCurrentPage] = useState("Home");
 
   // This method is checking to see what the value of `currentPage` is. Depending on the value of currentPage, we return the corresponding component to render.
   const renderPage = () => {
-    if (currentPage === 'Home') {
+    if (currentPage === "Home") {
       return <Home />;
     }
-    if (currentPage === 'Profile') {
-        return <Profile />;
-      }
-    if (currentPage === 'About') {
+    if (currentPage === "Profile") {
+      return <Profile />;
+    }
+    if (currentPage === "About") {
       return <About />;
     }
-    if (currentPage === 'ProfilePost') {
+    if (currentPage === "ProfilePost") {
       return <ProfilePost />;
     }
-    if (currentPage === 'LoginSignup') {
-        return <LoginSignup />;
-      }
+    if (currentPage === "LoginSignup") {
+      return <LoginSignup />;
+    }
   };
 
   const handlePageChange = (page) => setCurrentPage(page);
 
   return (
-    <div>
-      <Header/>
-      {/* We are passing the currentPage from state and the function to update it */}
-      <NavBar currentPage={currentPage} handlePageChange={handlePageChange} />
-      {/* Here we are calling the renderPage method which will return a component  */}
-      {renderPage()}
-      <Footer/>
+    <div className="container-fluid">
+      <Header />
+      <div>
+        {/* We are passing the currentPage from state and the function to update it */}
+        {/* Here we are calling the renderPage method which will return a component  */}
+        <NavBar currentPage={currentPage} handlePageChange={handlePageChange} />
+        {renderPage()}
+      </div>
+      <div className="row">
+        <div className="col-md-3">
+          <Sidebar />
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }
-
-
 
 // import React from 'react';
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -68,7 +72,6 @@ export default function PortfolioContainer() {
 // // import Profile from './components/pages/Profile';
 // // import ProfilePost from './components/pages/Profile-Post';
 // // import GamePage from './components/pages/GamePage';
-
 
 // const httpLink = createHttpLink({
 //   uri: '/graphql',
@@ -99,28 +102,28 @@ export default function PortfolioContainer() {
 //             {/* <Footer />
 //             <Sidebar /> */}
 //             <Routes>
-//               <Route 
-//                 path="/" 
-//                 element={<Home />} 
+//               <Route
+//                 path="/"
+//                 element={<Home />}
 //               />
-//               {/* <Route 
-//                 path="/LoginSignup" 
-//                 element={<LoginSignup />} 
+//               {/* <Route
+//                 path="/LoginSignup"
+//                 element={<LoginSignup />}
 //               />
-//               <Route 
-//                 path="/profile" 
-//                 element={<Profile />} 
+//               <Route
+//                 path="/profile"
+//                 element={<Profile />}
 //               />
-//               <Route 
-//                 path="/profilepost" 
-//                 element={<ProfilePost />} 
+//               <Route
+//                 path="/profilepost"
+//                 element={<ProfilePost />}
 //               />
-//               <Route 
-//                 path="/gamepage" 
-//                 element={<GamePage />} 
+//               <Route
+//                 path="/gamepage"
+//                 element={<GamePage />}
 //               />
-//               <Route 
-//                 path="/about" 
+//               <Route
+//                 path="/about"
 //                 element={<About />}  */}
 //               {/* /> */}
 //             </Routes>
