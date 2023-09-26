@@ -34,27 +34,29 @@
 
 // below code should just fetch API data so we can render it without unnecessary storing to our db
 
-const express = require('express');
-const axios = require('axios');
-const router = express.Router();
+// const express = require('express');
+// const axios = require('axios');
+// const router = express.Router();
 
-router.get('/games', async (req, res) => {
-  try {
-    // external API
-    const response = await axios.get('https://api.rawg.com/games'); //placeholder URL
+// router.get('/games', async (req, res) => {
+//   try {
+//     // external API
+//     const response = await axios.get('https://rawg.io/api/games?token&key=${apiKey}'); //placeholder URL
 
-    const gameData = response.data.map((game) => ({
-      title: game.title,
-      releaseDate: game.releaseDate,
-      genre: game.genre,
-      // properties
-    }));
+//     const gameData = response.data.map((game) => ({
+//       title: game.title,
+//       releaseDate: game.releaseDate,
+//       genre: game.genre,
+//       // properties
+//     }));
 
-    res.json(gameData); // data to reference
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
+//     res.json(gameData); // data to reference
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+// });
 
-module.exports = router;
+// module.exports = router;
+
+
