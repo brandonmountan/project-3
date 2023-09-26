@@ -34,18 +34,16 @@ export default function PortfolioContainer() {
   const handlePageChange = (page) => setCurrentPage(page);
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid justify-content-center">
       <Header />
-      <div>
-        {/* We are passing the currentPage from state and the function to update it */}
-        {/* Here we are calling the renderPage method which will return a component  */}
-        <NavBar currentPage={currentPage} handlePageChange={handlePageChange} />
-        {renderPage()}
-      </div>
+      {/* We are passing the currentPage from state and the function to update it */}
+      {/* Here we are calling the renderPage method which will return a component  */}
+      <NavBar currentPage={currentPage} handlePageChange={handlePageChange} />
       <div className="row">
         <div className="col-md-3">
           <Sidebar />
         </div>
+        <div className="col-md-9">{renderPage()}</div>
       </div>
       <Footer />
     </div>
