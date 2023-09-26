@@ -13,7 +13,8 @@ function NavBar({ currentPage, handlePageChange }) {
          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="#home" onClick={() => handlePageChange('Home')}>Home</Nav.Link>
-            <Nav.Link href="#about" onClick={() => handlePageChange('About')}>Profile</Nav.Link>
+            <Nav.Link href="#about" onClick={() => handlePageChange('About')}>About</Nav.Link>
+            <Nav.Link href="#profile" onClick={() => handlePageChange('Portfolio')}>Profile</Nav.Link>
             <Nav.Link href="#contact" onClick={() => handlePageChange('Contact')}>Login In/Signup</Nav.Link>
             <Nav.Link href="#resume" onClick={() => handlePageChange('Resume')}>Post</Nav.Link>
             <Nav.Link href="#portfolio" onClick={() => handlePageChange('Portfolio')}>GamePage</Nav.Link>

@@ -5,13 +5,12 @@ import '../Footer.css';
 
 function Footer() {
   return (
-    <>
-      <Navbar className="bg-body-tertiary" id="footer">
-        <Container>
-          <Navbar.Brand id="text">Website made with love by PostGame team.</Navbar.Brand>
-        </Container>
-      </Navbar>
-</>
+    <Navbar className="bg-body-tertiary text-center" id="footer">
+      <Container>
+      <Navbar.Brand className="text-center" id="text">Website made with love by PostGame team.</Navbar.Brand>
+
+      </Container>
+    </Navbar>
   );
 }
 
