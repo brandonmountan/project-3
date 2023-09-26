@@ -65,7 +65,7 @@ const typeDefs = gql`
         addPost(
             postTitle: String!
             postText: String!
-            postAuthor: String!
+            postAuthor: ID!
             game: ID
         ): Post
 
@@ -80,7 +80,7 @@ const typeDefs = gql`
         addComment(
             postId: ID!
             commentText: String!
-            commentAuthor: String!
+            commentAuthor: ID!
         ): Comment
 
         updateComment(
