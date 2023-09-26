@@ -1,22 +1,39 @@
 import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import axios from "axios";
 
-// const [games, setGames] = useState([]);
-
-// useEffect(() => {}, []);
-
 function Sidebar() {
+  const [games, setGames] = useState([]);
+  useEffect(() => {
+    async function fetchGames() {
+      try {
+        const year = 2023;
+        const startDate = `${year}-01-01`;
+        const endDate = `${year}-12-31`;
+        const response = await axios.get("https://api.rawg.io/api/games", {
+          params: {
+            key: process.env.REACT_APP_API_KEY,
+            dates: `${startDate},${endDate}`,
+            ordering: "-rating",
+            page_size: 5,
+          },
+        });
+        setGames(response.data.results);
+      } catch (error) {
+        console.error("error fetching games");
+      }
+    }
+    fetchGames();
+  }, []);
+
   return (
     <div className="sidebar">
-      <h2>Sidebar</h2>
-      <Button variant="primary" className="mb-2">
-        Button 1
-      </Button>
-      <Button variant="secondary" className="mb-2">
-        Button 2
-      </Button>
+      <h2>Top Rated Games of 2023</h2>
+      <ListGroup>
+        {games.map((game) => (
+          <ListGroup.Item key={game.id}>{game.name}</ListGroup.Item>
+        ))}
+      </ListGroup>
     </div>
   );
 }
