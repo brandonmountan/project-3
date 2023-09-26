@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Post, Comment, Game } = require('../models');
-const { signToken } = require('../utils/auth');
+const { User, Post } = require('../models');
+// Comment, Game
+// const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -9,7 +10,7 @@ const resolvers = {
         },
         user: async (parent, { userId }) => {
             return User.findOne({ _id: userId })
-            .populate('games')
+            // .populate('games')
             .populate('posts');
         },
         posts: async (parent, { userId }) => {
