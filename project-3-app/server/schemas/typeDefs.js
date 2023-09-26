@@ -10,11 +10,6 @@ const typeDefs = gql`
         friends: [User]
     }
 
-    login(
-        email: String!
-        password: String!
-      ): Auth
-
     type Auth {
         token: ID
         user: User
@@ -55,6 +50,12 @@ const typeDefs = gql`
       }
 
     type Mutation {
+
+        login(
+            email: String!
+            password: String!
+          ): Auth
+    
         addUser(
             username: String!
             email: String!
