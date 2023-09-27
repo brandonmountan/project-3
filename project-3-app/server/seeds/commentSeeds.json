@@ -1,26 +1,20 @@
 [
-    {
-      "commentText": "Great post!",
-      "commentAuthor": "seeduser1-unique-id"
-    },
-    {
-      "commentText": "Interesting topic!",
-      "commentAuthor": "seeduser2-unique-id"
-    },
-    {
-      "commentText": "I learned something new.",
-      "commentAuthor": "seeduser3-unique-id"
-    },
-    {
-      "commentText": "Thanks for sharing!",
-      "commentAuthor": "seeduser4-unique-id"
-    },
-    {
-      "commentText": "This is awesome!",
-      "commentAuthor": "seeduser5-unique-id"
-    },
-    {
-        "commentText": "W",
-        "commentAuthor": "seeduser6-unique-id"
-    }
-  ]
+  {
+    "commentText": "Great post!"
+  },
+  {
+    "commentText": "Interesting topic!"
+  },
+  {
+    "commentText": "I learned something new."
+  },
+  {
+    "commentText": "Thanks for sharing!"
+  },
+  {
+    "commentText": "This is awesome!"
+  },
+  {
+    "commentText": "W"
+  }
+]
