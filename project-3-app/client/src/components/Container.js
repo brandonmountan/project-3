@@ -1,13 +1,4 @@
 import React, { useState } from "react";
-
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-
 import NavBar from "./NavBar";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -18,27 +9,6 @@ import Footer from "./Footer";
 import Header from "./Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "./Sidebar";
-
-
-const httpLink = createHttpLink({
-  uri: '/graphql',
-});
-
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  };
-});
-
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-});
-
 
 
 export default function PortfolioContainer() {
@@ -66,7 +36,7 @@ export default function PortfolioContainer() {
   const handlePageChange = (page) => setCurrentPage(page);
 
   return (
-    <ApolloProvider client={client}>
+
       <div className="container-fluid justify-content-center">
         <Header />
         {/* We are passing the currentPage from state and the function to update it */}
@@ -85,7 +55,7 @@ export default function PortfolioContainer() {
         </div>
         <Footer />
       </div>
-    </ApolloProvider>
+
   );
 }
 
