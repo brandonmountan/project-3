@@ -73,6 +73,7 @@ const typeDefs = gql`
             postId: ID!
             postTitle: String!
             postText: String!
+            game: ID
         ): Post
 
         removePost(postId: ID!): Post
