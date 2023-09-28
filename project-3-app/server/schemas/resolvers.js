@@ -7,15 +7,22 @@ const resolvers = {
         users: async () => {
             return User.find().populate('posts');
         },
+
+        // tested- working "getUserPosts"
         user: async (parent, { userId }) => {
             return User.findOne({ _id: userId })
                 // .populate('games')
                 .populate('posts');
         },
+
+        // tested- working "getAllPosts"
         posts: async (parent, { userId }) => {
             const params = userId ? { postAuthor: userId } : {};
-            return Post.find(params).sort({ createdAt: -1 });
+            return Post.find(params).sort({ createdAt: -1 })
+            .populate('postAuthor');
         },
+
+        // tested- working "getSinglePost"
         post: async (parent, { postId }) => {
             return Post.findOne({ _id: postId })
                 .populate('postAuthor')
@@ -37,6 +44,7 @@ const resolvers = {
     },
 
     Mutation: {
+        // tested- working
         addUser: async (parent, { username, email, password }) => {
             try {
                 // create the user
@@ -49,6 +57,7 @@ const resolvers = {
                 throw new Error(`Error creating user: ${error.message}`);
             }
         },
+        // tested- working and provides token
         login: async (parent, { email, password }) => {
             try {
                 // look up user by email address. 
@@ -79,7 +88,8 @@ const resolvers = {
 
 
         // THE USER YOU CHOOSE TO GENERATE YOUR TOKEN ON THE LOGIN ROUTE WILL BE THE USER AFFECTED BY ALL AUTH ROUTES, SO IT DOESN'T MATTER WHAT "AUTHOR" ID IS USED IN THE APOLLO VARIABLES
-
+  
+        // tested- working
         addPost: async (parent, { postTitle, postText, gameId }, context) => {
             console.log("test addPost");
             if (!context.user) {
@@ -89,9 +99,7 @@ const resolvers = {
                 const post = await Post.create({
                     postTitle,
                     postText,
-                    // postAuthor does not return a username in Apollo for some reason. Username does appear in console log.
-                    postAuthor: {
-                        _id: context.user._id },
+                    postAuthor: context.user._id,
                     game: gameId // or whatever we use to identify the games through the API
                 });
 
@@ -105,7 +113,7 @@ const resolvers = {
                     { $addToSet: { posts: post._id } }
                 );
 
-                const newPost = await Post.findById(post).populate('postAuthor');
+                const newPost = await Post.findById(post).populate('postAuthor'); //to display username from postAuthor _id
                 
                 console.log("user id is: " + context.user._id)
                 return newPost;
@@ -115,7 +123,7 @@ const resolvers = {
             }
         },
 
-
+        // tested- working
         updatePost: async (parent, { postId, postTitle, postText, gameId }, context) => {
             console.log("test updatePost");
             if (!context.user) {
@@ -156,6 +164,7 @@ const resolvers = {
             }
         },
 
+        // tested- working
         removePost: async (parent, { postId }, context) => {
             console.log("test removePost");
             if (!context.user) {
@@ -198,6 +207,7 @@ const resolvers = {
                 throw new Error(`Error removing post: ${error.message}`);
             }
         },
+
 
         addComment: async (parent, { postId, commentText, commentAuthor }, context) => {
             console.log("test addComment");
