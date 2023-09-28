@@ -249,6 +249,13 @@ const resolvers = {
                     }
                 );
 
+                await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    {
+                        $addToSet: { comments: newComment._id },
+                    }
+                );
+
                 if (!updatedPost) {
                     throw new Error("Post not found");
                 }
@@ -259,7 +266,7 @@ const resolvers = {
             }
         },
 
-
+        // tested- working "updateComment"
         updateComment: async (parent, { commentId, commentText }, context) => {
             console.log("test updateComment");
             if (!context.user) {
@@ -286,6 +293,8 @@ const resolvers = {
                 throw new Error(`Error updating comment: ${error.message}`);
             }
         },
+
+        // tested- working "removeComment"
         removeComment: async (parent, { commentId }, context) => {
             console.log("test removeComment");
             if (!context.user) {
@@ -302,6 +311,18 @@ const resolvers = {
                 if (!deletedComment) {
                     throw new Error("Comment not found");
                 }
+
+                // remove comment from User 'comments'
+                await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { comments: commentId } }
+                );
+        
+                // remove comment from Post 'comments'
+                await Post.findOneAndUpdate(
+                    { comments: commentId },
+                    { $pull: { comments: commentId } }
+                );
 
                 return deletedComment;
             } catch (error) {
@@ -342,4 +363,5 @@ const resolvers = {
         },
     },
 };
+
 module.exports = resolvers;
