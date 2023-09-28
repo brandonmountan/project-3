@@ -11,20 +11,20 @@ function NavBar({ currentPage, handlePageChange }) {
         <Nav.Link href="#home" onClick={() => handlePageChange("Home")}>
           Home
         </Nav.Link>
-        <Nav.Link href="#about" onClick={() => handlePageChange("About")}>
+        <Nav.Link href="#profile" onClick={() => handlePageChange("Profile")}>
           Profile
         </Nav.Link>
-        <Nav.Link href="#contact" onClick={() => handlePageChange("Contact")}>
+        <Nav.Link href="#loginSignup" onClick={() => handlePageChange("Login-Signup")}>
           Login In/Signup
         </Nav.Link>
-        <Nav.Link href="#resume" onClick={() => handlePageChange("Resume")}>
+        <Nav.Link href="#post" onClick={() => handlePageChange("Post")}>
           Post
         </Nav.Link>
-        <Nav.Link
-          href="#portfolio"
-          onClick={() => handlePageChange("Portfolio")}
-        >
+        <Nav.Link href="#gamePage" onClick={() => handlePageChange("GamePage")}>
           GamePage
+        </Nav.Link>
+        <Nav.Link href="#contact" onClick={() => handlePageChange("Contact")}>
+          Contact
         </Nav.Link>
       </Nav>
     </Navbar>

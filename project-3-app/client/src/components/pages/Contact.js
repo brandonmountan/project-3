@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { useQuery } from '@apollo/client';
 
 
-function About() {
+function Home() {
   return (
     <Card class="m-5">
       <Card.Body class="p-5">Hello</Card.Body>
@@ -11,4 +11,4 @@ function About() {
   );
 }
 
-export default About;
+export default Home;
