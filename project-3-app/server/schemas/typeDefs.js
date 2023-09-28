@@ -10,11 +10,6 @@ const typeDefs = gql`
         friends: [User]
     }
 
-    login(
-        email: String!
-        password: String!
-      ): Auth
-
     type Auth {
         token: ID
         user: User
@@ -42,6 +37,7 @@ const typeDefs = gql`
         _id: ID
         commentText: String
         commentAuthor: User
+        post: Post
         createdAt: String
     }
 
@@ -54,6 +50,12 @@ const typeDefs = gql`
       }
 
     type Mutation {
+
+        login(
+            email: String!
+            password: String!
+          ): Auth
+    
         addUser(
             username: String!
             email: String!
@@ -63,7 +65,7 @@ const typeDefs = gql`
         addPost(
             postTitle: String!
             postText: String!
-            postAuthor: String!
+            postAuthor: ID!
             game: ID
         ): Post
 
@@ -71,6 +73,7 @@ const typeDefs = gql`
             postId: ID!
             postTitle: String!
             postText: String!
+            game: ID
         ): Post
 
         removePost(postId: ID!): Post
@@ -78,7 +81,7 @@ const typeDefs = gql`
         addComment(
             postId: ID!
             commentText: String!
-            commentAuthor: String!
+            commentAuthor: ID!
         ): Comment
 
         updateComment(

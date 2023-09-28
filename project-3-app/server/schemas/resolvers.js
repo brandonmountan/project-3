@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Post, Comment, Game } = require('../models');
+const { User, Post, Comment } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -9,8 +9,8 @@ const resolvers = {
         },
         user: async (parent, { userId }) => {
             return User.findOne({ _id: userId })
-            .populate('games')
-            .populate('posts');
+                // .populate('games')
+                .populate('posts');
         },
         posts: async (parent, { userId }) => {
             const params = userId ? { postAuthor: userId } : {};
@@ -22,8 +22,8 @@ const resolvers = {
         me: async (parent, args, context) => {
             if (context.user) {
                 return User.findOne({ _id: context.user._id })
-                .populate('posts')
-                .populate('comments');
+                    .populate('posts')
+                    .populate('comments');
             }
             throw new AuthenticationError('You need to be logged in!');
         },
@@ -70,25 +70,63 @@ const resolvers = {
             }
         },
 
-        addPost: async (parent, { postTitle, postText, postAuthor, game }) => {
+
+        // THE USER YOU CHOOSE TO GENERATE YOUR TOKEN ON THE LOGIN ROUTE WILL BE THE USER AFFECTED BY ALL AUTH ROUTES, SO IT DOESN'T MATTER WHAT "AUTHOR" ID IS USED IN THE APOLLO VARIABLES
+
+        addPost: async (parent, { postTitle, postText, gameId }, context) => {
+            console.log("test addPost");
+            if (!context.user) {
+                throw new AuthenticationError('You need to be logged in to add a post');
+            }
             try {
-                const post = await Post.create({ postTitle, postText, postAuthor, game }); //postAuthor= User _id, game= Game _id
+                const post = await Post.create({
+                    postTitle,
+                    postText,
+                    postAuthor: context.user._id,
+                    game: gameId // or whatever we use to identify the games through the API
+                });
+                console.log("author user id is: " + context.user._id)
 
                 await User.findOneAndUpdate(
-                    { _id: postAuthor },
+                    { _id: context.user._id },
                     { $addToSet: { posts: post._id } }
                 );
-
+                console.log("user id is: " + context.user._id)
                 return post;
+
             } catch (error) {
                 throw new Error(`Error creating post: ${error.message}`);
             }
         },
-        updatePost: async (parent, { postId, postTitle, postText }) => {
+
+
+        updatePost: async (parent, { postId, postTitle, postText, gameId }, context) => {
+            console.log("test updatePost");
+            if (!context.user) {
+                throw new AuthenticationError('You need to be logged in to update a post');
+            }
             try {
+                const existingPost = await Post.findOne({
+                    _id: postId,
+                    postAuthor: context.user._id
+                });
+                if (!existingPost) {
+                    throw new AuthenticationError('You are not authorized to update this post');
+                }
+
+                const updates = {
+                    postTitle,
+                    postText,
+                };
+        
+                // if gameId is provided, update the game association
+                if (gameId) {
+                    updates.game = gameId;
+                }
+
                 const updatedPost = await Post.findOneAndUpdate(
                     { _id: postId },
-                    { $set: { postTitle, postText } },
+                    { $set: updates },
                     { new: true }
                 );
 
@@ -101,8 +139,21 @@ const resolvers = {
                 throw new Error(`Error updating post: ${error.message}`);
             }
         },
-        removePost: async (parent, { postId }) => {
+
+        removePost: async (parent, { postId }, context) => {
+            console.log("test removePost");
+            if (!context.user) {
+                throw new AuthenticationError('You need to be logged in to remove a post');
+            }
             try {
+                const existingPost = await Post.findOne({
+                    _id: postId,
+                    postAuthor: context.user._id
+                });
+
+                if (!existingPost) {
+                    throw new AuthenticationError('You are not authorized to remove this post');
+                }
                 const deletedPost = await Post.findOneAndDelete({ _id: postId });
 
                 if (!deletedPost) {
@@ -116,11 +167,13 @@ const resolvers = {
                 );
 
                 // remove the reference to this post from the game
-                await Game.findOneAndUpdate(
-                    { _id: deletedPost.game },
-                    { $pull: { posts: postId } }
-                );
-                
+                if (deletedPost.game) {
+                    await Game.findOneAndUpdate(
+                        { _id: deletedPost.game },
+                        { $pull: { posts: postId } }
+                    );
+                }
+
                 // do we want to delete all comments associated with a Post, or make a placeholder "user removed post" that leaves comments visible under the deleted post?
                 // await Comment.deleteMany({ post: postId });
 
@@ -130,12 +183,21 @@ const resolvers = {
             }
         },
 
-        addComment: async (parent, { postId, commentText, commentAuthor }) => {
+        addComment: async (parent, { postId, commentText, commentAuthor }, context) => {
+            console.log("test addComment");
+            if (!context.user) {
+                throw new AuthenticationError('You need to be logged in to comment on other posts');
+            }
             try {
                 const updatedPost = await Post.findOneAndUpdate(
                     { _id: postId },
                     {
-                        $addToSet: { comments: { commentText, commentAuthor } },
+                        $addToSet: {
+                            comments: {
+                                commentText,
+                                commentAuthor: context.user._id
+                            }
+                        },
                     },
                     {
                         new: true,
@@ -152,10 +214,17 @@ const resolvers = {
                 throw new Error(`Error adding comment: ${error.message}`);
             }
         },
-        updateComment: async (parent, { commentId, commentText }) => {
+        updateComment: async (parent, { commentId, commentText }, context) => {
+            console.log("test updateComment");
+            if (!context.user) {
+                throw new AuthenticationError('You need to be logged in to update a comment');
+            }
             try {
                 const updatedComment = await Comment.findOneAndUpdate(
-                    { _id: commentId },
+                    {
+                        _id: commentId,
+                        commentAuthor: context.user._id
+                    },
                     { $set: { commentText } },
                     { new: true }
                 );
@@ -169,10 +238,17 @@ const resolvers = {
                 throw new Error(`Error updating comment: ${error.message}`);
             }
         },
-        removeComment: async (parent, { commentId }) => {
+        removeComment: async (parent, { commentId }, context) => {
+            console.log("test removeComment");
+            if (!context.user) {
+                throw new AuthenticationError('You need to be logged in to remove a comment');
+            }
             try {
                 const deletedComment = await Comment.findOneAndDelete(
-                    { _id: commentId }
+                    {
+                        _id: commentId,
+                        commentAuthor: context.user._id,
+                    }
                 );
 
                 if (!deletedComment) {
