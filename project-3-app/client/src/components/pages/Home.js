@@ -1,13 +1,37 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { QUERY_POSTS } from '../utils/queries';
+
+import Auth from '../utils/auth';
+
+import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
 
 function Home() {
-  const { loading, data } = useQuery(QUERY_POSTS);
-  const posts = data?.posts || [];
+    const { username: userParam } = useParams();
 
+    const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+      variables: { username: userParam },
+    });
+  
+    const user = data?.me || data?.user || {};
+    // navigate to personal profile page if username is yours
+    if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+      return <Navigate to="/me" />;
+    }
+  
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+  
+    if (!user?.username) {
+      return (
+        <h4>
+          Please login or signup to view content.
+        </h4>
+      );
+    }
   return (
     <Card class="m-5">
       <Card.Body class="p-5">Hello</Card.Body>
