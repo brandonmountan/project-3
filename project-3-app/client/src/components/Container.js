@@ -4,7 +4,8 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact"
 import About from "./pages/About";
 import ProfilePost from "./pages/PostForm";
-import LoginSignup from "./pages/Login-Signup";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -29,8 +30,11 @@ export default function Container() {
     if (currentPage === "ProfilePost") {
       return <ProfilePost />;
     }
-    if (currentPage === "LoginSignup") {
-      return <LoginSignup />;
+    if (currentPage === "Login") {
+      return <Login />;
+    }
+    if (currentPage === "Signup") {
+      return <Signup />;
     }
     return <Contact />;
   };
