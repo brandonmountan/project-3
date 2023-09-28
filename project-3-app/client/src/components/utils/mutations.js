@@ -38,6 +38,16 @@ export const ADD_POST = gql`
   }
 `;
 
+export const UPDATE_POST = gql`
+mutation updatePost($postId: ID!, $postTitle: String!, $postText: String!) {
+  updatePost(postId: $postId, postTitle: $postTitle, postText: $postText) {
+    _id
+    postText
+    postTitle
+  }
+}
+`;
+
 export const ADD_COMMENT = gql`
   mutation addComment($postId: ID!, $commentText: String!) {
     addComment(postId: $postId, commentText: $commentText) {
