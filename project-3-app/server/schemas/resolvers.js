@@ -1,7 +1,11 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, Post, Comment } = require("../models");
 const { signToken } = require("../utils/auth");
-const stripe = require("stripe")(process.env.REACT_APP_STRIPE_KEY);
+const Stripe = require("stripe");
+const stripe = Stripe(
+  "sk_test_51NruVnLbZqu6Vpn3o85H4sr4avu3L7WKZtaBJhVx52qVPs0UG4OqplpdkSCNDyK4w9DpXRPXAXpdXrmkzxFmGJF800GFrXttl6"
+);
+console.log(stripe);
 
 const resolvers = {
   Query: {
@@ -282,31 +286,36 @@ const resolvers = {
         throw new Error(`Error removing comment: ${error.message}`);
       }
     },
-    donate: async (parent, args, context) => {
-      const url = new URL(context.headers.referer).origin;
-      const product = await stripe.products.create({
-        name: "Donation to PostGame",
-      });
-      const price = await stripe.prices.create({
-        product: product.id,
-        unit_amount: args.amount * 100,
-        currency: "usd",
-      });
-      const session = await stripe.checkout.session.create({
-        payment_method_types: ["card"],
-        line_items: [
-          {
-            price: price.id,
-            quantity: 1,
-          },
-        ],
-        mode: "payment",
-        success_url: `${url}/donation-success`,
-        cancel_url: `${url}/donation-cancelled`,
-      });
-      return { session: session.id };
+    donate: async (parent, { amount }, context) => {
+      console.log(stripe);
+      try {
+        const url = new URL(context.headers.referer).origin;
+        const product = await stripe.products.create({
+          name: "Donation to PostGame",
+        });
+        const price = await stripe.prices.create({
+          product: product.id,
+          unit_amount: amount * 100,
+          currency: "usd",
+        });
+        const session = await stripe.checkout.sessions.create({
+          payment_method_types: ["card"],
+          line_items: [
+            {
+              price: price.id,
+              quantity: 1,
+            },
+          ],
+          mode: "payment",
+          success_url: `${url}/donation-success`,
+          cancel_url: `${url}/donation-cancelled`,
+        });
+        return { session: session.id };
+      } catch (error) {
+        console.error("Error in donate function:", error.message);
+        throw error;
+      }
     },
   },
 };
-
 module.exports = resolvers;
