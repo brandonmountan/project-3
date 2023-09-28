@@ -14,7 +14,7 @@ import Sidebar from "./Sidebar";
 
 
 export default function Container() {
-  const [currentPage, setCurrentPage] = useState("Home");
+  const [currentPage, setCurrentPage] = useState("LoginSignup");
 
   // This method is checking to see what the value of `currentPage` is. Depending on the value of currentPage, we return the corresponding component to render.
   const renderPage = () => {
@@ -69,14 +69,14 @@ export default function Container() {
 
 // import Home from './pages/Home';
 // import Header from './components/Header';
-// // import Footer from './components/pages/Footer';
-// // import NavBar from './components/pages/NavBar';
-// // import Sidebar from './components/pages/Sidebar'
-// // import LoginSignup from './components/pages/Login-Signup';
-// // import About from './components/pages/About';
-// // import Profile from './components/pages/Profile';
-// // import ProfilePost from './components/pages/Profile-Post';
-// // import GamePage from './components/pages/GamePage';
+// import Footer from './components/pages/Footer';
+// import NavBar from './components/pages/NavBar';
+// import Sidebar from './components/pages/Sidebar'
+// import LoginSignup from './components/pages/Login-Signup';
+// import About from './components/pages/About';
+// import Profile from './components/pages/Profile';
+// import ProfilePost from './components/pages/Profile-Post';
+// import GamePage from './components/pages/GamePage';
 
 
 // function App() {
@@ -92,27 +92,27 @@ export default function Container() {
 //               <Route
 //                 path="/"
 //                 element={<Home />}
-//               />
-//               {/* <Route
-//                 path="/LoginSignup"
-//                 element={<LoginSignup />}
-//               />
-//               <Route
-//                 path="/profile"
-//                 element={<Profile />}
-//               />
-//               <Route
-//                 path="/profilepost"
-//                 element={<ProfilePost />}
-//               />
-//               <Route
-//                 path="/gamepage"
-//                 element={<GamePage />}
-//               />
-//               <Route
-//                 path="/about"
-//                 element={<About />}  */}
-//               {/* /> */}
+              // />
+              // {/* <Route
+              //   path="/LoginSignup"
+              //   element={<LoginSignup />}
+              // />
+              // <Route
+              //   path="/profile"
+              //   element={<Profile />}
+              // />
+              // <Route
+              //   path="/profilepost"
+              //   element={<ProfilePost />}
+              // />
+              // <Route
+              //   path="/gamepage"
+              //   element={<GamePage />}
+              // />
+              // <Route
+              //   path="/about"
+              //   element={<About />}  */}
+              // {/* /> */}
 //             </Routes>
 //         </div>
 //       </Router>

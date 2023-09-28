@@ -40,3 +40,27 @@
     transform: rotate(360deg);
   }
 }
+
+
+.forms-container {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+}
+
+.signup-form,
+.login-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20 px;
+  border: 1px solid black;
+  color: white;
+  border-radius: 5px;
+  background-color: black;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin: 0 5px;
+  height: 100%;
+}
+

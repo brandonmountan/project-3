@@ -17,7 +17,14 @@ const resolvers = {
             return Post.find(params).sort({ createdAt: -1 });
         },
         post: async (parent, { postId }) => {
-            return Post.findOne({ _id: postId });
+            return Post.findOne({ _id: postId })
+                .populate('postAuthor')
+                .populate({
+                    path: 'comments',
+                    populate: {
+                        path: 'commentAuthor',
+                    },
+                }); // get additional user data from author ID
         },
         me: async (parent, args, context) => {
             if (context.user) {
@@ -82,13 +89,19 @@ const resolvers = {
                 const post = await Post.create({
                     postTitle,
                     postText,
-                    postAuthor: context.user._id,
+                    // postAuthor does not return a username in Apollo for some reason. Username does appear in console log.
+                    postAuthor: {
+                        _id: context.user._id,
+                        username: context.user.username
+                    },
                     game: gameId // or whatever we use to identify the games through the API
                 });
                 console.log("author user id is: " + context.user._id)
+                console.log("author username is: " + context.user.username)
 
                 await User.findOneAndUpdate(
                     { _id: context.user._id },
+                    // { username: context.user.username },
                     { $addToSet: { posts: post._id } }
                 );
                 console.log("user id is: " + context.user._id)
@@ -118,7 +131,7 @@ const resolvers = {
                     postTitle,
                     postText,
                 };
-        
+
                 // if gameId is provided, update the game association
                 if (gameId) {
                     updates.game = gameId;

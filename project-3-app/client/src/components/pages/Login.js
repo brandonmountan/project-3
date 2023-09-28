@@ -6,6 +6,10 @@ import { useMutation } from '@apollo/client';
 
 import Auth from '../utils/auth';
 
+// import { LOGIN } from '../utils/mutations';
+import '../../../src/App.css';
+
+
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN);
@@ -43,11 +47,14 @@ const Login = (props) => {
 
 
   return (
+
     <div className="m-5">
       {data ? (
         <p>success</p>
       ) : (
         <Form className="p-5">
+    <div className='forms-container'>
+      <div className='login-form'>
         {/* Login Form */}
         <h2>Login</h2>
         <Form.Group onSubmit={handleFormSubmit} controlId="loginEmail">
@@ -73,7 +80,9 @@ const Login = (props) => {
                 {error.message}
               </div>
             )}
+      </div>
     </div>
+    
   );
 }
 
