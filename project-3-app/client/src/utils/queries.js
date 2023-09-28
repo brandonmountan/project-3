@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_USER = gql`
   query user($username: String!) {
@@ -16,6 +16,14 @@ export const QUERY_ME = gql`
       _id
       username
       email
+    }
+  }
+`;
+
+export const QUERY_CHECKOUT_SESSION = gql`
+  query CheckoutSession($amount: Float!) {
+    checkoutSession(amount: $amount) {
+      session
     }
   }
 `;
