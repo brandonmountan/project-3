@@ -1,14 +1,14 @@
 import React from "react";
-import Card from "react-bootstrap/Card";
-import { useQuery } from "@apollo/client";
+import Form from 'react-bootstrap/Form';
+import { useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
 
-import { QUERY_SINGLE_POST } from "../utils/queries";
+import { ADD_POST } from "../utils/mutations";
 
 function ProfilePost() {
   const { postId } = useParams();
 
-  const { loading, data } = useQuery(QUERY_SINGLE_POST, {
+  const { loading, data } = useMutation(ADD_POST, {
     // pass URL parameter
     variables: { postId: postId },
   });
@@ -19,13 +19,12 @@ function ProfilePost() {
     return <div>Loading...</div>;
   }
   return (
-    <Card class="m-5">
-      <Card.Body class="p-5">{post.postTitle}</Card.Body>
-      <Card.Body class="p-5">{post.postText}</Card.Body>
-      <Card.Body class="p-5">{post.postAuthor}</Card.Body>
-      <Card.Body class="p-5">{post.createdAt}</Card.Body>
-      <Card.Body class="p-5">{post.comments}</Card.Body>
-    </Card>
+    <Form>
+      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+        <Form.Label>Example textarea</Form.Label>
+        <Form.Control as="textarea" rows={3} />
+      </Form.Group>
+    </Form>
   );
 }
 
