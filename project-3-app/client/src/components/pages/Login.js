@@ -2,12 +2,14 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 // import { LOGIN } from '../utils/mutations';
+import '../../../src/App.css';
 
 const Login = (props) => {
 
   return (
-    <div className="m-5">
-      <Form className="p-5">
+    
+    <div className='forms-container'>
+      <div className='login-form'>
         {/* Login Form */}
         <h2>Login</h2>
         <Form.Group controlId="loginEmail">
@@ -21,8 +23,9 @@ const Login = (props) => {
         <Button variant="primary" type="submit">
           Login
         </Button>
-      </Form>
+      </div>
     </div>
+    
   );
 }
 
