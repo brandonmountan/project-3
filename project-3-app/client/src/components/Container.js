@@ -9,6 +9,8 @@ import Footer from "./Footer";
 import Header from "./Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "./Sidebar";
+
+
 export default function PortfolioContainer() {
   const [currentPage, setCurrentPage] = useState("Home");
 
@@ -34,36 +36,32 @@ export default function PortfolioContainer() {
   const handlePageChange = (page) => setCurrentPage(page);
 
   return (
-    <div className="container-fluid justify-content-center">
-      <Header />
-      {/* We are passing the currentPage from state and the function to update it */}
-      {/* Here we are calling the renderPage method which will return a component  */}
-      <NavBar currentPage={currentPage} handlePageChange={handlePageChange} />
-      <div className="row">
-        <div className="col-md-3">
-          <Sidebar />
+
+      <div className="container-fluid justify-content-center">
+        <Header />
+        {/* We are passing the currentPage from state and the function to update it */}
+        {/* Here we are calling the renderPage method which will return a component  */}
+        <NavBar currentPage={currentPage} handlePageChange={handlePageChange} />
+        <div className="row">
+          <div className="col-md-3">
+            <Sidebar />
+          </div>
+          <div
+            className="col-md-9 d-flex justify-content-center align-items-center"
+            style={{ minHeight: "70vh" }}
+          >
+            {renderPage()}
+          </div>
         </div>
-        <div
-          className="col-md-9 d-flex justify-content-center align-items-center"
-          style={{ minHeight: "70vh" }}
-        >
-          {renderPage()}
-        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+
   );
 }
 
 // import React from 'react';
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import {
-//   ApolloClient,
-//   InMemoryCache,
-//   ApolloProvider,
-//   createHttpLink,
-// } from '@apollo/client';
-// import { setContext } from '@apollo/client/link/context';
+
 
 // import Home from './pages/Home';
 // import Header from './components/Header';
@@ -76,24 +74,6 @@ export default function PortfolioContainer() {
 // // import ProfilePost from './components/pages/Profile-Post';
 // // import GamePage from './components/pages/GamePage';
 
-// const httpLink = createHttpLink({
-//   uri: '/graphql',
-// });
-
-// const authLink = setContext((_, { headers }) => {
-//   const token = localStorage.getItem('id_token');
-//   return {
-//     headers: {
-//       ...headers,
-//       authorization: token ? `Bearer ${token}` : '',
-//     },
-//   };
-// });
-
-// const client = new ApolloClient({
-//   link: authLink.concat(httpLink),
-//   cache: new InMemoryCache(),
-// });
 
 // function App() {
 //   return (
