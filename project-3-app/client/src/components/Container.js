@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact"
 import About from "./pages/About";
-import ProfilePost from "./pages/Profile-Post";
+import ProfilePost from "./pages/PostForm";
 import LoginSignup from "./pages/Login-Signup";
 import Profile from "./pages/Profile";
 import Footer from "./Footer";
