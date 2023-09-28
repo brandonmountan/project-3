@@ -8,58 +8,65 @@ const stripe = Stripe(
 console.log(stripe);
 
 const resolvers = {
-  Query: {
-    users: async () => {
-      return User.find().populate("posts");
-    },
-    user: async (parent, { userId }) => {
-      return (
-        User.findOne({ _id: userId })
-          // .populate('games')
-          .populate("posts")
-      );
-    },
-    posts: async (parent, { userId }) => {
-      const params = userId ? { postAuthor: userId } : {};
-      return Post.find(params).sort({ createdAt: -1 });
-    },
-    post: async (parent, { postId }) => {
-      return Post.findOne({ _id: postId })
-        .populate("postAuthor")
-        .populate({
-          path: "comments",
-          populate: {
-            path: "commentAuthor",
-          },
-        });
-    }, // get additional user data from author ID
-    me: async (parent, args, context) => {
-      if (context.user) {
-        return User.findOne({ _id: context.user._id })
-          .populate("posts")
-          .populate("comments");
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
-  },
+    Query: {
+        users: async () => {
+            return User.find().populate('posts');
+        },
 
-  Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      try {
-        // create the user
-        const user = await User.create({ username, email, password });
-        // sign a JSON Web Token and log the user in after they are created
-        const token = signToken(user);
-        // `Auth` object of the signed token and user's information
-        return { token, user };
-      } catch (error) {
-        throw new Error(`Error creating user: ${error.message}`);
-      }
+        // tested- working "getUserPosts"
+        user: async (parent, { userId }) => {
+            return User.findOne({ _id: userId })
+                // .populate('games')
+                .populate('posts');
+        },
+
+        // tested- working "getAllPosts"
+        posts: async (parent, { userId }) => {
+            const params = userId ? { postAuthor: userId } : {};
+            return Post.find(params).sort({ createdAt: -1 })
+            .populate('postAuthor');
+        },
+
+        // tested- working "getSinglePost"
+        post: async (parent, { postId }) => {
+            return Post.findOne({ _id: postId })
+                .populate('postAuthor')
+                .populate({
+                    path: 'comments',
+                    populate: {
+                        path: 'commentAuthor',
+                    },
+                }); // get additional user data from author ID
+        },
+        me: async (parent, args, context) => {
+            if (context.user) {
+                return User.findOne({ _id: context.user._id })
+                    .populate('posts')
+                    .populate('comments');
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
     },
-    login: async (parent, { email, password }) => {
-      try {
-        // look up user by email address.
-        const user = await User.findOne({ email });
+
+    Mutation: {
+        // tested- working
+        addUser: async (parent, { username, email, password }) => {
+            try {
+                // create the user
+                const user = await User.create({ username, email, password });
+                // sign a JSON Web Token and log the user in after they are created
+                const token = signToken(user);
+                // `Auth` object of the signed token and user's information
+                return { token, user };
+            } catch (error) {
+                throw new Error(`Error creating user: ${error.message}`);
+            }
+        },
+        // tested- working and provides token
+        login: async (parent, { email, password }) => {
+            try {
+                // look up user by email address. 
+                const user = await User.findOne({ email });
 
         // if no user with that email address, throw error
         if (!user) {
@@ -86,23 +93,21 @@ const resolvers = {
       }
     },
 
-    // THE USER YOU CHOOSE TO GENERATE YOUR TOKEN ON THE LOGIN ROUTE WILL BE THE USER AFFECTED BY ALL AUTH ROUTES, SO IT DOESN'T MATTER WHAT "AUTHOR" ID IS USED IN THE APOLLO VARIABLES
-
-    addPost: async (parent, { postTitle, postText, gameId }, context) => {
-      console.log("test addPost");
-      if (!context.user) {
-        throw new AuthenticationError("You need to be logged in to add a post");
-      }
-      try {
-        const post = await Post.create({
-          postTitle,
-          postText,
-          // postAuthor does not return a username in Apollo for some reason. Username does appear in console log.
-          postAuthor: {
-            _id: context.user._id,
-          },
-          game: gameId, // or whatever we use to identify the games through the API
-        });
+        // THE USER YOU CHOOSE TO GENERATE YOUR TOKEN ON THE LOGIN ROUTE WILL BE THE USER AFFECTED BY ALL AUTH ROUTES, SO IT DOESN'T MATTER WHAT "AUTHOR" ID IS USED IN THE APOLLO VARIABLES
+  
+        // tested- working
+        addPost: async (parent, { postTitle, postText, gameId }, context) => {
+            console.log("test addPost");
+            if (!context.user) {
+                throw new AuthenticationError('You need to be logged in to add a post');
+            }
+            try {
+                const post = await Post.create({
+                    postTitle,
+                    postText,
+                    postAuthor: context.user._id,
+                    game: gameId // or whatever we use to identify the games through the API
+                });
 
         console.log("author user id is: " + context.user._id);
         console.log("author username is: " + context.user.username);
@@ -112,36 +117,30 @@ const resolvers = {
           { $addToSet: { posts: post._id } }
         );
 
-        const newPost = await Post.findById(post).populate("postAuthor");
+                const newPost = await Post.findById(post).populate('postAuthor'); //to display username from postAuthor _id
+                
+                console.log("user id is: " + context.user._id)
+                return newPost;
 
-        console.log("user id is: " + context.user._id);
-        return newPost;
-      } catch (error) {
-        throw new Error(`Error creating post: ${error.message}`);
-      }
-    },
+            } catch (error) {
+                throw new Error(`Error creating post: ${error.message}`);
+            }
+        },
 
-    updatePost: async (
-      parent,
-      { postId, postTitle, postText, gameId },
-      context
-    ) => {
-      console.log("test updatePost");
-      if (!context.user) {
-        throw new AuthenticationError(
-          "You need to be logged in to update a post"
-        );
-      }
-      try {
-        const existingPost = await Post.findOne({
-          _id: postId,
-          postAuthor: context.user._id,
-        });
-        if (!existingPost) {
-          throw new AuthenticationError(
-            "You are not authorized to update this post"
-          );
-        }
+        // tested- working
+        updatePost: async (parent, { postId, postTitle, postText, gameId }, context) => {
+            console.log("test updatePost");
+            if (!context.user) {
+                throw new AuthenticationError('You need to be logged in to update a post');
+            }
+            try {
+                const existingPost = await Post.findOne({
+                    _id: postId,
+                    postAuthor: context.user._id
+                });
+                if (!existingPost) {
+                    throw new AuthenticationError('You are not authorized to update this post');
+                }
 
         const updates = {
           postTitle,
@@ -169,18 +168,17 @@ const resolvers = {
       }
     },
 
-    removePost: async (parent, { postId }, context) => {
-      console.log("test removePost");
-      if (!context.user) {
-        throw new AuthenticationError(
-          "You need to be logged in to remove a post"
-        );
-      }
-      try {
-        const existingPost = await Post.findOne({
-          _id: postId,
-          postAuthor: context.user._id,
-        });
+        // tested- working
+        removePost: async (parent, { postId }, context) => {
+            console.log("test removePost");
+            if (!context.user) {
+                throw new AuthenticationError('You need to be logged in to remove a post');
+            }
+            try {
+                const existingPost = await Post.findOne({
+                    _id: postId,
+                    postAuthor: context.user._id
+                });
 
         if (!existingPost) {
           throw new AuthenticationError(
@@ -210,11 +208,12 @@ const resolvers = {
         // do we want to delete all comments associated with a Post, or make a placeholder "user removed post" that leaves comments visible under the deleted post?
         // await Comment.deleteMany({ post: postId });
 
-        return deletedPost;
-      } catch (error) {
-        throw new Error(`Error removing post: ${error.message}`);
-      }
-    },
+                return deletedPost;
+            } catch (error) {
+                throw new Error(`Error removing post: ${error.message}`);
+            }
+        },
+
 
     addComment: async (
       parent,
