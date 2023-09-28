@@ -91,21 +91,24 @@ const resolvers = {
                     postText,
                     // postAuthor does not return a username in Apollo for some reason. Username does appear in console log.
                     postAuthor: {
-                        _id: context.user._id,
-                        username: context.user.username
-                    },
+                        _id: context.user._id },
                     game: gameId // or whatever we use to identify the games through the API
                 });
+
+             
+
                 console.log("author user id is: " + context.user._id)
                 console.log("author username is: " + context.user.username)
 
                 await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    // { username: context.user.username },
                     { $addToSet: { posts: post._id } }
                 );
+
+                const newPost = await Post.findById(post).populate('postAuthor');
+                
                 console.log("user id is: " + context.user._id)
-                return post;
+                return newPost;
 
             } catch (error) {
                 throw new Error(`Error creating post: ${error.message}`);
