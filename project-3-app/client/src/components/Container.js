@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Home from "./pages/Home";
+import Contact from "./pages/Contact"
 import About from "./pages/About";
 import ProfilePost from "./pages/Profile-Post";
 import LoginSignup from "./pages/Login-Signup";
@@ -11,7 +12,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "./Sidebar";
 
 
-export default function PortfolioContainer() {
+export default function Container() {
   const [currentPage, setCurrentPage] = useState("Home");
 
   // This method is checking to see what the value of `currentPage` is. Depending on the value of currentPage, we return the corresponding component to render.
@@ -31,12 +32,12 @@ export default function PortfolioContainer() {
     if (currentPage === "LoginSignup") {
       return <LoginSignup />;
     }
+    return <Contact />;
   };
 
   const handlePageChange = (page) => setCurrentPage(page);
 
   return (
-
       <div className="container-fluid justify-content-center">
         <Header />
         {/* We are passing the currentPage from state and the function to update it */}
@@ -55,7 +56,6 @@ export default function PortfolioContainer() {
         </div>
         <Footer />
       </div>
-
   );
 }
 
