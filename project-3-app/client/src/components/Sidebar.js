@@ -15,9 +15,12 @@ function Sidebar() {
             key: process.env.REACT_APP_RAWG_API_KEY,
             dates: `${startDate},${endDate}`,
             ordering: "-rating",
-            page_size: 5,
+            page_size: 10,
           },
         });
+
+        console.log(response.data)
+
         setGames(response.data.results);
       } catch (error) {
         console.error("error fetching games");
@@ -31,7 +34,11 @@ function Sidebar() {
       <h2>Top Rated Games of 2023</h2>
       <ListGroup>
         {games.map((game) => (
-          <ListGroup.Item key={game.id}>{game.name}</ListGroup.Item>
+          <ListGroup.Item key={game.id}>
+            <h3>{game.name}</h3>
+            <p>Released: {game.released}</p>
+            <p>Genre: {game.genres.map((genre) => genre.name).join(", ")}</p>
+          </ListGroup.Item>
         ))}
       </ListGroup>
     </div>

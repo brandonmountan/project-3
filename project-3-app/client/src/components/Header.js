@@ -9,7 +9,7 @@ import { useState } from "react";
 const stripePromise = await loadStripe(process.env.REACT_APP_CLIENT_STRIPE_KEY);
 
 function Header() {
-  const [donate, { data }] = useMutation(DONATE);
+  const [donate] = useMutation(DONATE);
   const [donationAmount, setDonationAmount] = useState(0);
 
   const handleDonate = async (amount) => {
