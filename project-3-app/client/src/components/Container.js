@@ -31,7 +31,7 @@ export default function Container() {
       return <ProfilePost />;
     }
     if (currentPage === "Login") {
-      return <Login />;
+      return <Login setCurrentPage={setCurrentPage} />;
     }
     if (currentPage === "Signup") {
       return <Signup />;
