@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
-
+// contact page
 function ContactPage() {
     return (
         <Container className="my-5">
