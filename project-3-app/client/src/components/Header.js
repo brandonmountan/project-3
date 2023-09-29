@@ -1,7 +1,7 @@
 import React from "react";
 import Badge from "react-bootstrap/Badge";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./header.module.css";
+import styles from "../styles/header.module.css";
 import DonateComponent from "./Donate";
 
 function Header() {

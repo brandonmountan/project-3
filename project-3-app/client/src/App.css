@@ -1,4 +1,3 @@
-
 .App {
   text-align: center;
 }
@@ -33,15 +32,20 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-html, body {
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  width: 100%; /* Ensure content fits within viewport width */
-  max-width: 100%; /* Limit content to viewport width */
+html,
+body {
+  overflow-x: hidden;
+  /* Prevent horizontal scrolling */
+  width: 100%;
+  /* Ensure content fits within viewport width */
+  max-width: 100%;
+  /* Limit content to viewport width */
 }
 
 .forms-container {
@@ -61,7 +65,7 @@ html, body {
   color: white;
   border-radius: 5px;
   background-color: black;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin: 0 5px;
   height: 100%;
 }
@@ -70,17 +74,20 @@ html, body {
 .navbar {
   text-align: center;
   padding: 20px;
-  background-color: #333; /* Example background color */
-  color: white; /* Example text color */
+  background-color: #333;
+  /* Example background color */
+  color: white;
+  /* Example text color */
 }
 
 /* Navbar link styles */
 .nav-link {
-  padding-right: 0 !important; /* keeps spacing so underline matches word length*/
+  padding-right: 0 !important;
+  /* keeps spacing so underline matches word length*/
   padding-left: 0 !important;
-  display: inline-block; 
+  display: inline-block;
   margin-right: 20px;
-  margin-left: 20px; 
+  margin-left: 20px;
   position: relative;
   text-decoration: none;
   color: #fff;
@@ -91,46 +98,58 @@ html, body {
 .nav-link::before {
   content: "";
   position: absolute;
-  bottom: 1px; /* initial position of the underline */
+  bottom: 1px;
+  /* initial position of the underline */
   left: 0;
-  width: 0; /* underline starts with zero width */
-  height: 2px; /* height of the underline */
-  background-color: #fff; /* underline color */
-  transition: width 0.3s; /* transition underline width */
+  width: 0;
+  /* underline starts with zero width */
+  height: 2px;
+  /* height of the underline */
+  background-color: #fff;
+  /* underline color */
+  transition: width 0.3s;
+  /* transition underline width */
 }
 
 .navbar .nav-link:hover {
-  color: #ffa500; 
+  color: #ffa500;
 }
 
 /* expand the underline on hover */
 .nav-link:hover::before {
-  width: 100%; /* expand the underline to full width on hover */
+  width: 100%;
+  /* expand the underline to full width on hover */
 }
 
 .nav-link.active {
-  font-weight: bold; /* Make the active link text bold */
+  font-weight: bold;
+  /* Make the active link text bold */
 }
 
 
 .nav-link.active::before {
-  width: 100%; /* expand underline to full width for the active link */
+  width: 100%;
+  /* expand underline to full width for the active link */
 }
 
 
 /* Center the content */
 .app-container {
   display: flex;
-  flex-direction: column; /* Stack children vertically */
-  align-items: center; /* Center horizontally */
-  justify-content: flex-start; /* Align children to the start (top) */
+  flex-direction: column;
+  /* Stack children vertically */
+  align-items: center;
+  /* Center horizontally */
+  justify-content: flex-start;
+  /* Align children to the start (top) */
   background-color: rgb(46, 59, 59);
 }
 
 .content-container {
   display: flex;
   width: 100%;
-  max-width: 1200px; /* Set a maximum width for content */
+  max-width: 1200px;
+  /* Set a maximum width for content */
 }
 
 .sidebar {
@@ -139,6 +158,7 @@ html, body {
 }
 
 .main-content {
-  flex: 4; /* Adjust as needed */
+  flex: 4;
+  /* Adjust as needed */
   padding: 20px;
 }
