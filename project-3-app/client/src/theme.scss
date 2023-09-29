@@ -8,12 +8,12 @@ $text-color: rgba(255, 255, 255, 0.695);
 
 // Bootstrap customization
 $theme-colors: (
-  "primary": $primary-header,
-  "secondary": $secondary-background,
-  "dark": $primary-background,
-  "light": $primary-btn,
-  "info": $highlight-accent,
-  "text": $text-color
+    "primary": $primary-header,
+    "secondary": $secondary-background,
+    "dark": $primary-background,
+    "light": $primary-btn,
+    "info": $highlight-accent,
+    "text": $text-color
 );
 @import '~bootstrap/scss/bootstrap';
 
@@ -35,15 +35,19 @@ h1 {
     }
 }
 
-button, .btn {
+button,
+.btn {
     background-color: $primary-btn;
     border-color: $primary-btn;
 
-    &:hover, &:active, &:focus {
+    &:hover,
+    &:active,
+    &:focus {
         background-color: darken($primary-btn, 10%);
         border-color: darken($primary-btn, 10%);
     }
 }
+
 .form-label {
     color: $highlight-accent;
 }

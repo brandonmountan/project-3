@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './donateComponent.css'; 
+import '../styles/donateComponent.css'; 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
