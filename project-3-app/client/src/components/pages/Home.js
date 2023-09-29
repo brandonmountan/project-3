@@ -4,13 +4,13 @@ import { Container, Button, Row, Col, Card } from 'react-bootstrap';
 function HomePage() {
   return (
     <>
-      <Container fluid className="text-center bg-primary text-white py-5">
+      <Container fluid className="text-center bg-primary py-5">
         <h1>Welcome to PostGame</h1>
         <p>The ultimate platform for game enthusiasts!</p>
       </Container>
 
       {/* Sample Blog Card */}  
-      <Container className="my-5">
+      <Container className="my-5 primary">
         <h2>Recent Blogs</h2>
         <Row className="mt-4">    
           <Col md={4}>
@@ -47,7 +47,7 @@ function HomePage() {
         </Row>
       </Container>
 
-      <Container fluid className="text-center bg-secondary text-white py-5">
+      <Container fluid className="text-center bg-secondary py-5">
         <h2>Join the Community!</h2>
         <p>Ready to dive deeper into the world of gaming? Sign up now!</p>
         <Button variant="light" href="#login">Sign Up</Button>
