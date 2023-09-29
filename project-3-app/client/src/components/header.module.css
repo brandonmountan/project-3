@@ -1,8 +1,10 @@
 .headerContainer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  width: 100%;
+  text-align: center;
+  padding: 20px;
+  position: relative;
 }
 
 .leftSide {
