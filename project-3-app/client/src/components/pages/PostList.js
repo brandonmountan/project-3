@@ -5,13 +5,13 @@ import { useQuery } from '@apollo/client';
 
 import Auth from '../utils/auth';
 
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
+import { QUERY_POSTS, QUERY_SINGLE_POST } from '../utils/queries';
 
 
-function Profile() {
+function PostList() {
     const { username: userParam } = useParams();
 
-    const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+    const { loading, data } = useQuery(userParam ? QUERY_POSTS : QUERY_SINGLE_POST, {
       variables: { username: userParam },
     });
   
@@ -40,4 +40,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default PostList;

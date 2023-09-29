@@ -1,7 +1,31 @@
 import React from 'react';
 import { Container, Button, Row, Col, Card } from 'react-bootstrap';
 
-function HomePage() {
+
+function Home() {
+    const { username: userParam } = useParams();
+
+    const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+      variables: { username: userParam },
+    });
+  
+    const user = data?.me || data?.user || {};
+    // navigate to personal profile page if username is yours
+    if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+      return <Navigate to="/me" />;
+    }
+  
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+  
+    if (!user?.username) {
+      return (
+        <h4>
+          Please login or signup to view content.
+        </h4>
+      );
+    }
   return (
     <>
       <Container fluid className="text-center bg-primary py-5">

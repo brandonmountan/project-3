@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { useQuery } from '@apollo/client';
 
 
-function GamePage() {
+function Home() {
   return (
     <Card class="m-5">
       <Card.Body class="p-5">Hello</Card.Body>
@@ -11,4 +11,4 @@ function GamePage() {
   );
 }
 
-export default GamePage;
+export default Home;

@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import NavBar from "./NavBar";
 import Home from "./pages/Home";
+import Contact from "./pages/Contact"
 import About from "./pages/About";
-import ProfilePost from "./pages/Profile-Post";
-import LoginSignup from "./pages/Login-Signup";
+import ProfilePost from "./pages/PostForm";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Footer from "./Footer";
 import Header from "./Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "./Sidebar";
-export default function PortfolioContainer() {
-  const [currentPage, setCurrentPage] = useState("Home");
+
+
+export default function Container() {
+  const [currentPage, setCurrentPage] = useState("LoginSignup");
 
   // This method is checking to see what the value of `currentPage` is. Depending on the value of currentPage, we return the corresponding component to render.
   const renderPage = () => {
@@ -26,74 +30,54 @@ export default function PortfolioContainer() {
     if (currentPage === "ProfilePost") {
       return <ProfilePost />;
     }
-    if (currentPage === "LoginSignup") {
-      return <LoginSignup />;
+    if (currentPage === "Login") {
+      return <Login />;
     }
+    if (currentPage === "Signup") {
+      return <Signup />;
+    }
+    return <Contact />;
   };
 
   const handlePageChange = (page) => setCurrentPage(page);
 
   return (
-    <div className="container-fluid">
-      <Header />
-      <div className="row">
+      <div className="container-fluid justify-content-center">
+        <Header />
         {/* We are passing the currentPage from state and the function to update it */}
-        <div className="col-md-3">
-          <Sidebar />
+        {/* Here we are calling the renderPage method which will return a component  */}
+        <NavBar currentPage={currentPage} handlePageChange={handlePageChange} />
+        <div className="row">
+          <div className="col-md-3">
+            <Sidebar />
+          </div>
+          <div
+            className="col-md-9 d-flex justify-content-center align-items-center"
+            style={{ minHeight: "70vh" }}
+          >
+            {renderPage()}
+          </div>
         </div>
-        <div className="col-md-9">
-          <NavBar
-            currentPage={currentPage}
-            handlePageChange={handlePageChange}
-          />
-          {/* Here we are calling the renderPage method which will return a component  */}
-          {renderPage()}
-        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
   );
 }
 
 // import React from 'react';
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import {
-//   ApolloClient,
-//   InMemoryCache,
-//   ApolloProvider,
-//   createHttpLink,
-// } from '@apollo/client';
-// import { setContext } from '@apollo/client/link/context';
+
 
 // import Home from './pages/Home';
 // import Header from './components/Header';
-// // import Footer from './components/pages/Footer';
-// // import NavBar from './components/pages/NavBar';
-// // import Sidebar from './components/pages/Sidebar'
-// // import LoginSignup from './components/pages/Login-Signup';
-// // import About from './components/pages/About';
-// // import Profile from './components/pages/Profile';
-// // import ProfilePost from './components/pages/Profile-Post';
-// // import GamePage from './components/pages/GamePage';
+// import Footer from './components/pages/Footer';
+// import NavBar from './components/pages/NavBar';
+// import Sidebar from './components/pages/Sidebar'
+// import LoginSignup from './components/pages/Login-Signup';
+// import About from './components/pages/About';
+// import Profile from './components/pages/Profile';
+// import ProfilePost from './components/pages/Profile-Post';
+// import GamePage from './components/pages/GamePage';
 
-// const httpLink = createHttpLink({
-//   uri: '/graphql',
-// });
-
-// const authLink = setContext((_, { headers }) => {
-//   const token = localStorage.getItem('id_token');
-//   return {
-//     headers: {
-//       ...headers,
-//       authorization: token ? `Bearer ${token}` : '',
-//     },
-//   };
-// });
-
-// const client = new ApolloClient({
-//   link: authLink.concat(httpLink),
-//   cache: new InMemoryCache(),
-// });
 
 // function App() {
 //   return (
@@ -108,27 +92,27 @@ export default function PortfolioContainer() {
 //               <Route
 //                 path="/"
 //                 element={<Home />}
-//               />
-//               {/* <Route
-//                 path="/LoginSignup"
-//                 element={<LoginSignup />}
-//               />
-//               <Route
-//                 path="/profile"
-//                 element={<Profile />}
-//               />
-//               <Route
-//                 path="/profilepost"
-//                 element={<ProfilePost />}
-//               />
-//               <Route
-//                 path="/gamepage"
-//                 element={<GamePage />}
-//               />
-//               <Route
-//                 path="/about"
-//                 element={<About />}  */}
-//               {/* /> */}
+              // />
+              // {/* <Route
+              //   path="/LoginSignup"
+              //   element={<LoginSignup />}
+              // />
+              // <Route
+              //   path="/profile"
+              //   element={<Profile />}
+              // />
+              // <Route
+              //   path="/profilepost"
+              //   element={<ProfilePost />}
+              // />
+              // <Route
+              //   path="/gamepage"
+              //   element={<GamePage />}
+              // />
+              // <Route
+              //   path="/about"
+              //   element={<About />}  */}
+              // {/* /> */}
 //             </Routes>
 //         </div>
 //       </Router>
