@@ -5,6 +5,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useMutation } from "@apollo/client";
 import { DONATE } from "../utils/mutations";
 import { useState } from "react";
+import styles from "./header.module.css";
 
 const stripePromise = await loadStripe(process.env.REACT_APP_CLIENT_STRIPE_KEY);
 
@@ -26,7 +27,7 @@ function Header() {
     }
   };
   return (
-    <div className="p-4">
+    <div className={`p-4 ${styles.headerContainer}`}>
       <h1 className="text-center">
         PostGame <Badge bg="secondary">Welcome!</Badge>
       </h1>
