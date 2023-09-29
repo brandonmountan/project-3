@@ -5,18 +5,17 @@ import Button from 'react-bootstrap/Button';
 import { LOGIN } from '../utils/mutations';
 import '../../../src/App.css';
 import { Link } from 'react-router-dom';
-
-
 import Auth from '../utils/auth';
 
-
 const Login = (props) => {
+  console.log('hello1')
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { data }] = useMutation(LOGIN);
 
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
+    console.log('hello2')
 
     setFormState({
       ...formState,
@@ -27,15 +26,18 @@ const Login = (props) => {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(data);
     try {
       const { data } = await login({
         variables: { ...formState },
+        
       });
+      console.log('hello3')
       Auth.login(data.login.token);
+
     } catch (e) {
       console.error(e);
     }
+    console.log('hello4')
 
     // clear form values
     setFormState({
@@ -51,17 +53,17 @@ const Login = (props) => {
         {data ? (
               <p>
                 Success! You may now head{' '}
-                <Link to="/#profile">go to profile.</Link>
+                <Link to="/profile">go to profile.</Link>
               </p>
             ) : (
         <form onSubmit={handleFormSubmit}>
-        <Form.Group controlId="loginEmail">
+        <Form.Group controlId="email">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" onChange={handleChange} />
+          <Form.Control value={formState.email} type="email" name= "email" placeholder="Enter email" onChange={handleChange} />
         </Form.Group>
-        <Form.Group controlId="loginPassword">
+        <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" onChange={handleChange}/>
+          <Form.Control value={formState.password} type="password" name="password" placeholder="Password" onChange={handleChange}/>
         </Form.Group>
         <Button variant="primary" type="submit">
           Login
