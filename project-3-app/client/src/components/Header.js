@@ -6,9 +6,7 @@ import { useMutation } from "@apollo/client";
 import { DONATE } from "../utils/mutations";
 import { useState } from "react";
 
-const stripePromise = await loadStripe(
-  "pk_test_51NruVnLbZqu6Vpn3rGKVDetqtw18Ww25QFv4arRhtCBVAtc6zjcyjkxuprWi0yzDLckgKtpNNdP003huu0Z98yjY009bVktYvR"
-);
+const stripePromise = await loadStripe(process.env.REACT_APP_CLIENT_STRIPE_KEY);
 
 function Header() {
   const [donate, { data }] = useMutation(DONATE);
