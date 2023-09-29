@@ -80,6 +80,8 @@ const typeDefs = gql`
 
     removeComment(commentId: ID!): Comment
 
+    addFriend(friendId: ID!): User
+
     donate(amount: Float!): SessionResponse!
   }
 `;
