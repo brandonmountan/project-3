@@ -6,7 +6,6 @@ import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import { Navigate } from "react-router-dom";
 import Auth from "../utils/auth";
 
-
 function Home() {
     const { username: userParam } = useParams();
 
