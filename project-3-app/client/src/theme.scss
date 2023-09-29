@@ -44,3 +44,21 @@ button, .btn {
         border-color: darken($primary-btn, 10%);
     }
 }
+.form-label {
+    color: $highlight-accent;
+}
+
+.form-control {
+    background-color: $secondary-background;
+    color: $text-color;
+    border: 1px solid $highlight-accent;
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.5); // Lightened placeholder text for better visibility
+    }
+
+    &:focus {
+        border-color: $highlight-accent;
+        box-shadow: 0 0 0 0.2rem rgba($highlight-accent, 0.25);
+    }
+}

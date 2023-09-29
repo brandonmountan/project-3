@@ -61,3 +61,35 @@
   height: 100%;
 }
 
+/* Center the navigation bar */
+.navbar {
+  text-align: center;
+  padding: 20px;
+  background-color: #333; /* Example background color */
+  color: white; /* Example text color */
+}
+
+/* Center the content */
+.app-container {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: flex-start; /* Align children to the start (top) */
+  background-color: rgb(46, 59, 59);
+}
+
+.content-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px; /* Set a maximum width for content */
+}
+
+.sidebar {
+  flex: 1;
+  padding: 20px;
+}
+
+.main-content {
+  flex: 4; /* Adjust as needed */
+  padding: 20px;
+}
