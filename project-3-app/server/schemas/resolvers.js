@@ -331,6 +331,43 @@ const resolvers = {
         },
 
 
+        addFriend: async (parent, { friendId }, context) => {
+            if (!context.user) {
+              throw new AuthenticationError("You need to be logged in to add a friend");
+            }
+            
+            try {
+              // find current user by id
+              const user = await User.findById(context.user._id);
+          
+              // find another user and assign as "friend" to be added, and assign their user_id as "friendId"
+              const friend = await User.findById(friendId);
+          
+              if (!friend) {
+                throw new Error("Friend not found");
+              }
+          
+              // check friend list for duplicate
+              if (user.friends.includes(friendId)) {
+                throw new Error("This user is already in your friends list");
+              }
+          
+              // add friendId to the current user's friends array
+              user.friends.push(friendId);
+          
+              // push current user's id to the "friends" array of the user_id called "friend"
+              friend.friends.push(context.user._id);
+          
+              await user.save();
+              await friend.save();
+          
+              return friend;
+            } catch (error) {
+              throw new Error(`Error adding friend: ${error.message}`);
+            }
+          },
+
+
         donate: async (parent, { amount }, context) => {
             console.log(stripe);
             try {
