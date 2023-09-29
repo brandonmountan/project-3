@@ -1,2 +1,19 @@
 .headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leftSide {
+  flex-grow: 1;
+}
+
+.headerText {
+  flex-grow: 4;
+}
+
+.donate {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }

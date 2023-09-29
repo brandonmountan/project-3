@@ -6,6 +6,9 @@ import { useMutation } from "@apollo/client";
 import { DONATE } from "../utils/mutations";
 import { useState } from "react";
 import styles from "./header.module.css";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 
 const stripePromise = await loadStripe(process.env.REACT_APP_CLIENT_STRIPE_KEY);
 
@@ -28,18 +31,26 @@ function Header() {
   };
   return (
     <div className={`p-4 ${styles.headerContainer}`}>
-      <h1 className="text-center">
+      <div className={styles.leftSide}></div>
+      <h1 className={`text-center ${styles.headerText}`}>
         PostGame <Badge bg="secondary">Welcome!</Badge>
       </h1>
-      <h2>Donate</h2>
-      <input
-        type="number"
-        value={donationAmount}
-        onChange={(e) => setDonationAmount(parseFloat(e.target.value))}
-        min="1"
-        step="1"
-      />
-      <button onClick={handleDonate}>Donate</button>
+      <div className={styles.donate}>
+        <h2>Donate</h2>
+        <InputGroup
+          type="number"
+          value={donationAmount}
+          onChange={(e) => setDonationAmount(parseFloat(e.target.value))}
+          min="1"
+          step="1"
+        >
+          <Form.Control aria-label="Dollar amount (with dot and two decimal places)" />
+          <InputGroup.Text>$</InputGroup.Text>
+        </InputGroup>
+        <Button onClick={handleDonate} variant="light">
+          Submit
+        </Button>{" "}
+      </div>
     </div>
   );
 }
