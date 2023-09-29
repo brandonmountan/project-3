@@ -5,7 +5,6 @@ const Stripe = require("stripe");
 const stripe = Stripe(
     "sk_test_51NruVnLbZqu6Vpn3o85H4sr4avu3L7WKZtaBJhVx52qVPs0UG4OqplpdkSCNDyK4w9DpXRPXAXpdXrmkzxFmGJF800GFrXttl6"
 );
-console.log(stripe);
 
 const resolvers = {
     Query: {
