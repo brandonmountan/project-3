@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import {
   ApolloClient,
   InMemoryCache,
@@ -8,9 +7,6 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-
-
-// import Container from "./components/Container";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "./components/NavBar";
@@ -24,12 +20,9 @@ import Profile from "./components/pages/Profile";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
-
-// import Container from "./components/Container";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './theme.scss'
-
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -64,8 +57,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/me" element={<Profile />} />
-              <Route path="/profiles/:username" element={<Profile />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/about" element={<About />} />
               <Route path="/post" element={<ProfilePost />} />
