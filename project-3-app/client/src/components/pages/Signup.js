@@ -19,7 +19,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/register', formData);
+      const response = await axios.post('/', formData);
       console.log(response.data);
     } catch (error) {
       console.error(error.response.data);

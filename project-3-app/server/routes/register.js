@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User'); // Import the user schema
-const { validateUserRegistration } = require('../util/validateUser'); // Import utility functions
+const { validateUserRegistration } = require('../utils/validateUser'); // Import utility functions
 
 // Define the registration endpoint
     router.post('/register', async (req, res) => {
