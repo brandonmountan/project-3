@@ -38,6 +38,11 @@
   }
 }
 
+html, body {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  width: 100%; /* Ensure content fits within viewport width */
+  max-width: 100%; /* Limit content to viewport width */
+}
 
 .forms-container {
   display: flex;
@@ -68,6 +73,50 @@
   background-color: #333; /* Example background color */
   color: white; /* Example text color */
 }
+
+/* Navbar link styles */
+.nav-link {
+  padding-right: 0 !important; /* keeps spacing so underline matches word length*/
+  padding-left: 0 !important;
+  display: inline-block; 
+  margin-right: 20px;
+  margin-left: 20px; 
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s, border-bottom-width 0.3s, transform 0.3s;
+}
+
+/* bottom border initial */
+.nav-link::before {
+  content: "";
+  position: absolute;
+  bottom: 1px; /* initial position of the underline */
+  left: 0;
+  width: 0; /* underline starts with zero width */
+  height: 2px; /* height of the underline */
+  background-color: #fff; /* underline color */
+  transition: width 0.3s; /* transition underline width */
+}
+
+.navbar .nav-link:hover {
+  color: #ffa500; 
+}
+
+/* expand the underline on hover */
+.nav-link:hover::before {
+  width: 100%; /* expand the underline to full width on hover */
+}
+
+.nav-link.active {
+  font-weight: bold; /* Make the active link text bold */
+}
+
+
+.nav-link.active::before {
+  width: 100%; /* expand underline to full width for the active link */
+}
+
 
 /* Center the content */
 .app-container {
