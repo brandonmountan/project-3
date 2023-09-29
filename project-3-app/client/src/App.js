@@ -9,6 +9,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
+
 // import Container from "./components/Container";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -23,6 +24,12 @@ import Profile from "./components/pages/Profile";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+
+import Container from "./components/Container";
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './theme.scss'
+
 
 const httpLink = createHttpLink({
   uri: "/graphql",
