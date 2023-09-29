@@ -1,5 +1,10 @@
-import React from 'react';
-import { Container, Button, Row, Col, Card } from 'react-bootstrap';
+import React from "react";
+import { Container, Button, Row, Col, Card } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { QUERY_USER, QUERY_ME } from "../utils/queries";
+import { Navigate } from "react-router-dom";
+import Auth from "../utils/auth";
 
 
 function Home() {
@@ -80,4 +85,4 @@ function Home() {
   );
 }
 
-export default HomePage;
+export default Home;
