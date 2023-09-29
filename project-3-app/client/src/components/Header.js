@@ -28,8 +28,8 @@ function Header() {
     }
   };
   return (
-    <div class="p-4">
-      <h1 class="text-center">
+    <div className="p-4">
+      <h1 className="text-center">
         PostGame <Badge bg="secondary">Welcome!</Badge>
       </h1>
       <h2>Donate</h2>
