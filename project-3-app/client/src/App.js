@@ -25,7 +25,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 
-import Container from "./components/Container";
+// import Container from "./components/Container";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './theme.scss'
