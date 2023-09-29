@@ -11,6 +11,7 @@ import { setContext } from '@apollo/client/link/context';
 import Container from "./components/Container";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './theme.scss'
 
 const httpLink = createHttpLink({
     uri: '/graphql',
