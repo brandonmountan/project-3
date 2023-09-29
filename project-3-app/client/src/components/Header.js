@@ -44,7 +44,7 @@ function Header() {
           min="1"
           step="1"
         >
-          <Form.Control aria-label="Dollar amount (with dot and two decimal places)" />
+          <Form.Control />
           <InputGroup.Text>$</InputGroup.Text>
         </InputGroup>
         <Button onClick={handleDonate} variant="light">
