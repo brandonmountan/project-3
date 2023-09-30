@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import { useQuery } from '@apollo/client';
+// import { useQuery } from '@apollo/client';
 
 
 function GamePage() {

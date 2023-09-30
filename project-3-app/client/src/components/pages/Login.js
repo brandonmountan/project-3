@@ -4,13 +4,14 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { LOGIN } from "../utils/mutations";
 import "../../../src/App.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Auth from "../utils/auth";
 
 const Login = (props) => {
   console.log("hello1");
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { data }] = useMutation(LOGIN);
+  const navigate = useNavigate();
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -32,6 +33,8 @@ const Login = (props) => {
       });
       console.log("hello3");
       Auth.login(data.login.token);
+
+      navigate("/profile");
     } catch (e) {
       console.error(e);
     }
