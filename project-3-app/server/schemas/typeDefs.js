@@ -82,6 +82,8 @@ const typeDefs = gql`
 
     addFriend(friendId: ID!): User
 
+    removeFriend(friendId: ID!): User
+
     donate(amount: Float!): SessionResponse!
   }
 `;
