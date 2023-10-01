@@ -59,11 +59,7 @@ function App() {
             </div>
             <div className="main-content">
               <Routes>
-<<<<<<< HEAD
                 <Route path="/home" element={<Home />} />
-=======
-                <Route exact path="/" element={<Home />} />
->>>>>>> ad406854c3613ebcfb31f9d5353c8123462c0770
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/gamepage" element={<Gamepage />} />

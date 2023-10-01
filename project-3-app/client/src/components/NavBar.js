@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -19,6 +20,9 @@ import Auth from "./utils/auth";
                 <Nav.Link href="/me">{Auth.getProfile().data.username}'s Profile</Nav.Link>
                 <Nav.Link href="/" onClick={() => Auth.logout()}>Logout</Nav.Link>
 =======
+=======
+
+>>>>>>> 520dbd37a32507639ee1a42c98ef3dae8601102c
 import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -60,7 +64,10 @@ function NavBar() {
                 <Nav.Link href="/"
                   className={location.pathname === '/logout' ? 'active' : ''}
                   onClick={() => Auth.logout()}>Logout</Nav.Link>
+<<<<<<< HEAD
 >>>>>>> ad406854c3613ebcfb31f9d5353c8123462c0770
+=======
+>>>>>>> 520dbd37a32507639ee1a42c98ef3dae8601102c
               </Nav>
             </Navbar.Collapse>
           </Container>
