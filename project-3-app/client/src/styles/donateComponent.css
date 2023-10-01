@@ -1,17 +1,18 @@
 .tab {
-    max-height: 30px; /* Adjust the desired tab height */
-    cursor: pointer;
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background-color: #8ba691; /* Background color */
-    color: #fff; /* Text color */
-    padding: 8px 10px; /* Padding for the tab */
-    border-radius: 4px; /* Rounded corners */
-    transition: background-color 0.3s ease-in-out; /* Transition the background color */
-    display: flex; /* Use flexbox to center content */
-    align-items: center; /* Vertically center the content */
-  }
+  max-height: 30px; /* Adjust the desired tab height */
+  cursor: pointer;
+  position: fixed; /* Set to fixed positioning */
+  top: 10px; /* Adjust the top position as needed */
+  right: 10px; /* Fixed distance from the right window border */
+  background-color: #8ba691; /* Background color */
+  color: #fff; /* Text color */
+  padding: 8px 10px; /* Padding for the tab */
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.3s ease-in-out; /* Transition the background color */
+  display: flex; /* Use flexbox to center content */
+  align-items: center; /* Vertically center the content */
+  z-index: 999; /* Keep the donate button on top */
+}
 
   .tab:hover {
     background-color: #54b370; /* Adjust the color on hover */
@@ -26,7 +27,7 @@
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
   }
-  
+
   .donation-form.open {
     max-height: 200px; /* Adjust the desired max height for the expanded form */
   }
