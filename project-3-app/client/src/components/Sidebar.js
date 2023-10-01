@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import axios from "axios";
+import "../styles/sidebar.css";
 
 function Sidebar() {
   const [games, setGames] = useState([]);
@@ -15,7 +16,7 @@ function Sidebar() {
             key: process.env.REACT_APP_RAWG_API_KEY,
             dates: `${startDate},${endDate}`,
             ordering: "-rating",
-            page_size: 10,
+            page_size: 5,
           },
         });
 
@@ -34,10 +35,17 @@ function Sidebar() {
       <h2>Top Rated Games of 2023</h2>
       <ListGroup>
         {games.map((game) => (
-          <ListGroup.Item key={game.id}>
-            <h3>{game.name}</h3>
-            <p>Released: {game.released}</p>
-            <p>Genre: {game.genres.map((genre) => genre.name).join(", ")}</p>
+          <ListGroup.Item
+            key={game.id}
+            style={{
+              backgroundImage: `url(${game.background_image})`,
+            }}
+          >
+            <div className="content-wrapper">
+              <h3>{game.name}</h3>
+              <p>Released: {game.released}</p>
+              <p>Genre: {game.genres.map((genre) => genre.name).join(", ")}</p>
+            </div>
           </ListGroup.Item>
         ))}
       </ListGroup>

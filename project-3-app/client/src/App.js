@@ -20,6 +20,7 @@ import Profile from "./components/pages/Profile";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+import Gamepage from "./components/pages/GamePage";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './theme.scss'
@@ -61,8 +62,12 @@ function App() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/me" element={<Profile />} />
-                <Route path="/profiles/:username" element={<Profile />} />
+                <Route path="/gamepage" element={<Gamepage />} />
+                {/* <Route path="/profile" element={<Profile />} /> */}
+                {/* View someone else's profile */}
+                <Route path="/profile/:username" element={<Profile />} />
+                {/* View the user's own profile */}
+                <Route path="/profile/me" element={<Profile />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/post" element={<ProfilePost />} />
