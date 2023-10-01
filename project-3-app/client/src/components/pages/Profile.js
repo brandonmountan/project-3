@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
+
 import Card from 'react-bootstrap/Card';
 
 function Profile() {
@@ -21,6 +22,7 @@ function Profile() {
     } else {
       // User is viewing someone else's profile
       message = "You're viewing another user's profile.";
+
     }
   } else {
     // User is not logged in
