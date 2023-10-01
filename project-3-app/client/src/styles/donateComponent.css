@@ -1,0 +1,72 @@
+.tab {
+    max-height: 30px; /* Adjust the desired tab height */
+    cursor: pointer;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #8ba691; /* Background color */
+    color: #fff; /* Text color */
+    padding: 8px 10px; /* Padding for the tab */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s ease-in-out; /* Transition the background color */
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Vertically center the content */
+  }
+
+  .tab:hover {
+    background-color: #54b370; /* Adjust the color on hover */
+  }
+
+  .tab.open {
+    background-color: #c71e1e; /* Background color when form is open */
+  }
+
+  .donation-form {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+  
+  .donation-form.open {
+    max-height: 200px; /* Adjust the desired max height for the expanded form */
+  }
+
+  @media (max-width: 485px) {
+    .tab::before {
+      content: "$";
+      font-size: 20px; /* Adjust the font size as needed */
+      padding: 0; /* Add padding to maintain the tab's clickable area */
+    }
+    .tab:hover::before {
+        content: "$"; /* Set the hover content to "$" */
+      }
+    
+      .tab.open::before {
+        content: "X"; /* Change content to "Close" when the form is open */
+      }
+    
+      .tab.open::after {
+        content: ""; /* Remove the content "$" when the form is open */
+      }
+    }
+
+  @media (min-width: 486px) {
+    .tab::before {
+      content: "Donate";
+      font-size: inherit; /* Use the default font size */
+      padding: 0; /* Remove padding */
+    }
+  
+    .tab:hover::before {
+      content: "Donate"; /* Set the hover content to "Donate" */
+    }
+  
+    .tab.open::before {
+      content: "Close"; /* Change content to "Close" when the form is open */
+    }
+    
+    .tab.open::after {
+      content: ""; /* Remove the content "Donate" when the form is open */
+    }
+  }
+  

@@ -339,6 +339,7 @@ const resolvers = {
       }
     },
 
+    // tested- working "addFriend"
     addFriend: async (parent, { friendId }, context) => {
       if (!context.user) {
         throw new AuthenticationError(
@@ -374,6 +375,52 @@ const resolvers = {
         return friend;
       } catch (error) {
         throw new Error(`Error adding friend: ${error.message}`);
+      }
+    },
+
+    // tested- working "removeFriend"
+    removeFriend: async (parent, { friendId }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError(
+          "You need to be logged in to remove a friend"
+        );
+      }
+    
+      try {
+        // get current user by ID
+        const user = await User.findById(context.user._id);
+    
+        // get friend to remove by ID
+        const friend = await User.findById(friendId);
+    
+        if (!friend) {
+          throw new Error("Friend not found");
+        }
+    
+        // check if friend exists in user's friends list
+        const friendIndexInUser = user.friends.indexOf(friendId);
+        if (friendIndexInUser === -1) {
+          throw new Error("This user is not in your friends list");
+        }
+    
+        // remove friendId from the current user's friends array
+        user.friends.splice(friendIndexInUser, 1);
+    
+        // check if user exists in friend's friends list
+        const userIndexInFriend = friend.friends.indexOf(context.user._id);
+        if (userIndexInFriend === -1) {
+          throw new Error("You are not in this user's friends list");
+        }
+    
+        // remove current user's ID from friend's friends array
+        friend.friends.splice(userIndexInFriend, 1);
+    
+        await user.save();
+        await friend.save();
+    
+        return friend;
+      } catch (error) {
+        throw new Error(`Error removing friend: ${error.message}`);
       }
     },
 

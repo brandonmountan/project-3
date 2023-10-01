@@ -1,7 +1,10 @@
 .headerContainer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
+  padding: 20px;
+  position: relative;
 }
 
 .leftSide {
@@ -16,4 +19,5 @@
   display: flex;
   flex-direction: column;
   text-align: center;
+  justify-content: flex-end;
 }

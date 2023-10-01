@@ -3,10 +3,11 @@ import { Container, Button, Row, Col, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import Auth from "../utils/auth";
 
 function Home() {
+  const navigate = useNavigate();
   const { username: userParam } = useParams();
 
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
@@ -15,8 +16,17 @@ function Home() {
 
   const user = data?.me || data?.user || {};
   // navigate to personal profile page if username is yours
-  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Navigate to="/me" />;
+  // if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+  //   return <Navigate to="/me" />;
+  // }
+
+  if (Auth.loggedIn()) {
+    // Check if the user is logged in
+    if (Auth.getProfile().data.username === userParam) {
+      // Redirect to the user's profile if it matches the logged-in user
+      navigate('/profile/me');
+      return null; // Return null to prevent rendering the default content
+    }
   }
 
   if (loading) {
