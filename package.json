@@ -18,6 +18,9 @@
   "devDependencies": {
     "concurrently": "^5.3.0"
   },
+  "engines": {
+    "node": "16.18.0"
+  },
   "dependencies": {
     "bootstrap": "^5.3.2",
     "dotenv": "^16.3.1",
