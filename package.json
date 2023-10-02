@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "PostGame",
   "engines": {
-    "node": "v16.18.0",
+    "node": "v16.20.1",
     "npm": "8.19.2"
   },
   "main": "server/server.js",
