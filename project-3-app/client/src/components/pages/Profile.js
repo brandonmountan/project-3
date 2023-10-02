@@ -16,7 +16,7 @@ function Profile() {
   let message = '';
 
   if (Auth.loggedIn()) {
-    if (userParam === 'me' || Auth.getProfile().data.username === userParam) {
+    if (userParam === 'me' || Auth.getProfile().username === userParam) {
       // User is viewing their own profile
       message = `Welcome to your profile, ${user.username}!`;
     } else {
