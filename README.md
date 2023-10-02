@@ -17,21 +17,43 @@ One of the most important learning opportunities within this app was creating ou
 # Technologies Used
 
 React
+
+    Front-end Javascript library. React is based on components which are bits of code that can be resused. It is used to develop as single-page application (SPA). An SPA interacts with the user by dynamically rewriting the current web page with new data from the web server. This is in contrast to web browsers loading entire new pages.
+
 React-router
+
+    Used for page routing. Third party library that allows developers to define routes, manage navigation, and handle URL changes. 
+
 React-Bootstrap (for styling)
+
 Node.js
+
+    Open-source, cross-platform server environment. Used for the back-end and executes javascript code outside of the web browser. React and javascript get along very well.
+
 Express.js
-Mongoose
+
+    Back-end web application blueprint for building RESTful APIs along with node.js.
+
 MongoDB
+
+    Cross-platform document-oriented database program. Classified as NoSQL. The documents are JSON-like because they have optional schemas.
+
 JWT (JSON Web Token)
+
+    Used for encryption. The payload, or intended message, holds JSON that asserts a number of claims, or identity information.
+
 bcrypt
-graphql
-Apollo Server
+
+    Password hashing function for users so their password is protected.
+
+graphql and Apollo Server
+
+    Used to query and manipulate data for APIs.
+
 
 # Screenshots
 
-![screenshot page 3](/images)!
-[screenshot page 3](/images)!
-[screenshot page 3](/images)
+![screenshot page 3](./images/project3img1.PNG)!
+
 
 # Link
