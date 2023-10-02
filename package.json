@@ -8,6 +8,7 @@
   },
   "main": "server/server.js",
   "scripts": {
+    "develop": "concurrently \"cd server && npm start\" \"cd client && npm start\"",
     "start": "npm start --prefix server",
     "install-client": "cd client && npm install && npm run build && cd ..",
     "install-server": "cd server && npm install && cd .. ",

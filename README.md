@@ -1,6 +1,6 @@
-## PostGame
+# PostGame
 
-# Description
+## Description
 - What was your motivation?
 - Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
 - What problem does it solve?
@@ -14,7 +14,7 @@ All of us who helped built this project seemed to fall into the expected users c
 
 One of the most important learning opportunities within this app was creating our own API on the back end and using resolvers, typedefs, queries and mutations to display our own data on the front end. This application is built with React.
 
-# Technologies Used
+## Technologies Used
 
 **React**
 
@@ -51,8 +51,8 @@ One of the most important learning opportunities within this app was creating ou
     Used to query and manipulate data for APIs.
 
 
-# Screenshots
+## Screenshots
 
 ![screenshot page 3](./images/project3img1.PNG)!
 
-# Link
+## Link
