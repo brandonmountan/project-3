@@ -14,11 +14,14 @@
     "apollo-server-express": "^3.6.2",
     "axios": "^1.5.0",
     "bcrypt": "^5.0.0",
+    "connect-session-sequelize": "^7.1.7",
     "dotenv": "^16.3.1",
     "express": "^4.17.2",
     "graphql": "^16.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^7.0.2",
+    "mysql2": "^3.6.1",
+    "sequelize": "^6.33.0",
     "stripe": "^13.7.0"
   },
   "devDependencies": {
