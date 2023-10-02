@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "PostGame",
   "engines": {
-    "node": "18.x"
+    "node": "v16.18.0",
+    "npm": "8.19.2"
   },
   "main": "server/server.js",
   "scripts": {
@@ -19,13 +20,6 @@
     "concurrently": "^5.3.0"
   },
   "dependencies": {
-    "bootstrap": "^5.3.2",
-    "connect-session-sequelize": "^7.1.7",
-    "dotenv": "^16.3.1",
-    "node-sass": "^9.0.0",
-    "react-bootstrap": "^2.8.0",
-    "react-bootstrap-sidebar-menu": "^2.0.3",
-    "react-router-dom": "^6.16.0",
-    "sequelize": "^6.33.0"
+    "mongodb": "^6.1.0"
   }
 }
