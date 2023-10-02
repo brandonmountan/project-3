@@ -4,6 +4,25 @@ const path = require("path");
 const { authMiddleware } = require("./utils/auth");
 require("dotenv").config();
 
+const sequelize = require('./config/connection');
+
+const sess = {
+  secret: 'process.env.SECRET',
+  cookie: {
+    maxAge: 3600000, //set to 1 hour
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+  },
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
+
+app.use(session(sess));
+
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
 
