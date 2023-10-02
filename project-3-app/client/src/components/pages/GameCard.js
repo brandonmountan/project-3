@@ -62,10 +62,12 @@ function GameCard({ game }) {
       {/* Image Popup */}
       {selectedImage && (
         <div className="image-popup" onClick={closeImagePopup}>
-          <img src={selectedImage} alt={game.name} />
-          <div className="close-button" onClick={closeImagePopup}>
-            &#x2715;
-          </div>
+    <div className="image-popup-container">
+      <img src={selectedImage} alt={game.name} />
+      <div className="close-button" onClick={closeImagePopup}>
+        &#x2715;
+      </div>
+    </div>
         </div>
         )}
     </Card>

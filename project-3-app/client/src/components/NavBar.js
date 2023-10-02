@@ -51,7 +51,7 @@ function NavBar() {
       <>
         <Navbar bg="dark" data-bs-theme="dark" expand="lg" expanded={expanded}>
           <Container>
-            <Navbar.Brand href="#home">PostGame</Navbar.Brand>
+            {/* <Navbar.Brand href="#home">PostGame</Navbar.Brand> */}
             <Navbar.Toggle onClick={handleNavCollapse} aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
