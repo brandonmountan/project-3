@@ -1,7 +1,10 @@
 {
   "name": "project-3-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "PostGame",
+  "engines": {
+    "node": "18.x"
+  },
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js --ignore client",
