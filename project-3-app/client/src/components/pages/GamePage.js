@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
 import ListGroup from "react-bootstrap/ListGroup";
-import GameCard from "./GameCard"; // Import the GameCard component
+import GameCard from "./GameCard";
 import "../../styles/gamePage.css";
 
 function GamePage() {
@@ -10,14 +10,14 @@ function GamePage() {
   const [searchResults, setSearchResults] = useState([]);
   const [displayedResultsFor, setDisplayedResultsFor] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [selectedGame, setSelectedGame] = useState(null); // Store the selected game
+  const [selectedGame, setSelectedGame] = useState(null); 
 
   useEffect(() => {
-    // Fetch game suggestions when the search term changes
+   
     async function fetchGameSuggestions() {
       try {
         if (searchTerm.trim() === "") {
-          setSearchResults([]); // Clear results if the search term is empty
+          setSearchResults([]); 
           return;
         }
 
@@ -55,21 +55,20 @@ function GamePage() {
   }, [searchTerm, formSubmitted]);
 
   const handleItemClick = (clickedItem) => {
-    setSearchTerm(clickedItem.name); // Set the input value to the clicked item's name
-    setSearchResults([]); // Clear the dropdown
-    setDisplayedResultsFor(clickedItem.name); // Set the full game title as displayedResultsFor
-    setSelectedGame(clickedItem); // Store the selected game
-    handleFormSubmit(); // Trigger form submission
+    setSearchTerm(clickedItem.name);
+    setSearchResults([]); 
+    setDisplayedResultsFor(clickedItem.name); 
+    setSelectedGame(clickedItem); 
+    handleFormSubmit(); 
   };
 
   const handleFormSubmit = () => {
     if (searchTerm.trim() === "") {
-      // Don't submit if the search term is empty
       return;
     }
 
     setFormSubmitted(true);
-    setSearchTerm(""); // Clear the input field
+    setSearchTerm(""); 
   };
 
   return (
@@ -108,7 +107,7 @@ function GamePage() {
           </ListGroup>
         )}
       </div>
-      {selectedGame && <GameCard game={selectedGame} />} {/* Render the GameCard component */}
+      {selectedGame && <GameCard game={selectedGame} />}
     </div>
   );
 }

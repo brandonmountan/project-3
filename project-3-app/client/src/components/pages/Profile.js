@@ -14,19 +14,44 @@ function Profile() {
   const user = data?.me || data?.user || {};
 
   let message = '';
+  
+  // if (Auth.loggedIn()) {
+  //   if (userParam === 'me' || Auth.getProfile().data.username === userParam) {
+  //     // User is viewing their own profile
+  //     message = `Welcome to your profile, ${user.username}!`;
 
+  //     // Display the user's personal introduction if available
+  //     if (user.personalIntroduction) {
+  //       message += ` ${user.personalIntroduction}`;
+  //     }
+  //   } else {
+  //     // User is viewing someone else's profile
+  //     message = `You're viewing another user's profile, ${user.username}.`;
+  //   }
+  // } else {
+  //   // User is not logged in
+  //   message = `You're viewing another user's profile, ${user.username}.`;
+  // }
+
+  //this assigns profile to "me" properly now
   if (Auth.loggedIn()) {
     if (userParam === 'me' || Auth.getProfile().username === userParam) {
+      console.log("welcome " + user) // returns UNDEFINED
+
       // User is viewing their own profile
       message = `Welcome to your profile, ${user.username}!`;
+  
+      // Display the user's personal introduction if available
+      if (user.personalIntroduction) {
+        message += ` ${user.personalIntroduction}`;
+      }
     } else {
       // User is viewing someone else's profile
-      message = "You're viewing another user's profile.";
-
+      message = `You're viewing another user's profile, ${userParam}.`;
     }
   } else {
     // User is not logged in
-    message = "You're viewing another user's profile.";
+    message = `You're viewing another user's profile, ${userParam}.`;
   }
 
   if (loading) {
@@ -38,11 +63,15 @@ function Profile() {
       <Card.Body className="p-5">
         <p>{message}</p>
         {Auth.loggedIn() ? (
-// me
+          // me
           <p>Additional content for the logged-in user.</p>
         ) : (
-// other user
+          // other user
           <p>Additional content for others viewing the profile.</p>
+        )}
+        {/* Placeholder content */}
+        {userParam !== 'me' && !Auth.loggedIn() && (
+          <p>This is a placeholder for the public profile page.</p>
         )}
       </Card.Body>
     </Card>
