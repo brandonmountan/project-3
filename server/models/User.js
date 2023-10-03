@@ -29,7 +29,7 @@ const userSchema = new Schema(
                 message: 'Password must have 1 number and 1 uppercase letter!',
             },
         },
-        likeGames: [
+        likedGames: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Game',
