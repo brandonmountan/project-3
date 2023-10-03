@@ -62,3 +62,11 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const DONATE = gql`
+  mutation donate($amount: Float!) {
+    donate(amount: $amount) {
+      session
+    }
+  }
+`;

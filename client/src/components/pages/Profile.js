@@ -9,7 +9,7 @@ function Profile() {
   const { username: userParam } = useParams();
   const { loading, data } = useQuery( QUERY_ME );
   console.log(data)
-  const user = data?.me || data?.user || {};
+  const user = data?.me || {};
 
   let message = '';
 
@@ -40,7 +40,6 @@ function Profile() {
 
   return (
     <>
-    <h1>{data.me.username}</h1>
     <Card className="m-5">
       <Card.Body className="p-5">
         <p>{message}</p>
