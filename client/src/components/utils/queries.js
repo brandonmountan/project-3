@@ -29,19 +29,22 @@ export const QUERY_ME = gql`
     me {
       _id
       username
-      email
       posts {
         _id
-        postTitle
-        postText
-        postAuthor
-        createdAt
         comments {
           _id
+          commentAuthor {
+            _id
+          }
           commentText
-          commentAuthor
           createdAt
         }
+        postTitle
+        postText
+        postAuthor {
+          _id
+        }
+        createdAt
       }
     }
   }
