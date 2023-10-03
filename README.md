@@ -1,12 +1,6 @@
 # PostGame
-<<<<<<< HEAD
 
 ## Description
-
-=======
-
-## Description
->>>>>>> 54673aee262d704c52fc40095a7f79c5966ccca9
 - What was your motivation?
 - Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
 - What problem does it solve?
@@ -20,31 +14,6 @@ All of us who helped built this project seemed to fall into the expected users c
 
 One of the most important learning opportunities within this app was creating our own API on the back end and using resolvers, typedefs, queries and mutations to display our own data on the front end. This application is built with React.
 
-<<<<<<< HEAD
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Technologies Used](#technologiesused)
-- [Screenshots](#screenshots)
-- [Credits](#credits)
-- [License](#license)
-- [Features](#features)
-- [Future Implementations](#futureimplementations)
-- [Link](#link)
-
-## Installation
-
-- Clone the repository to your computer.
-- Navigate to the project directory
-- Run the following commands in your terminal:
-- `npm run install`
-- `npm run seed`
-- `npm run start`
-- `npm run develop`
-
-=======
->>>>>>> 54673aee262d704c52fc40095a7f79c5966ccca9
 ## Technologies Used
 
 **React**
@@ -53,7 +22,7 @@ One of the most important learning opportunities within this app was creating ou
 
 **React-router**
 
-    Used for page routing. Third party library that allows developers to define routes, manage navigation, and handle URL changes.
+    Used for page routing. Third party library that allows developers to define routes, manage navigation, and handle URL changes. 
 
 **React-Bootstrap (for styling)**
 
@@ -81,41 +50,9 @@ One of the most important learning opportunities within this app was creating ou
 
     Used to query and manipulate data for APIs.
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 54673aee262d704c52fc40095a7f79c5966ccca9
 ## Screenshots
 
 ![screenshot page 3](./images/project3img1.PNG)!
 
-<<<<<<< HEAD
-## Credits
-
-[Brandon Mountan](https://github.com/brandonmountan)
-
-[Daniel Wilson](https://github.com/Part-time-Dan)
-
-[Reiley Burnitt](https://github.com/Reibean)
-
-[Phillip Lam Thach](https://github.com/02madmax)
-
-[Bridger Daw](https://github.com/gymbridger)
-
-
-## License
-
-## Features
-- User creation and login
-- User can login and view their profie with their posts
-- Search games using rawg.io api
-- Donation button using Stripe dependency
-- View the top rated games of 2023 on our sidebar
-
-
-## Future Implementations
-
 ## Link
-=======
-## Link
->>>>>>> 54673aee262d704c52fc40095a7f79c5966ccca9
