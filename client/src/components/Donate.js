@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import '../styles/donateComponent.css';
+import React, { useState } from "react";
+import "../styles/donateComponent.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -40,11 +40,13 @@ function DonateComponent() {
   return (
     <div className="header">
       {/* Tab at the top right */}
-      <div className={`tab ${showForm ? 'open' : ''}`} onClick={handleTabClick}>
-      </div>
+      <div
+        className={`tab ${showForm ? "open" : ""}`}
+        onClick={handleTabClick}
+      ></div>
 
       {/* Donation form */}
-      <div className={`donation-form ${showForm ? 'open' : ''}`}>
+      <div className={`donation-form ${showForm ? "open" : ""}`}>
         <h2>Donate</h2>
         <InputGroup>
           <InputGroup.Text>$</InputGroup.Text>
@@ -68,4 +70,3 @@ function DonateComponent() {
 }
 
 export default DonateComponent;
-
