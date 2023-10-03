@@ -234,9 +234,18 @@ body {
     display: flex;
     flex-direction: column-reverse;
   }
+
+  .signup-form > form > div > input {
+    padding: 1rem 6rem 1rem 1rem;
+  }
+
+  .login-form > form > div > input {
+    padding: 1rem 6rem 1rem 1rem;
+  }
   .main-content {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     width: 100%;
     text-align: center;
   }
