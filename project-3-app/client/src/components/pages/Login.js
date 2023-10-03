@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { LOGIN } from "../utils/mutations";
-import "../../../src/App.css";
+import "../../App.css";
 import { Link, useNavigate } from "react-router-dom";
 import Auth from "../utils/auth";
 

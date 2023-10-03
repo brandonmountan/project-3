@@ -1,16 +1,20 @@
-import '../../../src/App.css';
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { Link, useNavigate } from 'react-router-dom';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import { ADD_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
+import "../../App.css";
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { Link, useNavigate } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { ADD_USER } from "../utils/mutations";
+import Auth from "../utils/auth";
 
 const Signup = () => {
-  const [formState, setFormState] = useState({ username: '', email: '', password: '' });
+  const [formState, setFormState] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
   const [addUser, { error }] = useMutation(ADD_USER);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -32,7 +36,7 @@ const Signup = () => {
       Auth.login(data.addUser.token);
 
       // navigate to redirect to the profile page
-      navigate('/profile');
+      navigate("/profile");
     } catch (e) {
       console.error(e);
     }
@@ -87,5 +91,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-

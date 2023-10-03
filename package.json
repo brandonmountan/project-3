@@ -1,0 +1,30 @@
+{
+  "name": "project-3-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js --ignore client",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  },
+  "engines": {
+    "node": "16.18.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.2",
+    "dotenv": "^16.3.1",
+    "mongodb": "^6.1.0",
+    "node-sass": "^9.0.0",
+    "react-bootstrap": "^2.8.0",
+    "react-bootstrap-sidebar-menu": "^2.0.3",
+    "react-router-dom": "^6.16.0"
+  }
+}
