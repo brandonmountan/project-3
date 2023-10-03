@@ -63,7 +63,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/gamepage" element={<Gamepage />} />
-                {/* <Route path="/profile" element={<Profile />} /> */}
+                <Route path="/profile" element={<Profile />} />
                 {/* View someone else's profile */}
                 <Route path="/profile/:username" element={<Profile />} />
                 {/* View the user's own profile */}

@@ -27,12 +27,12 @@
 
 // module.exports = router;
 
-// above code will try to push API data to database
+// // above code will try to push API data to database
 
 
 
 
-// below code should just fetch API data so we can render it without unnecessary storing to our db
+// // below code should just fetch API data so we can render it without unnecessary storing to our db
 
 // const express = require('express');
 // const axios = require('axios');
