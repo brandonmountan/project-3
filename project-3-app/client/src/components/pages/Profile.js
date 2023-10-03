@@ -1,20 +1,23 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import Auth from '../utils/auth';
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import Auth from "../utils/auth";
+import { QUERY_USER, QUERY_ME } from "../utils/queries";
 
-import Card from 'react-bootstrap/Card';
+import Card from "react-bootstrap/Card";
 
 function Profile() {
   const { username: userParam } = useParams();
-  const { loading, data } = useQuery(userParam === 'me' ? QUERY_ME : QUERY_USER, {
-    variables: { username: userParam === 'me' ? undefined : userParam },
-  });
+  const { loading, data } = useQuery(
+    userParam === "me" ? QUERY_ME : QUERY_USER,
+    {
+      variables: { username: userParam === "me" ? undefined : userParam },
+    }
+  );
   const user = data?.me || data?.user || {};
 
-  let message = '';
-  
+  let message = "";
+
   // if (Auth.loggedIn()) {
   //   if (userParam === 'me' || Auth.getProfile().data.username === userParam) {
   //     // User is viewing their own profile
@@ -35,12 +38,12 @@ function Profile() {
 
   //this assigns profile to "me" properly now
   if (Auth.loggedIn()) {
-    if (userParam === 'me' || Auth.getProfile().username === userParam) {
-      console.log("welcome " + user) // returns UNDEFINED
+    if (userParam === "me" || Auth.getProfile().username === userParam) {
+      console.log("welcome " + user); // returns UNDEFINED
 
       // User is viewing their own profile
       message = `Welcome to your profile, ${user.username}!`;
-  
+
       // Display the user's personal introduction if available
       if (user.personalIntroduction) {
         message += ` ${user.personalIntroduction}`;
@@ -70,7 +73,7 @@ function Profile() {
           <p>Additional content for others viewing the profile.</p>
         )}
         {/* Placeholder content */}
-        {userParam !== 'me' && !Auth.loggedIn() && (
+        {userParam !== "me" && !Auth.loggedIn() && (
           <p>This is a placeholder for the public profile page.</p>
         )}
       </Card.Body>

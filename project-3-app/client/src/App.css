@@ -126,12 +126,10 @@ body {
   /* Make the active link text bold */
 }
 
-
 .nav-link.active::before {
   width: 100%;
   /* expand underline to full width for the active link */
 }
-
 
 /* Center the content */
 .app-container {
