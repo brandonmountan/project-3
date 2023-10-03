@@ -93,6 +93,12 @@ graphql and Apollo Server
 ## License
 
 ## Features
+- User creation and login
+- User can login and view their profie with their posts
+- Search games using rawg.io api
+- Donation button using Stripe dependency
+- View the top rated games of 2023 on our sidebar
+
 
 ## Future Implementations
 
