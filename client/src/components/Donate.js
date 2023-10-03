@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/donateComponent.css'; 
+import '../styles/donateComponent.css';
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -14,6 +14,10 @@ function DonateComponent() {
 
   const handleTabClick = () => {
     setShowForm(!showForm);
+    const targetElement = document.getElementById("scrollTarget");
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const [donate] = useMutation(DONATE);
@@ -36,7 +40,8 @@ function DonateComponent() {
   return (
     <div className="header">
       {/* Tab at the top right */}
-      <div className={`tab ${showForm ? 'open' : ''}`} onClick={handleTabClick}></div>
+      <div className={`tab ${showForm ? 'open' : ''}`} onClick={handleTabClick}>
+      </div>
 
       {/* Donation form */}
       <div className={`donation-form ${showForm ? 'open' : ''}`}>

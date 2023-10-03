@@ -2,20 +2,22 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
 import ListGroup from "react-bootstrap/ListGroup";
+import GameCard from "./GameCard";
 import "../../styles/gamePage.css";
 
-function GameSearch() {
+function GamePage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [displayedResultsFor, setDisplayedResultsFor] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [selectedGame, setSelectedGame] = useState(null); 
 
   useEffect(() => {
-    // Fetch game suggestions when the search term changes
+   
     async function fetchGameSuggestions() {
       try {
         if (searchTerm.trim() === "") {
-          setSearchResults([]); // Clear results if the search term is empty
+          setSearchResults([]); 
           return;
         }
 
@@ -53,60 +55,64 @@ function GameSearch() {
   }, [searchTerm, formSubmitted]);
 
   const handleItemClick = (clickedItem) => {
-    setSearchTerm(clickedItem.name); // Set the input value to the clicked item's name
-    setSearchResults([]); // Clear the dropdown
-    setDisplayedResultsFor(clickedItem.name); // Set the full game title as displayedResultsFor
-    handleFormSubmit(); // Trigger form submission
+    setSearchTerm(clickedItem.name);
+    setSearchResults([]); 
+    setDisplayedResultsFor(clickedItem.name); 
+    setSelectedGame(clickedItem); 
+    handleFormSubmit(); 
   };
 
   const handleFormSubmit = () => {
     if (searchTerm.trim() === "") {
-      // Don't submit if the search term is empty
       return;
     }
 
     setFormSubmitted(true);
-    setSearchTerm(""); // Clear the input field
+    setSearchTerm(""); 
   };
 
   return (
-    <div className="game-search">
-      <h2>Game Search</h2>
-      <Form onSubmit={(e) => e.preventDefault()}>
-        <Form.Group controlId="searchTerm">
-          <Form.Control
-            type="text"
-            placeholder="Search for a game"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onFocus={() => {
-              if (searchTerm.trim() !== "") {
-                // Only show the dropdown if there is text in the input field
-                setSearchResults([]);
-              }
-            }}
-          />
-        </Form.Group>
-      </Form>
-      {formSubmitted && (
-        <p>Displaying results for: {displayedResultsFor}</p>
-      )}
-      {searchResults.length > 0 && (
-        <ListGroup>
-          {searchResults.map((game) => (
-            <ListGroup.Item
-              key={game.id}
-              onClick={() => handleItemClick(game)}
-            >
-              {game.name}
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
-      )}
+    <div className="game-page">
+      <div className="game-search">
+        <h2>Game Search</h2>
+        <Form onSubmit={(e) => e.preventDefault()}>
+          <Form.Group controlId="searchTerm">
+            <Form.Control
+              type="text"
+              placeholder="Search for a game"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onFocus={() => {
+                if (searchTerm.trim() !== "") {
+                  // Only show the dropdown if there is text in the input field
+                  setSearchResults([]);
+                }
+              }}
+            />
+          </Form.Group>
+        </Form>
+        {formSubmitted && (
+          <p>Displaying results for: {displayedResultsFor}</p>
+        )}
+        {searchResults.length > 0 && (
+          <ListGroup>
+            {searchResults.map((game) => (
+              <ListGroup.Item
+                key={game.id}
+                onClick={() => handleItemClick(game)}
+              >
+                {game.name}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        )}
+      </div>
+      {selectedGame && <GameCard game={selectedGame} />}
     </div>
   );
 }
 
-export default GameSearch;
+export default GamePage;
+
 
 

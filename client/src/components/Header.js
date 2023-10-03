@@ -7,7 +7,7 @@ import DonateComponent from "./Donate";
 function Header() {
 
 return (
-  <div className={`p-4 ${styles.headerContainer}`}>
+  <div id="scrollTarget" className={`p-4 ${styles.headerContainer}`}>
     <div className={styles.leftSide}></div>
     <h1 className={`text-center ${styles.headerText}`}>
       PostGame <Badge bg="secondary">Welcome!</Badge>
