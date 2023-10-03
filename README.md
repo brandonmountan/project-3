@@ -1,6 +1,7 @@
-## PostGame
+# PostGame
 
-# Description
+## Description
+
 - What was your motivation?
 - Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
 - What problem does it solve?
@@ -14,7 +15,20 @@ All of us who helped built this project seemed to fall into the expected users c
 
 One of the most important learning opportunities within this app was creating our own API on the back end and using resolvers, typedefs, queries and mutations to display our own data on the front end. This application is built with React.
 
-# Technologies Used
+## Table of Contents (Optional)
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+
+## Installation
+
+- Clone the repository to your computer.
+- Navigate to the project directory
+- run `npm run install`,`npm run seed`, `npm run start` then `npm run develop`
+
+## Technologies Used
 
 React
 
@@ -22,7 +36,7 @@ React
 
 React-router
 
-    Used for page routing. Third party library that allows developers to define routes, manage navigation, and handle URL changes. 
+    Used for page routing. Third party library that allows developers to define routes, manage navigation, and handle URL changes.
 
 React-Bootstrap (for styling)
 
@@ -50,10 +64,12 @@ graphql and Apollo Server
 
     Used to query and manipulate data for APIs.
 
-
-# Screenshots
+## Screenshots
 
 ![screenshot page 3](./images/project3img1.PNG)!
 
+## Credits
 
-# Link
+-[Brandon Mountan](https://github.com/brandonmountan): -[Daniel Wilson](https://github.com/Part-time-Dan) -[Reiley Burnitt](https://github.com/Reibean): -[Phillip Lam Thach](https://github.com/02madmax): -[Bridger Daw](https://github.com/gymbridger):
+
+## Link
