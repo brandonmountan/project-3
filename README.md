@@ -32,7 +32,7 @@ One of the most important learning opportunities within this app was creating ou
 
 React
 
-    Front-end Javascript library. React is based on components which are bits of code that can be resused. It is used to develop as single-page application (SPA). An SPA interacts with the user by dynamically rewriting the current web page with new data from the web server. This is in contrast to web browsers loading entire new pages.
+`Front-end Javascript library. React is based on components which are bits of code that can be resused. It is used to develop as single-page application (SPA). An SPA interacts with the user by dynamically rewriting the current web page with new data from the web server. This is in contrast to web browsers loading entire new pages.`
 
 React-router
 
@@ -70,15 +70,15 @@ graphql and Apollo Server
 
 ## Credits
 
--[Brandon Mountan](https://github.com/brandonmountan)
+[Brandon Mountan](https://github.com/brandonmountan)
 
--[Daniel Wilson](https://github.com/Part-time-Dan)
+[Daniel Wilson](https://github.com/Part-time-Dan)
 
--[Reiley Burnitt](https://github.com/Reibean)
+[Reiley Burnitt](https://github.com/Reibean)
 
--[Phillip Lam Thach](https://github.com/02madmax)
+[Phillip Lam Thach](https://github.com/02madmax)
 
--[Bridger Daw](https://github.com/gymbridger)
+[Bridger Daw](https://github.com/gymbridger)
 
 ## Link
 
