@@ -1,0 +1,330 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+html,
+body {
+  overflow-x: hidden;
+  /* Prevent horizontal scrolling */
+  width: 100%;
+  /* Ensure content fits within viewport width */
+  max-width: 100%;
+  /* Limit content to viewport width */
+}
+
+.forms-container {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+}
+
+.signup-form,
+.login-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20 px;
+  border: 1px solid black;
+  color: white;
+  border-radius: 5px;
+  background-color: black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 0 5px;
+  height: 100%;
+}
+
+/* Center the navigation bar */
+.navbar {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  /* Example background color */
+  color: white;
+  /* Example text color */
+}
+
+/* Navbar link styles */
+.nav-link {
+  padding-right: 0 !important;
+  /* keeps spacing so underline matches word length*/
+  padding-left: 0 !important;
+  display: inline-block;
+  margin-right: 20px;
+  margin-left: 20px;
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s, border-bottom-width 0.3s, transform 0.3s;
+}
+
+/* bottom border initial */
+.nav-link::before {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  /* initial position of the underline */
+  left: 0;
+  width: 0;
+  /* underline starts with zero width */
+  height: 2px;
+  /* height of the underline */
+  background-color: #fff;
+  /* underline color */
+  transition: width 0.3s;
+  /* transition underline width */
+}
+
+.navbar .nav-link:hover {
+  color: #ffa500;
+}
+
+/* expand the underline on hover */
+.nav-link:hover::before {
+  width: 100%;
+  /* expand the underline to full width on hover */
+}
+
+.nav-link.active {
+  font-weight: bold;
+  /* Make the active link text bold */
+}
+
+.nav-link.active::before {
+  width: 100%;
+  /* expand underline to full width for the active link */
+}
+
+/* Center the content */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  /* Stack children vertically */
+  align-items: center;
+  /* Center horizontally */
+  justify-content: flex-start;
+  /* Align children to the start (top) */
+  background-color: rgb(46, 59, 59);
+}
+
+.content-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  /* Set a maximum width for content */
+}
+
+.sidebar {
+  flex: 1;
+  padding: 20px;
+}
+
+.main-content {
+  flex: 4;
+  /* Adjust as needed */
+  padding: 20px;
+}
+
+/* @media (max-width: 320px) {
+  .content-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+} */
+
+@media (min-width: 321px) and (max-width: 479px) {
+  .content-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .main-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+  .forms-container {
+    width: 100%;
+  }
+  .navbar-toggler {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #signupPassword {
+    margin-bottom: 1rem;
+  }
+  #password {
+    margin-bottom: 1rem;
+  }
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+  }
+  #footer {
+    display: flex;
+    justify-content: center;
+  }
+  #text {
+    font-size: 1rem;
+    white-space: normal;
+    margin: 0px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 320px) {
+  .content-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .main-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+  #text {
+    white-space: normal;
+    margin: 0px;
+    text-align: center;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .content-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .main-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+  #searchTerm {
+    padding: 1rem 6rem 1rem 1rem;
+  }
+  .game-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .game-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .forms-container {
+    width: 100%;
+  }
+  .navbar-toggler {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #signupPassword {
+    margin-bottom: 1rem;
+  }
+  #password {
+    margin-bottom: 1rem;
+  }
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+  }
+  #footer {
+    display: flex;
+    justify-content: center;
+  }
+  #text {
+    white-space: normal;
+    margin: 0px;
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) {
+  #footer {
+    display: flex;
+    justify-content: center;
+  }
+  .game-page {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  h2 {
+    text-align: center;
+  }
+  #text {
+    font-size: 1.5rem;
+    margin: 0px;
+    text-align: center;
+  }
+  .navbar-toggler {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media (min-width: 1025px) and (max-width: 2000px) {
+  .game-page {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  h2 {
+    text-align: center;
+  }
+  #text {
+    font-size: 2rem;
+    margin: 0px;
+    text-align: center;
+  }
+  #searchTerm {
+    padding: 1rem 6rem 1rem 1rem;
+  }
+}
