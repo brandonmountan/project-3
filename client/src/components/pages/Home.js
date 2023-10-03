@@ -5,37 +5,50 @@ import { useQuery } from "@apollo/client";
 import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import { useNavigate } from 'react-router-dom';
 import Auth from "../utils/auth";
+import gql from 'graphql-tag';
+
+const GET_POSTS = gql`
+  query {
+    posts {
+      _id
+      postTitle
+      postText
+      postAuthor {
+        username
+      }
+      createdAt
+      game {
+        name
+      }
+    }
+  }
+`;
 
 function Home() {
   const navigate = useNavigate();
   const { username: userParam } = useParams();
 
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+  const { loading: userLoading, data: userData } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam },
   });
 
-  const user = data?.me || data?.user || {};
-  // navigate to personal profile page if username is yours
-  // if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-  //   return <Navigate to="/me" />;
-  // }
+  const { loading: postsLoading, data: postsData } = useQuery(GET_POSTS);
+  
+  const user = userData?.me || userData?.user || {};
 
-  if (Auth.loggedIn()) {
-    // Check if the user is logged in
-    if (Auth.getProfile().data.username === userParam) {
-      // Redirect to the user's profile if it matches the logged-in user
-      navigate('/profile/me');
-      return null; // Return null to prevent rendering the default content
-    }
+  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+    navigate('/profile/me');
+    return null;
   }
 
-  if (loading) {
+  if (userLoading || postsLoading) {
     return <div>Loading...</div>;
   }
 
   if (!user?.username) {
     return <h4>Please login or signup to view content.</h4>;
   }
+
   return (
     <>
       <Container fluid className="text-center bg-primary py-5">
@@ -43,26 +56,18 @@ function Home() {
         <p>The ultimate platform for game enthusiasts!</p>
       </Container>
 
-      {/* Sample Blog Card */}
-      <Container className="my-5 primary">
-        <h2>Recent Blogs</h2>
-        <Row className="mt-4">
-          <Col md={4}>
-            <Card className="mb-4">
-              <Card.Img variant="top" />
-              <Card.Body>
-                <Card.Title>Blog Title</Card.Title>
-                <Card.Text>Short blog description...</Card.Text>
-                <Button variant="primary" href="#blog-link">
-                  Read More
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+      <Container className="my-5">
+        <h2>Latest Posts</h2>
+        {postsData.posts.map(post => (
+          <Card key={post._id} className="mb-3">
+            <Card.Body>
+              <Card.Title>{post.postTitle}</Card.Title>
+              <Card.Text>{post.postText}</Card.Text>
+              <Card.Footer>Author: {post.postAuthor.username} | Game: {post.game?.name || 'N/A'}</Card.Footer>
+            </Card.Body>
+          </Card>
+        ))}
       </Container>
-      {/* if we intend to incorporate blogs into the home page we can map through
-      an array of our blogs here */}
 
       <Container className="my-5">
         <h2>Key Features</h2>
