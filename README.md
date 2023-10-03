@@ -39,9 +39,9 @@ One of the most important learning opportunities within this app was creating ou
 
 ## Technologies Used
 
--**React**:
+React
 
-Front-end Javascript library. React is based on components which are bits of code that can be resused. It is used to develop as single-page application (SPA). An SPA interacts with the user by dynamically rewriting the current web page with new data from the web server. This is in contrast to web browsers loading entire new pages.
+    Front-end Javascript library. React is based on components which are bits of code that can be resused. It is used to develop as single-page application (SPA). An SPA interacts with the user by dynamically rewriting the current web page with new data from the web server. This is in contrast to web browsers loading entire new pages.
 
 React-router
 
