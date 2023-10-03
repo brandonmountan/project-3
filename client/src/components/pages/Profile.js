@@ -1,37 +1,17 @@
-import React from 'react';
+import  React  from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
-
+import { QUERY_ME } from '../utils/queries';
 import Card from 'react-bootstrap/Card';
 
 function Profile() {
   const { username: userParam } = useParams();
-  const { loading, data } = useQuery(userParam === 'me' ? QUERY_ME : QUERY_USER, {
-    variables: { username: userParam === 'me' ? undefined : userParam },
-  });
+  const { loading, data } = useQuery( QUERY_ME );
+  console.log(data)
   const user = data?.me || data?.user || {};
 
   let message = '';
-  
-  // if (Auth.loggedIn()) {
-  //   if (userParam === 'me' || Auth.getProfile().data.username === userParam) {
-  //     // User is viewing their own profile
-  //     message = `Welcome to your profile, ${user.username}!`;
-
-  //     // Display the user's personal introduction if available
-  //     if (user.personalIntroduction) {
-  //       message += ` ${user.personalIntroduction}`;
-  //     }
-  //   } else {
-  //     // User is viewing someone else's profile
-  //     message = `You're viewing another user's profile, ${user.username}.`;
-  //   }
-  // } else {
-  //   // User is not logged in
-  //   message = `You're viewing another user's profile, ${user.username}.`;
-  // }
 
   //this assigns profile to "me" properly now
   if (Auth.loggedIn()) {
@@ -59,6 +39,8 @@ function Profile() {
   }
 
   return (
+    <>
+    <h1>{data.me.username}</h1>
     <Card className="m-5">
       <Card.Body className="p-5">
         <p>{message}</p>
@@ -75,6 +57,7 @@ function Profile() {
         )}
       </Card.Body>
     </Card>
+    </>
   );
 }
 
