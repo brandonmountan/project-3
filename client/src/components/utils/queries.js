@@ -25,26 +25,11 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_ME = gql`
-  query me {
-    me {
-      _id
-      username
-      email
-      posts {
-        _id
-        postTitle
-        postText
-        postAuthor
-        createdAt
-        comments {
-          _id
-          commentText
-          commentAuthor
-          createdAt
-        }
-      }
-    }
+query me {
+  me {
+    _id
   }
+}
 `;
 
 export const QUERY_POSTS = gql`
