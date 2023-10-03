@@ -70,7 +70,15 @@ graphql and Apollo Server
 
 ## Credits
 
--[Brandon Mountan](https://github.com/brandonmountan) -[Daniel Wilson](https://github.com/Part-time-Dan) -[Reiley Burnitt](https://github.com/Reibean) -[Phillip Lam Thach](https://github.com/02madmax) -[Bridger Daw](https://github.com/gymbridger)
+-[Brandon Mountan](https://github.com/brandonmountan)
+
+-[Daniel Wilson](https://github.com/Part-time-Dan)
+
+-[Reiley Burnitt](https://github.com/Reibean)
+
+-[Phillip Lam Thach](https://github.com/02madmax)
+
+-[Bridger Daw](https://github.com/gymbridger)
 
 ## Link
 
