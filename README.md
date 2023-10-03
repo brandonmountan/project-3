@@ -15,12 +15,17 @@ All of us who helped built this project seemed to fall into the expected users c
 
 One of the most important learning opportunities within this app was creating our own API on the back end and using resolvers, typedefs, queries and mutations to display our own data on the front end. This application is built with React.
 
-## Table of Contents (Optional)
+## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Technologies Used](#technologiesused)
+- [Screenshots](#screenshots)
 - [Credits](#credits)
 - [License](#license)
+- [Features](#features)
+- [Future Implementations](#futureimplementations)
+- [Link](#link)
 
 ## Installation
 
@@ -32,7 +37,7 @@ One of the most important learning opportunities within this app was creating ou
 
 React
 
-`Front-end Javascript library. React is based on components which are bits of code that can be resused. It is used to develop as single-page application (SPA). An SPA interacts with the user by dynamically rewriting the current web page with new data from the web server. This is in contrast to web browsers loading entire new pages.`
+    Front-end Javascript library. React is based on components which are bits of code that can be resused. It is used to develop as single-page application (SPA). An SPA interacts with the user by dynamically rewriting the current web page with new data from the web server. This is in contrast to web browsers loading entire new pages.
 
 React-router
 
@@ -80,10 +85,11 @@ graphql and Apollo Server
 
 [Bridger Daw](https://github.com/gymbridger)
 
-## Link
 
 ## License
 
 ## Features
 
 ## Future Implementations
+
+## Link
