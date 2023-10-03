@@ -31,13 +31,17 @@ One of the most important learning opportunities within this app was creating ou
 
 - Clone the repository to your computer.
 - Navigate to the project directory
-- run `npm run install`,`npm run seed`, `npm run start` then `npm run develop`
+- Run the following commands in your terminal:
+- `npm run install`
+- `npm run seed`
+- `npm run start`
+- `npm run develop`
 
 ## Technologies Used
 
-React
+-**React**:
 
-    Front-end Javascript library. React is based on components which are bits of code that can be resused. It is used to develop as single-page application (SPA). An SPA interacts with the user by dynamically rewriting the current web page with new data from the web server. This is in contrast to web browsers loading entire new pages.
+Front-end Javascript library. React is based on components which are bits of code that can be resused. It is used to develop as single-page application (SPA). An SPA interacts with the user by dynamically rewriting the current web page with new data from the web server. This is in contrast to web browsers loading entire new pages.
 
 React-router
 
