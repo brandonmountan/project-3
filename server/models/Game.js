@@ -45,6 +45,12 @@ const gameSchema = new Schema(
             type: String,
         },
 
+        externalGameId: {
+            type: String,
+            unique: true,
+            required: true,
+          },
+
         // users who like this game
         likedByUsers: [
             {

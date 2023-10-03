@@ -379,6 +379,35 @@ const resolvers = {
       }
     },
 
+    // tested- working as "addNewGame", uses Game Search in GamePage.js on client
+    addNewGame: async (parent, { name, externalGameId }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("Authentication required to add a new game");
+      }
+    
+      try {
+        // check if game with the same externalGameId already exists
+        const existingGame = await Game.findOne({ externalGameId });
+    
+        if (existingGame) {
+          console.log("Game already exists in database")
+          return null;
+        }
+    
+        // if game does not exist, create new Game document and store it in the database
+        const newGame = await Game.create({
+          name,
+          externalGameId,
+          // add other fields as needed
+        });
+    
+        // return the new game document
+        return newGame;
+      } catch (error) {
+        throw new Error(`Error adding a new game: ${error.message}`);
+      }
+    },
+
     // tested- working "removeFriend"
     removeFriend: async (parent, { friendId }, context) => {
       if (!context.user) {
