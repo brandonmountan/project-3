@@ -1,19 +1,17 @@
-import React from 'react';
+import  React  from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
 import { QUERY_ME } from '../utils/queries';
-
 import Card from 'react-bootstrap/Card';
 
 function Profile() {
   const { username: userParam } = useParams();
   const { loading, data } = useQuery( QUERY_ME );
   console.log(data)
-  const user = data?.me || {};
+  const user = data?.me || data?.user || {};
 
   let message = '';
-
 
   //this assigns profile to "me" properly now
   if (Auth.loggedIn()) {
@@ -41,6 +39,8 @@ function Profile() {
   }
 
   return (
+    <>
+    <h1>{data.me.username}</h1>
     <Card className="m-5">
       <Card.Body className="p-5">
         <p>{message}</p>
@@ -57,6 +57,7 @@ function Profile() {
         )}
       </Card.Body>
     </Card>
+    </>
   );
 }
 
