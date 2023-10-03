@@ -5,9 +5,9 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { loadStripe } from "@stripe/stripe-js";
 import { useMutation } from "@apollo/client";
-import { DONATE } from "../utils/mutations";
+import { DONATE } from "./utils/mutations";
 
-const stripePromise = await loadStripe("process.env.REACT_APP_CLIENT_STRIPE_KEY");
+const stripePromise = await loadStripe(process.env.REACT_APP_CLIENT_STRIPE_KEY);
 
 function DonateComponent() {
   const [showForm, setShowForm] = useState(false);

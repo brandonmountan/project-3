@@ -9,7 +9,7 @@ function Profile() {
   const { username: userParam } = useParams();
   const { loading, data } = useQuery( QUERY_ME );
   console.log(data)
-  const user = data?.me || data?.user || {};
+  const user = data?.me || {};
 
   let message = '';
 
