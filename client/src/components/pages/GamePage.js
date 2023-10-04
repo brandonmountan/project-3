@@ -15,7 +15,7 @@ function GamePage() {
   const [selectedGame, setSelectedGame] = useState(null);
 
   const [addNewGame] = useMutation(ADD_NEW_GAME);
-
+  
   useEffect(() => {
     async function fetchGameSuggestions() {
       try {
@@ -56,8 +56,6 @@ function GamePage() {
 
     fetchGameSuggestions();
   }, [searchTerm, formSubmitted]);
-
-
 
   const handleItemClick = (clickedItem) => {
     setSearchTerm(clickedItem.name);
