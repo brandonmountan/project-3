@@ -20,6 +20,14 @@ const GET_POSTS = gql`
       game {
         name
       }
+      comments {
+        _id
+        commentText
+        createdAt
+        commentAuthor {
+          username
+        }
+      }
     }
   }
 `;
@@ -33,7 +41,7 @@ function Home() {
   });
 
   const { loading: postsLoading, data: postsData } = useQuery(GET_POSTS);
-  
+
   const user = userData?.me || userData?.user || {};
 
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
@@ -49,27 +57,22 @@ function Home() {
     return <h4>Please login or signup to view content.</h4>;
   }
 
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return !isNaN(date.getTime()) ? date.toLocaleDateString() : "Date not available";
+}
   return (
     <>
+
       <Container fluid className="text-center bg-primary py-5">
         <h1>Welcome to PostGame</h1>
         <p>The ultimate platform for game enthusiasts!</p>
       </Container>
 
-      <Container className="my-5">
-        <h2>Latest Posts</h2>
-        {postsData.posts.map(post => (
-          <Card key={post._id} className="mb-3">
-            <Card.Body>
-              <Card.Title>{post.postTitle}</Card.Title>
-              <Card.Text>{post.postText}</Card.Text>
-              <Card.Footer>Author: {post.postAuthor.username} | Game: {post.game?.name || 'N/A'}</Card.Footer>
-            </Card.Body>
-          </Card>
-        ))}
-      </Container>
-
-      <Container className="my-5">
+    { !Auth.loggedIn() && (
+      <>
+       <Container className="my-5">
         <h2>Key Features</h2>
         <Row className="mt-4">
           <Col md={4}>
@@ -94,6 +97,40 @@ function Home() {
           Sign Up
         </Button>
       </Container>
+      </>
+    )}
+
+
+
+<Container className="my-5">
+    <h2>Latest Posts</h2>
+    {postsData?.posts?.map(post => (
+      <Card key={post._id} className="mb-3">
+        <Card.Body>
+          <Card.Title>{post.postTitle}</Card.Title>
+          
+          <div className="mb-2 d-flex justify-content-between flex-wrap">
+            <span>Author: {post.postAuthor?.username}</span>
+            <span>Game: {post.game?.name || 'N/A'}</span>
+            <span>Posted on: {formatDate(post.createdAt)}</span>
+          </div>
+
+          <Card.Text>{post.postText}</Card.Text>
+          
+          <Card.Subtitle className="mb-2 mt-3">Comments</Card.Subtitle>
+          {post.comments?.map(comment => (
+            <Card.Text key={comment._id} className="mb-1">
+              <strong>{comment.commentAuthor?.username}:</strong> {comment.commentText}
+              <div>
+                {formatDate(comment.createdAt)}
+              </div>
+            </Card.Text>
+          ))}
+        </Card.Body>
+      </Card>
+    ))}
+</Container>
+
     </>
   );
 }
