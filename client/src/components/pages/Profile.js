@@ -41,7 +41,7 @@ function Profile() {
       }
     } else {
       // User is viewing someone else's profile
-      message = `You're viewing another user's profile, ${userParam}.`;
+      message = `You're viewing another user's profile.`;
     }
   } else {
     // User is not logged in
