@@ -19,7 +19,7 @@ One of the most important learning opportunities within this app was creating ou
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Technologies Used](#technologiesused)
+- [Technologies Used](#technologies-used)
 - [Screenshots](#screenshots)
 - [Credits](#credits)
 - [License](#license)
