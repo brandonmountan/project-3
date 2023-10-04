@@ -20,11 +20,20 @@ const resolvers = {
       )
     },
 
-    // tested- working "getAllPosts"
-    posts: async (parent, { userId }) => {
-      const params = userId ? { postAuthor: userId } : {};
-      return Post.find(params).sort({ createdAt: -1 }).populate("postAuthor");
-    },
+// tested- working "getAllPosts"
+posts: async (parent, { userId }) => {
+  const params = userId ? { postAuthor: userId } : {};
+  return Post.find(params)
+    .sort({ createdAt: -1 })
+    .populate("postAuthor")
+    .populate({
+      path: "comments",
+      populate: {
+        path: "commentAuthor",
+      },
+    });
+},
+
 
     // tested- working "getSinglePost"
     post: async (parent, { postId }) => {
