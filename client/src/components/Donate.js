@@ -8,7 +8,7 @@ import { useMutation } from "@apollo/client";
 import { DONATE } from "./utils/mutations";
 
 const stripePromise = await loadStripe(
-  "process.env.REACT_APP_CLIENT_STRIPE_KEY"
+  process.env.REACT_APP_CLIENT_STRIPE_KEY
 );
 
 function DonateComponent() {
