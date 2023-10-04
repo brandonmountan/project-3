@@ -13,7 +13,7 @@ function Sidebar() {
         const endDate = `${year}-12-31`;
         const response = await axios.get("https://api.rawg.io/api/games", {
           params: {
-            key: "process.env.REACT_APP_RAWG_API_KEY",
+            key: process.env.REACT_APP_RAWG_API_KEY,
             dates: `${startDate},${endDate}`,
             ordering: "-rating",
             page_size: 5,
