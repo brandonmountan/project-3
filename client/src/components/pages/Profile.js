@@ -97,7 +97,7 @@ function Profile() {
             <h4>Liked Games:</h4>
             <ul>
               {likedGames.map((game) => (
-                <li key={game._id}>{game.name}</li> // Assuming there's a "name" field in your Game model
+                <li key={game._id}>{game.name}</li> 
               ))}
             </ul>
           </div>
