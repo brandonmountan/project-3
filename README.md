@@ -90,6 +90,13 @@ graphql and Apollo Server
 
 ## Features
 
+- Able to create A profile
+- Post game related content
+- Search games
+- Add friends
+- A sidebar that displays the top rated games of 2023
+
 ## Future Implementations
+- Be able to accept or deny a friend request
 
 ## Link
