@@ -33,8 +33,11 @@ function Profile() {
         message += ` ${user.personalIntroduction}`;
       }
       
-      if (userParam === 'me' && userPosts.length > 0) {
+      if (userPosts.length > 0) {
         message += ` You have ${userPosts.length} posts.`
+      }
+      if (userPosts.length < 1) {
+        message += ` No posts from ${user.username} yet.`
       }
     } else {
       // User is viewing someone else's profile
@@ -57,10 +60,14 @@ function Profile() {
         {Auth.loggedIn() ? (
           // me
           <div>
-          <h3>User Posts</h3>
+          <h2>Your Posts</h2>
           {userPosts.map((post) => (
-            <div key={post._id}>
-            </div>
+            <li key={post._id}>
+              <h3>{post.postTitle}</h3>
+              <p>{post.postText}</p>
+              <p>Posted by: {post.postAuthor}</p>
+              <p>Created at: {post.createdAt}</p>
+            </li>
           ))}
           </div>
         ) : (
