@@ -73,11 +73,13 @@ export const ADD_NEW_GAME = gql`
 `;
 
 export const ADD_GAME_LIKE = gql`
-  mutation addGameLike($gameId: ID!) {
-    addGameLike(gameId: $gameId) {
-      _id
-    }
+mutation addGameLike($gameId: ID!) {
+  addGameLike(gameId: $gameId) {
+    _id
+    externalGameId
+    name
   }
+}
 `;
 
 export const REMOVE_GAME_LIKE = gql`

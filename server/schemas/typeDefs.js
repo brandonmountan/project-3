@@ -28,6 +28,7 @@ const typeDefs = gql`
   type Game {
     _id: ID
     name: String!
+    externalGameId: String
     releaseDate: String
     genre: String
     posts: [Post]
@@ -53,6 +54,7 @@ const typeDefs = gql`
     posts(userId: ID): [Post]!
     post(postId: ID!): Post
     games: [Game]
+    game(gameId: ID!): Game 
     me: User
   }
 
@@ -75,7 +77,7 @@ const typeDefs = gql`
       game: ID
     ): Post
 
-    addNewGame(name: String!, externalGameId: String!): Game
+    addNewGame(name: String!, externalGameId: String!): Game!
 
     removePost(postId: ID!): Post
 

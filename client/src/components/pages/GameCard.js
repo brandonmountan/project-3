@@ -1,12 +1,66 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import { useMutation, useQuery } from "@apollo/client";
+import { ADD_GAME_LIKE, REMOVE_GAME_LIKE } from "../utils/mutations";
+import { GET_SINGLE_GAME } from "../utils/queries";
 import "../../styles/gameCard.css";
-import { ADD_GAME_LIKE } from "../utils/mutations";
-import { useMutation } from "@apollo/client";
 
-function GameCard({ game }) {
+function GameCard({ gameId, game }) {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isLiked, setIsLiked] = useState(false);
+
+  // Define a loading state to track the query loading status
+  const { loading, data, error } = useQuery(GET_SINGLE_GAME, {
+    variables: { gameId }, // Pass the received gameId as a variable
+  });
+
+  // Log the gameId to the console
+  console.log("GAME CARD gameId (value):", gameId);
+  console.log("GAME CARD gameId (type):", typeof gameId);
+
+  // Log the object ID of the game from the database
+  if (!loading && data && data.game) {
+    console.log("GAME CARD game (database object ID):", data.game._id);
+  }
+
+  // Handle the "Like" button click
+  const [addGameLike] = useMutation(ADD_GAME_LIKE, {
+    onCompleted: () => setIsLiked(true),
+  });
+
+  const [removeGameLike] = useMutation(REMOVE_GAME_LIKE, {
+    onCompleted: () => setIsLiked(false),
+  });
+
+  const handleLikeClick = () => {
+    if (!loading && data && data.game) {
+      const gameId = data.game._id;
+
+      if (isLiked) {
+        // If already liked, remove the like
+        removeGameLike({ variables: { gameId } })
+          .then((response) => {
+            console.log("Game removed from liked games:", response);
+            setIsLiked(false);
+          })
+          .catch((removeError) => {
+            console.error("Error removing game like:", removeError);
+          });
+      } else {
+        // If not liked, add the like
+        addGameLike({ variables: { gameId } })
+          .then((response) => {
+            console.log("Game added to liked games:", response);
+            setIsLiked(true);
+          })
+          .catch((addError) => {
+            console.error("Error adding game like:", addError);
+          });
+      }
+    }
+  }
   
   const filteredScreenshots = game.short_screenshots.filter(
     (screenshot) => screenshot.id !== -1
@@ -33,25 +87,6 @@ function GameCard({ game }) {
     }
   };
 
-  const [addGameLike] = useMutation(ADD_GAME_LIKE);
-
-
-  const handleLikeGame = (game) => {
-    addGameLike({
-      variables: { gameId: game.id },
-    })
-    .then((response) => {
-      console.log("Game liked:", response);
-    })
-    .catch((error) => {
-      console.error("Error liking the game:", error);
-    });
-  };
-
-  const handleLikeClick = () => {
-    handleLikeGame(game.id)
-  };
-
   return (
     <Card style={{ backgroundColor: '#3a506b' }}>
       <Card.Img src={game.background_image} alt={game.name} />
@@ -68,7 +103,12 @@ function GameCard({ game }) {
           <strong>Metacritic Score:</strong> {game.metacritic}
         </Card.Text>
       </Card.Body>
-      <button onClick={handleLikeClick}>Like</button>
+      <Button
+        variant={isLiked ? "danger" : "primary"}
+        onClick={handleLikeClick}
+      >
+        {isLiked ? "Unlike" : "Like"}
+      </Button>
       <Card.Footer className="card-footer">
         {filteredScreenshots.map((screenshot) => (
           <div
@@ -100,3 +140,4 @@ GameCard.propTypes = {
 };
 
 export default GameCard;
+

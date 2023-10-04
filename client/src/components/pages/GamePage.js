@@ -12,15 +12,17 @@ function GamePage() {
   const [searchResults, setSearchResults] = useState([]);
   const [displayedResultsFor, setDisplayedResultsFor] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [selectedGame, setSelectedGame] = useState(null);
+  const [selectedGame, setSelectedGame] = useState(null); 
+  const [selectedGameId, setSelectedGameId] = useState(null);
 
   const [addNewGame] = useMutation(ADD_NEW_GAME);
-  
+
   useEffect(() => {
+   
     async function fetchGameSuggestions() {
       try {
         if (searchTerm.trim() === "") {
-          setSearchResults([]);
+          setSearchResults([]); 
           return;
         }
 
@@ -57,17 +59,21 @@ function GamePage() {
     fetchGameSuggestions();
   }, [searchTerm, formSubmitted]);
 
+
+
   const handleItemClick = (clickedItem) => {
     setSearchTerm(clickedItem.name);
     setSearchResults([]); 
     setDisplayedResultsFor(clickedItem.name); 
     setSelectedGame(clickedItem); 
+    setSelectedGameId(clickedItem.id);
     
     console.log("Clicked Item Name: " + clickedItem.name);
     console.log("Clicked Item ID: " + clickedItem.id);
 
     const externalGameId = clickedItem.id.toString();
     console.log("THIS IS STRING ID: " + externalGameId)
+    
 
     // Trigger the addNewGame mutation when a game is selected
     addNewGame({
@@ -86,25 +92,13 @@ function GamePage() {
     handleFormSubmit(); 
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      if (searchResults.length > 0) {
-        setSelectedGame(searchResults[0]);
-      } else {
-        handleFormSubmit();
-      }
-      setSearchResults([]);
-    }
-  };
-
-
   const handleFormSubmit = () => {
     if (searchTerm.trim() === "") {
       return;
     }
 
     setFormSubmitted(true);
-    setSearchTerm("");
+    setSearchTerm(""); 
   };
 
   return (
@@ -124,7 +118,6 @@ function GamePage() {
                   setSearchResults([]);
                 }
               }}
-              onKeyDown={handleKeyPress}
             />
           </Form.Group>
         </Form>
@@ -144,7 +137,7 @@ function GamePage() {
           </ListGroup>
         )}
       </div>
-      {selectedGame && <GameCard game={selectedGame} />}
+      {selectedGame && <GameCard gameId={selectedGameId.toString()} game={selectedGame} />}
     </div>
   );
 }
