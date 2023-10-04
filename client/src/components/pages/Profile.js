@@ -2,15 +2,19 @@ import  React  from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
-import { QUERY_ME } from '../utils/queries';
 import Card from 'react-bootstrap/Card';
+<<<<<<< HEAD
 import { useMutation } from '@apollo/client';
 import { ADD_POST } from '../utils/mutations';
 import { useNavigate } from 'react-router-dom';
+=======
+import { QUERY_ME, QUERY_POSTS } from '../utils/queries';
+>>>>>>> origin/develop
 
 function Profile() {
   const navigate = useNavigate();
   const { username: userParam } = useParams();
+<<<<<<< HEAD
   const { loading, data } = useQuery( QUERY_ME );
   console.log(data)
   const user = data?.me || {};
@@ -42,36 +46,56 @@ function Profile() {
     navigate('/home')
   }
   
+=======
+  
+  // Use the useQuery hook to fetch the 'me' and 'posts' queries
+  const { loading: loadingMe, data: dataMe } = useQuery(QUERY_ME);
+  const { loading: loadingPosts, data: dataPosts } = useQuery(QUERY_POSTS, {
+    variables: { username: userParam }, // Pass the 'username' variable to the query
+  });
+
+  console.log(dataMe)
+  const user = dataMe?.me || {};
+  const userPosts = dataPosts?.posts || [];
+>>>>>>> origin/develop
 
   let message = '';
 
   //this assigns profile to "me" properly now
   if (Auth.loggedIn()) {
-    if (user) {
-      console.log(data)
+    if (dataMe) {
+      console.log(dataMe)
 
       // User is viewing their own profile
       message = `Welcome to your profile, ${user.username}!`;
-  
+
       // Display the user's personal introduction if available
       if (user.personalIntroduction) {
         message += ` ${user.personalIntroduction}`;
       }
+      
+      if (userPosts.length > 0) {
+        message += ` You have ${userPosts.length} posts.`
+      }
+      if (userPosts.length < 1) {
+        message += ` No posts from ${user.username} yet.`
+      }
     } else {
       // User is viewing someone else's profile
-      message = `You're viewing another user's profile, ${userParam}.`;
+      message = `You're viewing another user's profile.`;
     }
   } else {
     // User is not logged in
     message = `You're viewing another user's profile, ${userParam}.`;
   }
 
-  if (loading) {
+  if (loadingMe || loadingPosts) {
     return <div>Loading...</div>;
   }
 
   return (
     <>
+<<<<<<< HEAD
       <Card className="m-5">
         <Card.Body className="p-5">
           <p>{message}</p>
@@ -113,6 +137,34 @@ function Profile() {
           {error && <div className="mt-3 text-danger">Error creating post!</div>}
         </div>
       )}
+=======
+    <Card className="m-5">
+      <Card.Body className="p-5">
+        <p>{message}</p>
+        {Auth.loggedIn() ? (
+          // me
+          <div>
+          <h2>Your Posts</h2>
+          {userPosts.map((post) => (
+            <li key={post._id}>
+              <h3>{post.postTitle}</h3>
+              <p>{post.postText}</p>
+              <p>Posted by: {post.postAuthor}</p>
+              <p>Created at: {post.createdAt}</p>
+            </li>
+          ))}
+          </div>
+        ) : (
+          // other user
+          <p>Additional content for others viewing the profile.</p>
+        )}
+        {/* Placeholder content */}
+        {userParam !== 'me' && !Auth.loggedIn() && (
+          <p>This is a placeholder for the public profile page.</p>
+        )}
+      </Card.Body>
+    </Card>
+>>>>>>> origin/develop
     </>
   );
 }

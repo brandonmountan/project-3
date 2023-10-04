@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
-import "../../styles/gameCard.css"
+import "../../styles/gameCard.css";
+import { ADD_GAME_LIKE } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
 
 function GameCard({ game }) {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -31,6 +33,25 @@ function GameCard({ game }) {
     }
   };
 
+  const [addGameLike] = useMutation(ADD_GAME_LIKE);
+
+
+  const handleLikeGame = (game) => {
+    addGameLike({
+      variables: { gameId: game.id },
+    })
+    .then((response) => {
+      console.log("Game liked:", response);
+    })
+    .catch((error) => {
+      console.error("Error liking the game:", error);
+    });
+  };
+
+  const handleLikeClick = () => {
+    handleLikeGame(game.id)
+  };
+
   return (
     <Card style={{ backgroundColor: '#3a506b' }}>
       <Card.Img src={game.background_image} alt={game.name} />
@@ -47,13 +68,13 @@ function GameCard({ game }) {
           <strong>Metacritic Score:</strong> {game.metacritic}
         </Card.Text>
       </Card.Body>
+      <button onClick={handleLikeClick}>Like</button>
       <Card.Footer className="card-footer">
         {filteredScreenshots.map((screenshot) => (
           <div
             key={screenshot.id}
             className="thumbnail-image"
-            onClick={() => openImagePopup(screenshot.image)}
-          >
+            onClick={() => openImagePopup(screenshot.image)}>
             <img src={screenshot.image} alt={game.name} />
           </div>
         ))}

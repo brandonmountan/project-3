@@ -4,20 +4,23 @@ import Form from "react-bootstrap/Form";
 import ListGroup from "react-bootstrap/ListGroup";
 import GameCard from "./GameCard";
 import "../../styles/gamePage.css";
+import { useMutation } from "@apollo/client"; 
+import { ADD_NEW_GAME } from "../utils/mutations"
 
 function GamePage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [displayedResultsFor, setDisplayedResultsFor] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [selectedGame, setSelectedGame] = useState(null); 
+  const [selectedGame, setSelectedGame] = useState(null);
 
+  const [addNewGame] = useMutation(ADD_NEW_GAME);
+  
   useEffect(() => {
-   
     async function fetchGameSuggestions() {
       try {
         if (searchTerm.trim() === "") {
-          setSearchResults([]); 
+          setSearchResults([]);
           return;
         }
 
@@ -59,8 +62,41 @@ function GamePage() {
     setSearchResults([]); 
     setDisplayedResultsFor(clickedItem.name); 
     setSelectedGame(clickedItem); 
+    
+    console.log("Clicked Item Name: " + clickedItem.name);
+    console.log("Clicked Item ID: " + clickedItem.id);
+
+    const externalGameId = clickedItem.id.toString();
+    console.log("THIS IS STRING ID: " + externalGameId)
+
+    // Trigger the addNewGame mutation when a game is selected
+    addNewGame({
+      variables: {
+        name: clickedItem.name,
+        externalGameId: externalGameId,
+      },
+    })
+      .then((response) => {
+        console.log("Game added to the server database:", response.data.addNewGame);
+      })
+      .catch((error) => {
+        console.error("Error adding the game:", error);
+      });
+
     handleFormSubmit(); 
   };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      if (searchResults.length > 0) {
+        setSelectedGame(searchResults[0]);
+      } else {
+        handleFormSubmit();
+      }
+      setSearchResults([]);
+    }
+  };
+
 
   const handleFormSubmit = () => {
     if (searchTerm.trim() === "") {
@@ -68,7 +104,7 @@ function GamePage() {
     }
 
     setFormSubmitted(true);
-    setSearchTerm(""); 
+    setSearchTerm("");
   };
 
   return (
@@ -88,6 +124,7 @@ function GamePage() {
                   setSearchResults([]);
                 }
               }}
+              onKeyDown={handleKeyPress}
             />
           </Form.Group>
         </Form>
@@ -113,6 +150,3 @@ function GamePage() {
 }
 
 export default GamePage;
-
-
-

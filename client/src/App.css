@@ -52,6 +52,8 @@ body {
   display: flex;
   justify-content: center;
   width: 60%;
+  margin: 0 auto;
+  flex-direction: column;
 }
 
 .signup-form,
@@ -68,6 +70,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin: 0 5px;
   height: 100%;
+  text-align: center;
 }
 
 /* Center the navigation bar */
@@ -337,3 +340,4 @@ body {
     padding: 1rem 6rem 1rem 1rem;
   }
 }
+

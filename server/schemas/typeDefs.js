@@ -75,6 +75,8 @@ const typeDefs = gql`
       game: ID
     ): Post
 
+    addNewGame(name: String!, externalGameId: String!): Game
+
     removePost(postId: ID!): Post
 
     addComment(postId: ID!, commentText: String!, commentAuthor: ID!): Comment
