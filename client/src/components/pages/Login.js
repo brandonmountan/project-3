@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Auth from "../utils/auth";
 
 const Login = (props) => {
-  console.log("hello1");
+  // console.log("hello1");
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { data }] = useMutation(LOGIN);
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Login = (props) => {
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log("hello2");
+    // console.log("hello2");
 
     setFormState({
       ...formState,
@@ -31,7 +31,7 @@ const Login = (props) => {
       const { data } = await login({
         variables: { ...formState },
       });
-      console.log("hello3");
+      // console.log("hello3");
       Auth.login(data.login.token);
 
       navigate("/profile");

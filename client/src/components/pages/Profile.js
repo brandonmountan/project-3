@@ -9,14 +9,14 @@ function Profile() {
   const { username: userParam } = useParams();
   const { loading, data } = useQuery( QUERY_ME );
   console.log(data)
-  const user = data?.me || data?.user || {};
+  const user = data?.me || {};
 
   let message = '';
 
   //this assigns profile to "me" properly now
   if (Auth.loggedIn()) {
-    if (userParam === 'me' || Auth.getProfile().username === userParam) {
-      console.log("welcome " + user) // returns UNDEFINED
+    if (user) {
+      console.log(data)
 
       // User is viewing their own profile
       message = `Welcome to your profile, ${user.username}!`;
@@ -40,7 +40,6 @@ function Profile() {
 
   return (
     <>
-    <h1>{data.me.username}</h1>
     <Card className="m-5">
       <Card.Body className="p-5">
         <p>{message}</p>

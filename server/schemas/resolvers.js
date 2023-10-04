@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Post, Comment } = require("../models");
+const { User, Post, Comment, Game } = require("../models");
 const { signToken } = require("../utils/auth");
 const Stripe = require("stripe");
 const stripe = Stripe(process.env.REACT_APP_SERVER_STRIPE_KEY);
@@ -15,9 +15,9 @@ const resolvers = {
     user: async (parent, { userId }) => {
       return (
         User.findOne({ _id: userId })
-          // .populate('games')
           .populate("posts")
-      );
+          .populate("likedGames")
+      )
     },
 
     // tested- working "getAllPosts"
@@ -43,7 +43,8 @@ const resolvers = {
       if (context.user) {
         return User.findOne({ _id: context.user._id })
           .populate("posts")
-          .populate("comments");
+          .populate("comments")
+          .populate("likedGames")
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -378,6 +379,35 @@ const resolvers = {
       }
     },
 
+    // tested- working as "addNewGame", uses Game Search in GamePage.js on client
+    addNewGame: async (parent, { name, externalGameId }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError("Authentication required to add a new game");
+      }
+    
+      try {
+        // check if game with the same externalGameId already exists
+        const existingGame = await Game.findOne({ externalGameId });
+    
+        if (existingGame) {
+          console.log("Game already exists in database")
+          return null;
+        }
+    
+        // if game does not exist, create new Game document and store it in the database
+        const newGame = await Game.create({
+          name,
+          externalGameId,
+          // add other fields as needed
+        });
+    
+        // return the new game document
+        return newGame;
+      } catch (error) {
+        throw new Error(`Error adding a new game: ${error.message}`);
+      }
+    },
+
     // tested- working "removeFriend"
     removeFriend: async (parent, { friendId }, context) => {
       if (!context.user) {
@@ -421,6 +451,104 @@ const resolvers = {
         return friend;
       } catch (error) {
         throw new Error(`Error removing friend: ${error.message}`);
+      }
+    },
+
+    // tested- working locally. NOT TESTED with client API data
+    addGameLike: async (parent, { gameId }, context) => {
+      const { user } = context;
+    
+      if (!user) {
+        throw new Error('Authentication required to like a game');
+      }
+    
+      try {
+        // get user who wants to like the game
+        const currentUser = await User.findById(user._id);
+    
+        if (!currentUser) {
+          throw new Error('User not found');
+        }
+    
+        // get game that the user wants to like
+        const gameToLike = await Game.findById(gameId);
+    
+        if (!gameToLike) {
+          throw new Error('Game not found');
+        }
+    
+        // check user already liked the game
+        if (!currentUser.likedGames) {
+          currentUser.likedGames = [];
+        }
+    
+        if (currentUser.likedGames.includes(gameToLike._id)) {
+          throw new Error('User already liked this game');
+        }
+    
+        // add user to the likedByUsers array of the game
+        gameToLike.likedByUsers.push(currentUser);
+    
+        // update likesCount of the game
+        gameToLike.likesCount = gameToLike.likedByUsers.length;
+    
+        // save changes to the game
+        await gameToLike.save();
+    
+        // Add the liked game to the user's likedGames array
+        currentUser.likedGames.push(gameToLike._id);
+    
+        // Save changes to the user
+        await currentUser.save();
+    
+        return gameToLike;
+      } catch (error) {
+        throw new Error(`Failed to like the game: ${error.message}`);
+      }
+    },
+
+     // tested- working locally. NOT TESTED with client API data
+    removeGameLike: async (parent, { gameId }, context) => {
+      const { user } = context;
+  
+      if (!user) {
+        throw new Error('Authentication required to remove a like');
+      }
+  
+      try {
+        
+        const currentUser = await User.findById(user._id);
+  
+        if (!currentUser) {
+          throw new Error('User not found');
+        }
+  
+        const gameToRemoveLike = await Game.findById(gameId);
+  
+        if (!gameToRemoveLike) {
+          throw new Error('Game not found');
+        }
+  
+        if (!currentUser.likedGames.includes(gameToRemoveLike._id)) {
+          throw new Error('User has not liked this game');
+        }
+ 
+        currentUser.likedGames = currentUser.likedGames.filter(
+          (gameId) => gameId.toString() !== gameToRemoveLike._id.toString()
+        );
+
+        gameToRemoveLike.likedByUsers = gameToRemoveLike.likedByUsers.filter(
+          (userId) => userId.toString() !== currentUser._id.toString()
+        );
+ 
+        gameToRemoveLike.likesCount = gameToRemoveLike.likedByUsers.length;
+
+        await currentUser.save();
+        await gameToRemoveLike.save();
+  
+        return gameToRemoveLike;
+      } catch (error) {
+        throw new Error(`Failed to remove the like: ${error.message}`);
       }
     },
 
