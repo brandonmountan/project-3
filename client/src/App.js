@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
@@ -21,9 +21,9 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Gamepage from "./components/pages/GamePage";
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './theme.scss'
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./theme.scss";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -45,24 +45,8 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const incrementApiCallCount = () => {
-  const currentCount = parseInt(localStorage.getItem("apiCallCount")) || 0;
-  const newCount = currentCount + 1;
-  localStorage.setItem("apiCallCount", newCount);
-};
 
 function App() {
-
-  const [apiCallCount, setApiCallCount] = useState(
-    parseInt(localStorage.getItem("apiCallCount")) || 0
-  );
-
-  useEffect(() => {
-    // Fetch and display the API call count when the component mounts.
-    // You can also fetch this count whenever you need to display it.
-    const apiCallCount = parseInt(localStorage.getItem("apiCallCount")) || 0;
-    console.log("API Call Count:", apiCallCount); // Display the count in the console or use it for your application logic
-  }, []);
 
   return (
     <ApolloProvider client={client}>
@@ -90,7 +74,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/post" element={<ProfilePost />} />
               </Routes>
-              </div>
+            </div>
           </div>
           <Footer />
         </div>

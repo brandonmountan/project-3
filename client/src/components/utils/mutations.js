@@ -63,6 +63,36 @@ export const ADD_COMMENT = gql`
   }
 `;
 
+<<<<<<< HEAD
+=======
+export const ADD_NEW_GAME = gql`
+  mutation addNewGame($name: String!, $externalGameId: String!) {
+    addNewGame(name: $name, externalGameId: $externalGameId) {
+      _id
+      name
+    }
+  }
+`;
+
+export const ADD_GAME_LIKE = gql`
+mutation addGameLike($gameId: ID!) {
+  addGameLike(gameId: $gameId) {
+    _id
+    externalGameId
+    name
+  }
+}
+`;
+
+export const REMOVE_GAME_LIKE = gql`
+  mutation removeGameLike($gameId: ID!) {
+    removeGameLike(gameId: $gameId) {
+      _id
+    }
+  }
+`;
+
+>>>>>>> 84b89f15b0ffbea9a0b991ed56daa6eb7ba93185
 export const DONATE = gql`
   mutation donate($amount: Float!) {
     donate(amount: $amount) {

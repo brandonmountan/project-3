@@ -1,6 +1,7 @@
 # PostGame
 
 ## Description
+
 - What was your motivation?
 - Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
 - What problem does it solve?
@@ -14,45 +15,90 @@ All of us who helped built this project seemed to fall into the expected users c
 
 One of the most important learning opportunities within this app was creating our own API on the back end and using resolvers, typedefs, queries and mutations to display our own data on the front end. This application is built with React.
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
+- [Screenshots](#screenshots)
+- [Credits](#credits)
+- [License](#license)
+- [Features](#features)
+- [Future Implementations](#futureimplementations)
+- [Link](#link)
+
+## Installation
+
+- Clone the repository to your computer.
+- Navigate to the project directory
+- run `npm run install`,`npm run seed`, `npm run start` then `npm run develop`
+
 ## Technologies Used
 
-**React**
+React
 
     Front-end Javascript library. React is based on components which are bits of code that can be resused. It is used to develop as single-page application (SPA). An SPA interacts with the user by dynamically rewriting the current web page with new data from the web server. This is in contrast to web browsers loading entire new pages.
 
-**React-router**
+React-router
 
-    Used for page routing. Third party library that allows developers to define routes, manage navigation, and handle URL changes. 
+    Used for page routing. Third party library that allows developers to define routes, manage navigation, and handle URL changes.
 
-**React-Bootstrap (for styling)**
 
-**Node.js**
+Node.js
 
     Open-source, cross-platform server environment. Used for the back-end and executes javascript code outside of the web browser. React and javascript get along very well.
 
-**Express.js**
+Express.js
 
     Back-end web application blueprint for building RESTful APIs along with node.js.
 
-**MongoDB**
+MongoDB
 
     Cross-platform document-oriented database program. Classified as NoSQL. The documents are JSON-like because they have optional schemas.
 
-**JWT (JSON Web Token)**
+JWT (JSON Web Token)
 
     Used for encryption. The payload, or intended message, holds JSON that asserts a number of claims, or identity information.
 
-**bcrypt**
+Bcrypt
 
     Password hashing function for users so their password is protected.
 
-**graphql and Apollo Server**
+Graphql and Apollo Server
 
     Used to query and manipulate data for APIs.
+
+React-Bootstrap (for styling)
 
 
 ## Screenshots
 
 ![screenshot page 3](./images/project3img1.PNG)!
+
+## Credits
+
+[Brandon Mountan](https://github.com/brandonmountan)
+
+[Daniel Wilson](https://github.com/Part-time-Dan)
+
+[Reiley Burnitt](https://github.com/Reibean)
+
+[Phillip Lam Thach](https://github.com/02madmax)
+
+[Bridger Daw](https://github.com/gymbridger)
+
+
+## License
+
+## Features
+
+- Able to create A profile
+- Post game related content
+- Search games
+- Add friends
+- A sidebar that displays the top rated games of 2023
+
+## Future Implementations
+- Be able to accept or deny a friend request
 
 ## Link

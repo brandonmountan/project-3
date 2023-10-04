@@ -52,6 +52,8 @@ body {
   display: flex;
   justify-content: center;
   width: 60%;
+  margin: 0 auto;
+  flex-direction: column;
 }
 
 .signup-form,
@@ -68,6 +70,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin: 0 5px;
   height: 100%;
+  text-align: center;
 }
 
 /* Center the navigation bar */
@@ -126,12 +129,10 @@ body {
   /* Make the active link text bold */
 }
 
-
 .nav-link.active::before {
   width: 100%;
   /* expand underline to full width for the active link */
 }
-
 
 /* Center the content */
 .app-container {
@@ -161,4 +162,186 @@ body {
   flex: 4;
   /* Adjust as needed */
   padding: 20px;
+}
+
+@media (max-width: 320px) {
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+  }
+  .card-body {
+    padding: 0px;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 479px) {
+  .content-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .main-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    flex-direction: column;
+  }
+  .forms-container {
+    width: 100%;
+  }
+  .navbar-toggler {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #signupPassword {
+    margin-bottom: 1rem;
+  }
+  #password {
+    margin-bottom: 1rem;
+  }
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+  }
+  #footer {
+    display: flex;
+    justify-content: center;
+  }
+  #text {
+    font-size: 1rem;
+    white-space: normal;
+    margin: 0px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 320px) {
+  .content-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .main-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+  #text {
+    white-space: normal;
+    margin: 0px;
+    text-align: center;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .content-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .signup-form > form > div > input {
+    padding: 1rem 6rem 1rem 1rem;
+  }
+
+  .login-form > form > div > input {
+    padding: 1rem 6rem 1rem 1rem;
+  }
+  .main-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+  #searchTerm {
+    padding: 1rem 6rem 1rem 1rem;
+  }
+  .game-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .game-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .forms-container {
+    width: 100%;
+  }
+  .navbar-toggler {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #signupPassword {
+    margin-bottom: 1rem;
+  }
+  #password {
+    margin-bottom: 1rem;
+  }
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+  }
+  #footer {
+    display: flex;
+    justify-content: center;
+  }
+  #text {
+    white-space: normal;
+    margin: 0px;
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) {
+  #footer {
+    display: flex;
+    justify-content: center;
+  }
+  .game-page {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  h2 {
+    text-align: center;
+  }
+  #text {
+    font-size: 1.5rem;
+    margin: 0px;
+    text-align: center;
+  }
+  .navbar-toggler {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media (min-width: 1025px) and (max-width: 2000px) {
+  .game-page {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  h2 {
+    text-align: center;
+  }
+  #text {
+    font-size: 2rem;
+    margin: 0px;
+    text-align: center;
+  }
+  #searchTerm {
+    padding: 1rem 6rem 1rem 1rem;
+  }
 }

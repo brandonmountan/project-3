@@ -4,10 +4,10 @@ const typeDefs = gql`
   type User {
     _id: ID
     username: String!
-    games: [Game]
     posts: [Post]
     comments: [Comment]
     friends: [User]
+    likedGames: [Game]
   }
 
   type Auth {
@@ -27,10 +27,13 @@ const typeDefs = gql`
 
   type Game {
     _id: ID
-    title: String!
+    name: String!
+    externalGameId: String
     releaseDate: String
     genre: String
     posts: [Post]
+    likedByUsers: [User]
+    likesCount: Int!
   }
 
   type Comment {
@@ -50,6 +53,8 @@ const typeDefs = gql`
     user(userId: ID!): User
     posts(userId: ID): [Post]!
     post(postId: ID!): Post
+    games: [Game]
+    game(gameId: ID!): Game 
     me: User
   }
 
@@ -72,6 +77,8 @@ const typeDefs = gql`
       game: ID
     ): Post
 
+    addNewGame(name: String!, externalGameId: String!): Game!
+
     removePost(postId: ID!): Post
 
     addComment(postId: ID!, commentText: String!, commentAuthor: ID!): Comment
@@ -83,6 +90,10 @@ const typeDefs = gql`
     addFriend(friendId: ID!): User
 
     removeFriend(friendId: ID!): User
+
+    addGameLike(gameId: ID!): Game
+
+    removeGameLike(gameId: ID!): Game
 
     donate(amount: Float!): SessionResponse!
   }

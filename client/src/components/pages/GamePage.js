@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 import ListGroup from "react-bootstrap/ListGroup";
 import GameCard from "./GameCard";
 import "../../styles/gamePage.css";
+import { useMutation } from "@apollo/client"; 
+import { ADD_NEW_GAME } from "../utils/mutations"
 
 function GamePage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -11,6 +13,9 @@ function GamePage() {
   const [displayedResultsFor, setDisplayedResultsFor] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null); 
+  const [selectedGameId, setSelectedGameId] = useState(null);
+
+  const [addNewGame] = useMutation(ADD_NEW_GAME)
 
   useEffect(() => {
    
@@ -54,11 +59,38 @@ function GamePage() {
     fetchGameSuggestions();
   }, [searchTerm, formSubmitted]);
 
+
+
   const handleItemClick = (clickedItem) => {
     setSearchTerm(clickedItem.name);
     setSearchResults([]); 
     setDisplayedResultsFor(clickedItem.name); 
     setSelectedGame(clickedItem); 
+    setSelectedGameId(clickedItem.id);
+    
+    console.log("Clicked Item Name: " + clickedItem.name);
+    console.log("Clicked Item ID: " + clickedItem.id);
+
+    const externalGameId = clickedItem.id.toString();
+    console.log("THIS IS STRING ID: " + externalGameId)
+
+
+    
+
+    // Trigger the addNewGame mutation when a game is selected
+    addNewGame({
+      variables: {
+        name: clickedItem.name,
+        externalGameId: externalGameId,
+      },
+    })
+      .then((response) => {
+        console.log("Game added to the server database:", response.data.addNewGame);
+      })
+      .catch((error) => {
+        console.error("Error adding the game:", error);
+      });
+
     handleFormSubmit(); 
   };
 
@@ -107,12 +139,9 @@ function GamePage() {
           </ListGroup>
         )}
       </div>
-      {selectedGame && <GameCard game={selectedGame} />}
+      {selectedGame && <GameCard gameId={selectedGameId.toString()} game={selectedGame} />}
     </div>
   );
 }
 
 export default GamePage;
-
-
-

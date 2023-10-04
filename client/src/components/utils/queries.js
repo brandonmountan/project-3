@@ -25,29 +25,29 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_ME = gql`
-  query me {
-    me {
+query me {
+  me {
+    _id
+    username
+    posts {
       _id
-      username
-      posts {
+      comments {
         _id
-        comments {
-          _id
-          commentAuthor {
-            _id
-          }
-          commentText
-          createdAt
-        }
-        postTitle
-        postText
-        postAuthor {
+        commentAuthor {
           _id
         }
+        commentText
         createdAt
       }
+      postTitle
+      postText
+      postAuthor {
+        _id
+      }
+      createdAt
     }
   }
+}
 `;
 
 export const QUERY_POSTS = gql`
@@ -75,6 +75,32 @@ export const QUERY_SINGLE_POST = gql`
         commentText
         commentAuthor
         createdAt
+      }
+    }
+  }
+`;
+
+export const GET_ALL_GAMES = gql`
+  query getAllGames {
+    games {
+      _id
+      externalGameId
+      name
+      likedByUsers {
+        _id
+      }
+    }
+  }
+`;
+
+export const GET_SINGLE_GAME = gql`
+  query getGameByXId($gameId: ID!) {
+    game(gameId: $gameId) {
+      _id
+      externalGameId
+      name
+      likedByUsers {
+        _id
       }
     }
   }

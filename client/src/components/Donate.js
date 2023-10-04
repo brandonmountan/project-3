@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import '../styles/donateComponent.css';
+import React, { useState } from "react";
+import "../styles/donateComponent.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -7,7 +7,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useMutation } from "@apollo/client";
 import { DONATE } from "./utils/mutations";
 
-const stripePromise = await loadStripe("process.env.REACT_APP_CLIENT_STRIPE_KEY");
+const stripePromise = await loadStripe(
+  "process.env.REACT_APP_CLIENT_STRIPE_KEY"
+);
 
 function DonateComponent() {
   const [showForm, setShowForm] = useState(false);
@@ -21,7 +23,7 @@ function DonateComponent() {
   };
 
   const [donate] = useMutation(DONATE);
-  const [donationAmount, setDonationAmount] = useState(0);
+  const [donationAmount, setDonationAmount] = useState("");
 
   const handleDonate = async () => {
     try {
@@ -40,11 +42,13 @@ function DonateComponent() {
   return (
     <div className="header">
       {/* Tab at the top right */}
-      <div className={`tab ${showForm ? 'open' : ''}`} onClick={handleTabClick}>
-      </div>
+      <div
+        className={`tab ${showForm ? "open" : ""}`}
+        onClick={handleTabClick}
+      ></div>
 
       {/* Donation form */}
-      <div className={`donation-form ${showForm ? 'open' : ''}`}>
+      <div className={`donation-form ${showForm ? "open" : ""}`}>
         <h2>Donate</h2>
         <InputGroup>
           <InputGroup.Text>$</InputGroup.Text>
@@ -54,6 +58,7 @@ function DonateComponent() {
             onChange={(e) => setDonationAmount(parseFloat(e.target.value))}
             min="1"
             step="1"
+            placeholder="Enter donation amount"
           />
           <Button onClick={handleDonate} variant="light">
             Submit
@@ -68,4 +73,3 @@ function DonateComponent() {
 }
 
 export default DonateComponent;
-
