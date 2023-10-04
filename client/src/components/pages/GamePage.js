@@ -95,6 +95,7 @@ function GamePage() {
       } else {
         handleFormSubmit();
       }
+      setSearchResults([]);
     }
   };
 

@@ -1,6 +1,6 @@
 .sidebar {
     padding-left: 4px;
-
+    display: block;
 }
 
 .list-group-item {
@@ -43,3 +43,10 @@
     color: white;
     width: 100%;
 }
+
+@media (max-width: 768px) {
+    .sidebar{
+        display: none;
+    }
+}
+
