@@ -63,8 +63,6 @@ export const ADD_COMMENT = gql`
   }
 `;
 
-<<<<<<< HEAD
-=======
 export const ADD_NEW_GAME = gql`
   mutation addNewGame($name: String!, $externalGameId: String!) {
     addNewGame(name: $name, externalGameId: $externalGameId) {
@@ -92,7 +90,6 @@ export const REMOVE_GAME_LIKE = gql`
   }
 `;
 
->>>>>>> 84b89f15b0ffbea9a0b991ed56daa6eb7ba93185
 export const DONATE = gql`
   mutation donate($amount: Float!) {
     donate(amount: $amount) {
