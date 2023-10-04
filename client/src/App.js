@@ -21,9 +21,9 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Gamepage from "./components/pages/GamePage";
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './theme.scss'
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./theme.scss";
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -52,7 +52,6 @@ const incrementApiCallCount = () => {
 };
 
 function App() {
-
   const [apiCallCount, setApiCallCount] = useState(
     parseInt(localStorage.getItem("apiCallCount")) || 0
   );
@@ -90,7 +89,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/post" element={<ProfilePost />} />
               </Routes>
-              </div>
+            </div>
           </div>
           <Footer />
         </div>
