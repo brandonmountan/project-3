@@ -10,14 +10,13 @@ function GamePage() {
   const [searchResults, setSearchResults] = useState([]);
   const [displayedResultsFor, setDisplayedResultsFor] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [selectedGame, setSelectedGame] = useState(null); 
+  const [selectedGame, setSelectedGame] = useState(null);
 
   useEffect(() => {
-   
     async function fetchGameSuggestions() {
       try {
         if (searchTerm.trim() === "") {
-          setSearchResults([]); 
+          setSearchResults([]);
           return;
         }
 
@@ -56,10 +55,21 @@ function GamePage() {
 
   const handleItemClick = (clickedItem) => {
     setSearchTerm(clickedItem.name);
-    setSearchResults([]); 
-    setDisplayedResultsFor(clickedItem.name); 
-    setSelectedGame(clickedItem); 
-    handleFormSubmit(); 
+    setSearchResults([]);
+    setDisplayedResultsFor(clickedItem.name);
+    setSelectedGame(clickedItem);
+    handleFormSubmit();
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      if (searchResults.length > 0) {
+        setSelectedGame(searchResults[0]);
+      } else {
+        handleFormSubmit();
+      }
+      setSearchResults([]);
+    }
   };
 
   const handleFormSubmit = () => {
@@ -68,7 +78,7 @@ function GamePage() {
     }
 
     setFormSubmitted(true);
-    setSearchTerm(""); 
+    setSearchTerm("");
   };
 
   return (
@@ -88,6 +98,7 @@ function GamePage() {
                   setSearchResults([]);
                 }
               }}
+              onKeyDown={handleKeyPress}
             />
           </Form.Group>
         </Form>
@@ -113,6 +124,3 @@ function GamePage() {
 }
 
 export default GamePage;
-
-
-
