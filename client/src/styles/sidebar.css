@@ -35,9 +35,9 @@
 
 
 .list-group-item h3,
-.list-group-item p {
-
-    text-wrap: wrap;
+.list-group-item p 
+{
+    overflow-wrap: break-word;
     margin: 0;
     padding: 5px;
     color: white;

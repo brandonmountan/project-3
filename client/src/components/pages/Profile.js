@@ -2,28 +2,39 @@ import  React  from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
-import { QUERY_ME } from '../utils/queries';
 import Card from 'react-bootstrap/Card';
+import { QUERY_ME, QUERY_POSTS } from '../utils/queries';
 
 function Profile() {
   const { username: userParam } = useParams();
-  const { loading, data } = useQuery( QUERY_ME );
-  console.log(data)
-  const user = data?.me || {};
+  
+  // Use the useQuery hook to fetch the 'me' and 'posts' queries
+  const { loading: loadingMe, data: dataMe } = useQuery(QUERY_ME);
+  const { loading: loadingPosts, data: dataPosts } = useQuery(QUERY_POSTS, {
+    variables: { username: userParam }, // Pass the 'username' variable to the query
+  });
+
+  console.log(dataMe)
+  const user = dataMe?.me || {};
+  const userPosts = dataPosts?.posts || [];
 
   let message = '';
 
   //this assigns profile to "me" properly now
   if (Auth.loggedIn()) {
-    if (user) {
-      console.log(data)
+    if (dataMe) {
+      console.log(dataMe)
 
       // User is viewing their own profile
       message = `Welcome to your profile, ${user.username}!`;
-  
+
       // Display the user's personal introduction if available
       if (user.personalIntroduction) {
         message += ` ${user.personalIntroduction}`;
+      }
+      
+      if (userParam === 'me' && userPosts.length > 0) {
+        message += ` You have ${userPosts.length} posts.`
       }
     } else {
       // User is viewing someone else's profile
@@ -34,7 +45,7 @@ function Profile() {
     message = `You're viewing another user's profile, ${userParam}.`;
   }
 
-  if (loading) {
+  if (loadingMe || loadingPosts) {
     return <div>Loading...</div>;
   }
 
@@ -45,7 +56,13 @@ function Profile() {
         <p>{message}</p>
         {Auth.loggedIn() ? (
           // me
-          <p>Additional content for the logged-in user.</p>
+          <div>
+          <h3>User Posts</h3>
+          {userPosts.map((post) => (
+            <div key={post._id}>
+            </div>
+          ))}
+          </div>
         ) : (
           // other user
           <p>Additional content for others viewing the profile.</p>
