@@ -6,6 +6,8 @@ import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import { useNavigate } from 'react-router-dom';
 import Auth from "../utils/auth";
 import gql from 'graphql-tag';
+import CommentForm from "./CommentForm";
+
 
 const GET_POSTS = gql`
   query {
@@ -64,7 +66,7 @@ function Home() {
         <p>The ultimate platform for game enthusiasts!</p>
       </Container>
 
-      { !Auth.loggedIn() && (
+      {!Auth.loggedIn() && (
         <>
           <Container className="my-5">
             <h2>Key Features</h2>
@@ -98,11 +100,12 @@ function Home() {
         <h2>Latest Posts</h2>
         {postsData?.posts?.map(post => {
           // console.log("Post createdAt:", post.createdAt);
+          // console.log("Post ID:", post._id);
           return (
             <Card key={post._id} className="mb-3">
               <Card.Body>
                 <Card.Title>{post.postTitle}</Card.Title>
-                
+
                 <div className="mb-2 d-flex justify-content-between flex-wrap">
                   <span>Author: {post.postAuthor?.username}</span>
                   <span>Game: {post.game?.name || 'N/A'}</span>
@@ -110,7 +113,7 @@ function Home() {
                 </div>
 
                 <Card.Text>{post.postText}</Card.Text>
-                
+
                 <Card.Subtitle className="mb-2 mt-3">Comments</Card.Subtitle>
                 {post.comments?.map(comment => (
                   <Card.Text key={comment._id} className="mb-1">
@@ -120,6 +123,8 @@ function Home() {
                     </div>
                   </Card.Text>
                 ))}
+
+                <CommentForm postId={post._id} updateQuery={GET_POSTS} />
               </Card.Body>
             </Card>
           );

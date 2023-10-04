@@ -6,8 +6,10 @@ import { QUERY_ME } from '../utils/queries';
 import Card from 'react-bootstrap/Card';
 import { useMutation } from '@apollo/client';
 import { ADD_POST } from '../utils/mutations';
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
+  const navigate = useNavigate();
   const { username: userParam } = useParams();
   const { loading, data } = useQuery( QUERY_ME );
   console.log(data)
@@ -23,7 +25,6 @@ function Profile() {
   
     const { data } = await addPost({
       variables: {
-        id: user._id,
         postTitle: postTitleValue,
         postText: postTextValue,
         postAuthor: user._id,
@@ -32,13 +33,13 @@ function Profile() {
     });
 
     console.log(data);
-    
 
   
     if (!data) {
       throw new Error('something went wrong!');
     }
     alert('Post created!');
+    navigate('/home')
   }
   
 
