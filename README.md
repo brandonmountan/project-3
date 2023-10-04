@@ -74,6 +74,10 @@ React-Bootstrap (for styling)
 ## Screenshots
 
 ![screenshot page 3](./images/project3img1.PNG)!
+![screenshot page 3](./images/project3img2.PNG)!
+![screenshot page 3](./images/project3img3.PNG)!
+![screenshot page 3](./images/project3img4.PNG)!
+![screenshot page 3](./images/project3img5.PNG)!
 
 ## Credits
 
