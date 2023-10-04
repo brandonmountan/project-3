@@ -29,3 +29,22 @@ export const DONATE = gql`
     }
   }
 `;
+
+export const ADD_POST = gql`
+  mutation AddPost($postTitle: String!, $postText: String!, $postAuthor: ID!, $game: ID) {
+    addPost(postTitle: $postTitle, postText: $postText, postAuthor: $postAuthor, game: $gameId) {
+      _id
+      postTitle
+      postText
+      createdAt
+      postAuthor {
+        _id
+        username
+      }
+      game {
+        _id
+        name
+      }
+    }
+  }
+`;
