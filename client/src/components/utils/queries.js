@@ -94,11 +94,14 @@ export const GET_ALL_GAMES = gql`
 `;
 
 export const GET_SINGLE_GAME = gql`
-  query getGameById($gameId: ID!) {
+  query getGameByXId($gameId: ID!) {
     game(gameId: $gameId) {
       _id
       externalGameId
       name
+      likedByUsers {
+        _id
+      }
     }
   }
 `;
