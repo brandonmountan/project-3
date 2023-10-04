@@ -15,6 +15,7 @@ function Profile() {
   const { loading: loadingPosts, data } = useQuery(QUERY_POSTS, {variables: {username: userParam}});
   const user = dataMe?.me || {};
   const userPosts = data?.posts || [];
+  const likedGames = user.likedGames || [];
 
 
   const [addPost, { error }] = useMutation(ADD_POST);
@@ -83,20 +84,34 @@ function Profile() {
   return (
     <>
       <Card className="m-5">
-        <Card.Body className="p-5">
-          <p>{message}</p>
-          {Auth.loggedIn() ? (
-            // me
-            <p>Additional content for the logged-in user.</p>
-          ) : (
-            // other user
-            <p>Additional content for others viewing the profile.</p>
-          )}
-          {/* Placeholder content */}
-          {userParam !== 'me' && !Auth.loggedIn() && (
-            <p>This is a placeholder for the public profile page.</p>
-          )}
-        </Card.Body>
+      <Card.Body className="p-5">
+    <p>{message}</p>
+    {Auth.loggedIn() ? (
+      // me
+      <div>
+        <p>Additional content for the logged-in user.</p>
+        
+        {/* Display liked games if the user has liked any */}
+        {likedGames.length > 0 && (
+          <div>
+            <h4>Liked Games:</h4>
+            <ul>
+              {likedGames.map((game) => (
+                <li key={game._id}>{game.name}</li> 
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    ) : (
+      // other user
+      <p>Additional content for others viewing the profile.</p>
+    )}
+    {/* Placeholder content */}
+    {userParam !== 'me' && !Auth.loggedIn() && (
+      <p>This is a placeholder for the public profile page.</p>
+    )}
+  </Card.Body>
       </Card>
 
       {Auth.loggedIn() && (

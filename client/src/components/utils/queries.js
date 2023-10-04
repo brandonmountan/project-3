@@ -31,20 +31,28 @@ query me {
     username
     posts {
       _id
-      comments {
-        _id
-        commentAuthor {
-          _id
-        }
-        commentText
-        createdAt
-      }
       postTitle
       postText
-      postAuthor {
-        _id
-      }
       createdAt
+      game {
+        _id
+        externalGameId
+        name
+      } 
+    }
+    comments {
+      _id
+      commentAuthor {
+        _id
+        username
+      }
+      commentText
+      createdAt
+    }
+    likedGames {
+      _id
+      externalGameId
+      name
     }
   }
 }
