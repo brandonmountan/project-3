@@ -15,7 +15,7 @@ function GamePage() {
   const [selectedGame, setSelectedGame] = useState(null); 
   const [selectedGameId, setSelectedGameId] = useState(null);
 
-  const [addNewGame] = useMutation(ADD_NEW_GAME);
+  const [addNewGame] = useMutation(ADD_NEW_GAME)
 
   useEffect(() => {
    
@@ -73,6 +73,8 @@ function GamePage() {
 
     const externalGameId = clickedItem.id.toString();
     console.log("THIS IS STRING ID: " + externalGameId)
+
+
     
 
     // Trigger the addNewGame mutation when a game is selected

@@ -1,26 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useMutation, useQuery } from "@apollo/client";
 import { ADD_GAME_LIKE, REMOVE_GAME_LIKE } from "../utils/mutations";
 import { GET_SINGLE_GAME } from "../utils/queries";
+import Auth from '../utils/auth';
 import "../../styles/gameCard.css";
 
 function GameCard({ gameId, game }) {
+  const { loggedIn, getProfile } = Auth;
   const [selectedImage, setSelectedImage] = useState(null);
-  const [isLiked, setIsLiked] = useState(false);
+  // const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(
+    game?.likedByUsers?.includes(loggedIn() ? getProfile().data._id : null) || false
+  );
 
   // Define a loading state to track the query loading status
-  const { loading, data, error } = useQuery(GET_SINGLE_GAME, {
+  const { loading, data } = useQuery(GET_SINGLE_GAME, {
     variables: { gameId }, // Pass the received gameId as a variable
   });
 
-  // Log the gameId to the console
   console.log("GAME CARD gameId (value):", gameId);
   console.log("GAME CARD gameId (type):", typeof gameId);
 
-  // Log the object ID of the game from the database
   if (!loading && data && data.game) {
     console.log("GAME CARD game (database object ID):", data.game._id);
   }
@@ -34,33 +37,35 @@ function GameCard({ gameId, game }) {
     onCompleted: () => setIsLiked(false),
   });
 
-  const handleLikeClick = () => {
-    if (!loading && data && data.game) {
-      const gameId = data.game._id;
+  useEffect(() => {
+    // Update isLiked when the user's authentication status changes
+    setIsLiked(
+      game?.likedByUsers?.includes(loggedIn() ? getProfile().data._id : null) || false
+    );
+  }, [game, loggedIn, getProfile]); 
 
-      if (isLiked) {
-        // If already liked, remove the like
-        removeGameLike({ variables: { gameId } })
-          .then((response) => {
-            console.log("Game removed from liked games:", response);
-            setIsLiked(false);
-          })
-          .catch((removeError) => {
-            console.error("Error removing game like:", removeError);
-          });
+
+  const handleLikeClick = async () => {
+    setIsLiked(!isLiked);
+  
+    try {
+      // Check if data is available and data.game exists
+      if (data && data.game) {
+        if (isLiked) {
+          await removeGameLike({ variables: { gameId: data.game._id } });
+        } else {
+          await addGameLike({ variables: { gameId: data.game._id } });
+        }
       } else {
-        // If not liked, add the like
-        addGameLike({ variables: { gameId } })
-          .then((response) => {
-            console.log("Game added to liked games:", response);
-            setIsLiked(true);
-          })
-          .catch((addError) => {
-            console.error("Error adding game like:", addError);
-          });
+
+        console.log("Data is not available yet. You can handle this case here.");
       }
+    } catch (error) {
+      setIsLiked(!isLiked);
     }
-  }
+  };
+
+
   
   const filteredScreenshots = game.short_screenshots.filter(
     (screenshot) => screenshot.id !== -1
@@ -140,4 +145,3 @@ GameCard.propTypes = {
 };
 
 export default GameCard;
-
