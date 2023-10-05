@@ -1,0 +1,68 @@
+// Theme colors based on their usage and appearance
+$primary-background: #080b12;
+$secondary-background: #0c132e;
+$primary-header: #273c50;
+$highlight-accent: #5d807f;
+$primary-btn: #8ba691;
+$text-color: rgba(255, 255, 255, 0.695);
+
+// Bootstrap customization
+$theme-colors: (
+    "primary": $primary-header,
+    "secondary": $secondary-background,
+    "dark": $primary-background,
+    "light": $primary-btn,
+    "info": $highlight-accent,
+    "text": $text-color
+);
+@import '~bootstrap/scss/bootstrap';
+
+body {
+    background-color: $primary-background;
+    color: rgba(255, 255, 255, 0.695);
+}
+
+h1 {
+    color: $highlight-accent;
+}
+
+.card {
+    background-color: $secondary-background;
+    color: rgba(255, 255, 255, 0.695);
+
+    .card-header {
+        background-color: $primary-header;
+    }
+}
+
+button,
+.btn {
+    background-color: $primary-btn;
+    border-color: $primary-btn;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: darken($primary-btn, 10%);
+        border-color: darken($primary-btn, 10%);
+    }
+}
+
+.form-label {
+    color: $highlight-accent;
+}
+
+.form-control {
+    background-color: $secondary-background;
+    color: $text-color;
+    border: 1px solid $highlight-accent;
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.5); // Lightened placeholder text for better visibility
+    }
+
+    &:focus {
+        border-color: $highlight-accent;
+        box-shadow: 0 0 0 0.2rem rgba($highlight-accent, 0.25);
+    }
+}

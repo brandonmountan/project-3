@@ -1,0 +1,32 @@
+[
+    {
+        "username": "Chris",
+        "email": "redfield@email.rpd",
+        "password": "Password01"
+    },
+    {
+        "username": "Jill",
+        "email": "valentine@email.rpd",
+        "password": "Password02"
+    },
+    {
+        "username": "Leon",
+        "email": "kennedy@email.rpd",
+        "password": "Password03"
+    },
+    {
+        "username": "Claire",
+        "email": "redfield2@email.rpd",
+        "password": "Password04"
+    },
+    {
+        "username": "Sheva",
+        "email": "alomar@email.rpd",
+        "password": "Password05"
+    },
+    {
+        "username": "Albert",
+        "email": "wesker@email.rpd",
+        "password": "Password06"
+    }
+]

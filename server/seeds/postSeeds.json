@@ -1,0 +1,26 @@
+[
+    {
+      "postTitle": "My First Post",
+      "postText": "This is my very first post. Excited to be here!"
+    },
+    {
+      "postTitle": "A Journey Begins",
+      "postText": "Embarking on a new adventure. Follow along!"
+    },
+    {
+      "postTitle": "Exploring New Horizons",
+      "postText": "Discovering new places and cultures. Join me on this journey!"
+    },
+    {
+      "postTitle": "Tech Talk",
+      "postText": "Let's discuss the latest in technology trends. What's your favorite tech gadget?"
+    },
+    {
+      "postTitle": "Game Recommendations",
+      "postText": "Looking for game recommendations. Share your favorites!"
+    },
+    {
+        "postTitle": "Try This Glitch",
+        "postText": "Get through the toughest section of the game with this!"
+    }
+  ]
