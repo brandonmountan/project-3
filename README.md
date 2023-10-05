@@ -106,3 +106,5 @@ React-Bootstrap (for styling)
 - Be able to accept or deny a friend request
 
 ## Link
+
+[Live Deployment](https://blooming-mesa-22889-acf656e63fb1.herokuapp.com/)
